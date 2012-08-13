@@ -24,6 +24,7 @@ default[:stash][:url]           = "http://www.atlassian.com/software/stash/downl
 default[:stash][:checksum]      = "e643aa62b06c38d51333855262fc36d112b39d93c29721ab085a127b78a28d2f"
 default[:stash][:install_path]  = "/opt/atlassian-stash"
 default[:stash][:run_user]      = "stash"
+default[:stash][:home_path]     = "/home/#{node[:stash][:run_user]}"
 default[:stash][:database]      = "postgresql"
 default[:stash][:database_host] = "localhost"
 default[:stash][:database_port] = "5432"

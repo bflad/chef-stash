@@ -37,6 +37,7 @@
 
 user node[:stash][:run_user] do
   comment "Stash Service Account"
+  home    "/home/#{node[:stash][:run_user]}"
   shell   "/bin/bash"
   system  true
   action  :create 
