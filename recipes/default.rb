@@ -18,6 +18,7 @@
 #
 
 if node[:stash][:database] == "postgresql" && node[:stash][:database_host] == "localhost"  
+  include_recipe "database"
   database_connection = {:host => "#{node[:stash][:database_host]}", :port => node[:stash][:database_port], :username => 'postgres', :password => node[:postgresql][:password][:postgres]}
   database_info = Chef::EncryptedDataBagItem.load("stash","stash")
 
