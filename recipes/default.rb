@@ -35,6 +35,13 @@
 #  end
 #end
 
+user node[:stash][:run_user] do
+  comment "Stash Service Account"
+  shell   "/bin/bash"
+  system  true
+  action  :create 
+end
+
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node[:stash][:version]}.tar.gz" do
   source    node[:stash][:url]
   checksum  node[:stash][:checksum]
@@ -46,21 +53,10 @@ execute "Extracting Stash #{node[:stash][:version]}" do
   cwd Chef::Config[:file_cache_path]
   command <<-COMMAND
     tar -zxf atlassian-stash-#{node[:stash][:version]}.tar.gz
+    chown -R #{node[:stash][:run_user]} atlassian-stash-#{node[:stash][:version]}
     mv atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
   COMMAND
   not_if "test -f #{node[:stash][:install_path]}/atlassian-stash.war"
-end
-
-user node[:stash][:run_user] do
-  comment "Stash Service Account"
-  shell   "/bin/bash"
-  system  true
-  action  :create 
-end
-
-directory "#{node[:stash][:install_path]}" do
-  recursive true
-  owner     node[:stash][:run_user]
 end
 
 template "#{node[:stash][:install_path]}/bin/setenv.sh" do
