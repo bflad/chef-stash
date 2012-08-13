@@ -1,14 +1,14 @@
-= DESCRIPTION:
+# DESCRIPTION:
 
 Installs Atlassian Stash.
 
-= REQUIREMENTS:
+# REQUIREMENTS:
 
-== Cookbooks:
+## Cookbooks:
 
 Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
-* git (once CHEF-1537 is incorporated, otherwise use git cookbook fork below)
+* git (once COOK-1537 is incorporated, otherwise use git cookbook fork below)
 * java
 * postgresql
 
@@ -16,7 +16,7 @@ Third-Party Cookbooks
 
 * git::source from https://github.com/bflad/git
 
-= USAGE:
+# USAGE:
 
 For a localhost Postgres database, create a stash/stash encrypted data bag
 with the following information (repeat for other environments as necessary):
@@ -32,7 +32,7 @@ with the following information (repeat for other environments as necessary):
 
 Add recipe[stash] and get on your merry way.
 
-= LICENSE and AUTHOR:
+# LICENSE and AUTHOR:
       
 Author:: Brian Flad (<bflad417@gmail.com>)
 
