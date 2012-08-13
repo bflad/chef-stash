@@ -75,7 +75,7 @@ template "#{node[:stash][:install_path]}/conf/server.xml.erb" do
   mode   "0640"
 end
 
-cookbook_file "#{node[:stash][:install_path]}/conf/web.xml" do
+template "#{node[:stash][:install_path]}/conf/web.xml" do
   source "web.xml"
   owner  node[:stash][:run_user]
   mode   "0644"
