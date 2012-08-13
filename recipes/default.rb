@@ -17,23 +17,23 @@
 # limitations under the License.
 #
 
-if node[:stash][:database] == "postgresql" && node[:stash][:database_host] == "localhost"  
-  include_recipe "database"
-  database_connection = {:host => "#{node[:stash][:database_host]}", :port => node[:stash][:database_port], :username => 'postgres', :password => node[:postgresql][:password][:postgres]}
-  database_info = Chef::EncryptedDataBagItem.load("stash","stash")
-
-  postgresql_database database_info[node.chef_environment]["database"] do
-    connection database_connection
-    action :create
-  end
-
-  postgresql_database_user database_info[node.chef_environment]["database_user"] do
-    connection database_connection
-    password database_info[node.chef_environment]["database_password"]
-    database_name database_info[node.chef_environment]["database"]
-    action [:create, :grant]
-  end
-end
+#if node[:stash][:database] == "postgresql" && node[:stash][:database_host] == "localhost"  
+#  include_recipe "database"
+#  database_connection = {:host => "#{node[:stash][:database_host]}", :port => node[:stash][:database_port], :username => 'postgres', :password => node[:postgresql][:password][:postgres]}
+#  database_info = Chef::EncryptedDataBagItem.load("stash","stash")
+#
+#  postgresql_database database_info[node.chef_environment]["database"] do
+#    connection database_connection
+#    action :create
+#  end
+#
+#  postgresql_database_user database_info[node.chef_environment]["database_user"] do
+#    connection database_connection
+#    password database_info[node.chef_environment]["database_password"]
+#    database_name database_info[node.chef_environment]["database"]
+#    action [:create, :grant]
+#  end
+#end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node[:stash][:version]}.tar.gz" do
   source    node[:stash][:url]
