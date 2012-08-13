@@ -70,7 +70,7 @@ template "#{node[:stash][:install_path]}/bin/setenv.sh" do
   mode   "0755"
 end
 
-template "#{node[:stash][:install_path]}/conf/server.xml.erb" do
+template "#{node[:stash][:install_path]}/conf/server.xml" do
   source "server.xml.erb"
   owner  node[:stash][:run_user]
   mode   "0640"
