@@ -101,9 +101,9 @@
              secure="true"
              clientAuth="false"
              sslProtocol="TLS"
-             <%= "keyAlias=\"#{node[:stash][:tomcat][:keyAlias]}\"" if node[:stash][:tomcat][:keyAlias] %>
-             <%= "keystoreFile=\"#{node[:stash][:tomcat][:keystoreFile]}\"" if node[:stash][:tomcat][:keystoreFile] %>
-             <%= "keystorePass=\"#{node[:stash][:tomcat][:keystorePass]}\"" if node[:stash][:tomcat][:keystorePass] %>
+             <%= "keyAlias=\"#{node[:stash][:tomcat][:keyAlias]}\"" unless node[:stash][:tomcat][:keyAlias].empty? %>
+             <%= "keystoreFile=\"#{node[:stash][:tomcat][:keystoreFile]}\"" unless node[:stash][:tomcat][:keystoreFile].empty? %>
+             <%= "keystorePass=\"#{node[:stash][:tomcat][:keystorePass]}\"" unless node[:stash][:tomcat][:keystorePass].empty? %>
         />
 
         <!--
