@@ -21,12 +21,12 @@ if node[:stash][:database] == "postgresql" && node[:stash][:database_host] == "l
   database_connection = {:host => "#{node[:stash][:database_host]}", :port => node[:stash][:database_port], :username => 'postgres', :password => node[:postgresql][:password][:postgres]}
   database_info = Chef::EncryptedDataBagItem.load("stash","stash")
 
-  postgresql_database database_info[node.chef_environment]["database"] do
+  postgres_database database_info[node.chef_environment]["database"] do
     connection database_connection
     action :create
   end
 
-  postgresql_database_user database_info[node.chef_environment]["database_user"] do
+  postgres_database_user database_info[node.chef_environment]["database_user"] do
     connection database_connection
     password database_info[node.chef_environment]["database_password"]
     database_name database_info[node.chef_environment]["database"]
