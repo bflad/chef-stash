@@ -46,6 +46,21 @@ user node[:stash][:run_user] do
   action  :create 
 end
 
+execute "Generating Self-Signed Java Keystore" do
+  command <<-COMMAND
+    keytool -genkey \
+      -alias tomcat \
+      -keyalg RSA \
+      -dname 'CN=#{node[:fqdn]}, OU=Example, O=Example, L=Example, ST=Example, C=US' \
+      -keypass changeit \
+      -storepass changeit \
+      -keystore #{node[:stash][:home_path]}/.keystore
+    chown #{node[:stash][:run_user]}:#{node[:stash][:run_user]} #{node[:stash][:home_path]}/.keystore
+  COMMAND
+  creates "#{node[:stash][:home_path]}/.keystore"
+  only_if node[:stash][:tomcat][:keystoreFile].empty?
+end
+
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node[:stash][:version]}.tar.gz" do
   source    node[:stash][:url]
   checksum  node[:stash][:checksum]
