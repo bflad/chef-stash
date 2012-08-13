@@ -7,13 +7,13 @@
 # One way to set the STASH HOME path is here via this variable.  Simply uncomment it and set a valid path like
 # /stash/home.  You can of course set it outside in the command terminal; that will also work.
 #
-STASH_HOME="<%= node[:stash][:install_path]} %>"
+STASH_HOME="<%= node[:stash][:install_path] %>"
 
 #
 # Occasionally Atlassian Support may recommend that you set some specific JVM arguments.  You can use this variable
 # below to do that.
 #
-JVM_SUPPORT_RECOMMENDED_ARGS="<%= node[:stash][:jvm][:support_args]} %>"
+JVM_SUPPORT_RECOMMENDED_ARGS="<%= node[:stash][:jvm][:support_args] %>"
 
 #
 # The following 2 settings control the minimum and maximum given to the Atlassian Stash Java virtual machine.
