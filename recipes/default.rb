@@ -51,6 +51,13 @@ execute "Extracting Stash #{node[:stash][:version]}" do
   not_if "test -f #{node[:stash][:install_path]}/atlassian-stash.war"
 end
 
+user node[:stash][:run_user] do
+  comment "Stash Service Account"
+  shell   "/bin/bash"
+  system  true
+  action  :create 
+end
+
 directory "#{node[:stash][:install_path]}" do
   recursive true
   owner     node[:stash][:run_user]
