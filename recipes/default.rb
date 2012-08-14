@@ -24,23 +24,6 @@ stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 case stash_database_info['type']
 when "mysql"
   stash_database_info['port'] ||= "3306"
-  
-  remote_file "#{Chef::Config[:file_cache_path]}/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}.tar.gz" do
-    source    node[:stash][:mysql][:connector][:url]
-    checksum  node[:stash][:mysql][:connector][:checksum]
-    mode      "0644"
-    action    :create_if_missing
-  end
-
-  execute "Extracting MySQL Connector Java #{node[:stash][:mysql][:connector][:version]}" do
-    cwd Chef::Config[:file_cache_path]
-    command <<-COMMAND
-      tar -zxf mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}.tar.gz
-      chown -R #{node[:stash][:run_user]} mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}
-      mv mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}-bin.jar #{node[:stash][:install_path]}/lib
-    COMMAND
-    creates "#{node[:stash][:install_path]}/lib/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}-bin.jar"
-  end
 when "postgresql"
   stash_database_info['port'] ||= "5432"
 end
@@ -140,6 +123,25 @@ execute "Extracting Stash #{node[:stash][:version]}" do
     mv atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
   COMMAND
   creates "#{node[:stash][:install_path]}/atlassian-stash.war"
+end
+
+if stash_database_info['type'] == "mysql"
+  remote_file "#{Chef::Config[:file_cache_path]}/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}.tar.gz" do
+    source    node[:stash][:mysql][:connector][:url]
+    checksum  node[:stash][:mysql][:connector][:checksum]
+    mode      "0644"
+    action    :create_if_missing
+  end
+
+  execute "Extracting MySQL Connector Java #{node[:stash][:mysql][:connector][:version]}" do
+    cwd Chef::Config[:file_cache_path]
+    command <<-COMMAND
+      tar -zxf mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}.tar.gz
+      chown -R #{node[:stash][:run_user]} mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}
+      mv mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}-bin.jar #{node[:stash][:install_path]}/lib
+    COMMAND
+    creates "#{node[:stash][:install_path]}/lib/mysql-connector-java-#{node[:stash][:mysql][:connector][:version]}-bin.jar"
+  end
 end
 
 template "#{node[:stash][:install_path]}/bin/setenv.sh" do
