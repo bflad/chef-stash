@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe "database"
+
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
 stash_database_info = stash_data_bag[node.chef_environment]['database']
 stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
@@ -28,7 +30,7 @@ when "mysql"
   if stash_database_info['host'] == "localhost"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
     include_recipe "mysql::server"
-    include_recipe "database"
+    
     database_connection = {
       :host => stash_database_info['host'],
       :port => stash_database_info['port'],
@@ -55,13 +57,13 @@ when "mysql"
 when "postgresql"
   stash_database_info['port'] ||= "5432"
   
+  # Temporary handling of pg for COOK-1406
+  chef_gem "pg"
+  
   if stash_database_info['host'] == "localhost"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+PostgreSQL
-    # Temporary handling of pg for COOK-1406
-    chef_gem "pg"
-
     include_recipe "postgresql::server"
-    include_recipe "database"
+    
     database_connection = {
       :host => stash_database_info['host'],
       :port => stash_database_info['port'],
