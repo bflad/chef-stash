@@ -19,7 +19,7 @@
 
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
 
-if stash_data_bago[node.chef_environment][:database][:host] == "localhost"
+if stash_data_bag[node.chef_environment][:database][:host] == "localhost"
   case stash_data_bag[node.chef_environment][:database]
     when "mysql"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
