@@ -36,7 +36,7 @@ Repeat for other Chef environments as necessary. Example:
       "id": "stash"
       "development": {
         "database": {
-          "type": "postgres",
+          "type": "postgresql",
           "host": "localhost",
           "name": "stash",
           "user": "stash",
