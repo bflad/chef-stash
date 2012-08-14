@@ -101,9 +101,9 @@
              secure="true"
              clientAuth="false"
              sslProtocol="TLS"
-             <%= "keyAlias=\"#{tomcat['keyAlias']}\"" if @tomcat['keyAlias'] %>
-             <%= "keystoreFile=\"#{tomcat['keystoreFile']}\"" if @tomcat['keystoreFile'] %>
-             <%= "keystorePass=\"#{tomcat['keystorePass']}\"" if @tomcat['keystorePass'] %>
+             <%= "keyAlias=\"#{@tomcat['keyAlias']}\"" if @tomcat['keyAlias'] %>
+             <%= "keystoreFile=\"#{@tomcat['keystoreFile']}\"" if @tomcat['keystoreFile'] %>
+             <%= "keystorePass=\"#{@tomcat['keystorePass']}\"" if @tomcat['keystorePass'] %>
         />
 
         <!--
