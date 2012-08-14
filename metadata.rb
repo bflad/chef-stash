@@ -10,6 +10,6 @@ recipe            "stash", "Installs Atlassian Stash"
   supports os
 end
 
-%w{ database git java postgresql }.each do |cb|
+%w{ database git java mysql postgresql }.each do |cb|
   depends cb
 end
