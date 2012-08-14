@@ -58,7 +58,6 @@ execute "Generating Self-Signed Java Keystore" do
     chown #{node[:stash][:run_user]}:#{node[:stash][:run_user]} #{node[:stash][:home_path]}/.keystore
   COMMAND
   creates "#{node[:stash][:home_path]}/.keystore"
-  not_if "test -f #{node[:stash][:tomcat][:keystoreFile]}"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node[:stash][:version]}.tar.gz" do
@@ -75,7 +74,7 @@ execute "Extracting Stash #{node[:stash][:version]}" do
     chown -R #{node[:stash][:run_user]} atlassian-stash-#{node[:stash][:version]}
     mv atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
   COMMAND
-  not_if "test -f #{node[:stash][:install_path]}/atlassian-stash.war"
+  creates "#{node[:stash][:install_path]}/atlassian-stash.war"
 end
 
 template "/etc/init.d/stash" do
