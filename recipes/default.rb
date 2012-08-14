@@ -17,24 +17,64 @@
 # limitations under the License.
 #
 
-if node[:stash][:database] == "postgresql" && node[:stash][:database_host] == "localhost"  
-  # Temporary handling of pg for COOK-1406
-  chef_gem "pg"
+stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
+
+if stash_data_bago[node.chef_environment][:database][:host] == "localhost"
+  case stash_data_bag[node.chef_environment][:database]
+    when "mysql"
+      # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
+      include_recipe "mysql::server"
+      include_recipe "database"
+      database_connection = {
+        :host => "#{stash_data_bag[node.chef_environment][:database][:host]}",
+        :username => 'root',
+        :password => node[:mysql][:server_root_password]
+      }
+      database_connection << { :port => stash_data_bag[node.chef_environment][:database][:port] } if stash_data_bag[node.chef_environment][:database][:port]
+
+      mysql_database stash_data_bag[node.chef_environment][:database][:name] do
+        connection database_connection
+        encoding "utf8"
+        collation "ut8_bin"
+        action :create
+      end
+
+      mysql_database_user stash_data_bag[node.chef_environment][:database][:user] do
+        connection database_connection
+        password stash_data_bag[node.chef_environment][:database][:password]
+        database_name stash_data_bag[node.chef_environment][:database][:name]
+        action [:create, :grant]
+      end
+    when "postgresql"
+      # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+PostgreSQL
+      # Temporary handling of pg for COOK-1406
+      chef_gem "pg"
   
-  include_recipe "database"
-  database_connection = {:host => "#{node[:stash][:database_host]}", :port => node[:stash][:database_port], :username => 'postgres', :password => node[:postgresql][:password][:postgres]}
-  database_info = Chef::EncryptedDataBagItem.load("stash","stash")
+      include_recipe "postgresql::server"
+      include_recipe "database"
+      database_connection = {
+        :host => "#{stash_data_bag[node.chef_environment][:database][:host]}",
+        :username => 'postgres',
+        :password => node[:postgresql][:password][:postgres]
+      }
+      database_connection << { :port => stash_data_bag[node.chef_environment][:database][:port] } if stash_data_bag[node.chef_environment][:database][:port]
 
-  postgresql_database database_info[node.chef_environment]["database"] do
-    connection database_connection
-    action :create
-  end
+      postgresql_database stash_data_bag[node.chef_environment][:database][:name] do
+        connection database_connection
+        connection_limit "-1"
+        encoding "utf8"
+        action :create
+      end
 
-  postgresql_database_user database_info[node.chef_environment]["database_user"] do
-    connection database_connection
-    password database_info[node.chef_environment]["database_password"]
-    database_name database_info[node.chef_environment]["database"]
-    action [:create, :grant]
+      postgresql_database_user stash_data_bag[node.chef_environment][:database][:user] do
+        connection database_connection
+        password stash_data_bag[node.chef_environment][:database][:password]
+        database_name stash_data_bag[node.chef_environment][:database][:name]
+        action [:create, :grant]
+      end
+    else
+      Chef::Log.warn("Unsupported database type for localhost database creation. Skipping.")
+    end
   end
 end
 

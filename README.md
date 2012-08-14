@@ -10,27 +10,47 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
 * git (once COOK-1537 is incorporated, otherwise use git cookbook fork below)
 * java
+* mysql
 * postgresql
 
 Third-Party Cookbooks
 
-* git::source from https://github.com/bflad/git
+* git::source from https://github.com/bflad/git (until COOK-1537 is incorporated)
 
 # USAGE:
 
-For a localhost Postgres database, create a stash/stash encrypted data bag
-with the following information (repeat for other environments as necessary):
+Create a stash/stash encrypted data bag with the following information per
+Chef environment:
+* _required:_ database type (mysql/postgresql), host (FQDN/localhost),
+name, user, password
+* _optional:_ database port
+* _optional:_ Tomcat HTTPS Java Keystore keyAlias, keystoreFile, keystorePass
+(defaults to self-signed)
+
+Repeat for other Chef environments as necessary. Example:
 
     {
       "id": "stash"
-      "ENVIRONMENT1": {
-        "database": "ENVIRONMENT1_DATABASE_NAME",
-        "database_user": "ENVIRONMENT1_DATABASE_USER",
-        "database_password": "ENVIRONMENT1_DATABASE_PASSWORD",
+      "development": {
+        "database": {
+          "type": "postgres",
+          "host": "localhost",
+          "name": "stash",
+          "user": "stash",
+          "password": "stash_db_password",
+        },
+        "tomcat": {
+          "keyAlias": "not_tomcat",
+          "keystoreFile": "/etc/pki/java/wildcard_cert.jks",
+          "keystorePass": "not_changeit"
+        }
       }
     }
 
-Add recipe[stash] and get on your merry way.
+Add recipe[stash] to your run_list and get on your merry way. If it is a
+localhost database, it will automatically set up the database server, 
+create the database, and assign database user permissions (along with
+approriate Stash configuration of course).
 
 # LICENSE and AUTHOR:
       
