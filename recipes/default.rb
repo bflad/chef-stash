@@ -18,31 +18,33 @@
 #
 
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
+stash_database_info = stash_data_bag[node.chef_environment]['database']
+stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 
-if stash_data_bag[node.chef_environment]['database']['host'] == "localhost"
-  case stash_data_bag[node.chef_environment]['database']
+if stash_database_info['host'] == "localhost"
+  case stash_database_info['type']
     when "mysql"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
     include_recipe "mysql::server"
     include_recipe "database"
     database_connection = {
-      :host => "#{stash_data_bag[node.chef_environment]['database']['host']}",
+      :host => "#{stash_database_info['host']}",
       :username => 'root',
       :password => node[:mysql][:server_root_password]
     }
-    database_connection << { :port => stash_data_bag[node.chef_environment]['database']['port'] } if stash_data_bag[node.chef_environment]['database']['port']
+    database_connection << { :port => stash_database_info['port'] } if stash_database_info['port']
 
-    mysql_database stash_data_bag[node.chef_environment]['database']['name'] do
+    mysql_database stash_database_info['name'] do
       connection database_connection
       encoding "utf8"
       collation "ut8_bin"
       action :create
     end
 
-    mysql_database_user stash_data_bag[node.chef_environment]['database']['user'] do
+    mysql_database_user stash_database_info['user'] do
       connection database_connection
-      password stash_data_bag[node.chef_environment]['database']['password']
-      database_name stash_data_bag[node.chef_environment]['database']['name']
+      password stash_database_info['password']
+      database_name stash_database_info['name']
       action [:create, :grant]
     end
   when "postgresql"
@@ -53,23 +55,23 @@ if stash_data_bag[node.chef_environment]['database']['host'] == "localhost"
     include_recipe "postgresql::server"
     include_recipe "database"
     database_connection = {
-      :host => "#{stash_data_bag[node.chef_environment]['database'][:host]}",
+      :host => "#{stash_database_info['host']}",
       :username => 'postgres',
       :password => node[:postgresql][:password][:postgres]
     }
-    database_connection << { :port => stash_data_bag[node.chef_environment]['database'][:port] } if stash_data_bag[node.chef_environment]['database'][:port]
+    database_connection << { :port => stash_database_info['port'] } if stash_database_info['port']
 
-    postgresql_database stash_data_bag[node.chef_environment]['database']['name'] do
+    postgresql_database stash_database_info['name'] do
       connection database_connection
       connection_limit "-1"
       encoding "utf8"
       action :create
     end
 
-    postgresql_database_user stash_data_bag[node.chef_environment]['database']['user'] do
+    postgresql_database_user stash_database_info['user'] do
       connection database_connection
-      password stash_data_bag[node.chef_environment]['database']['password']
-      database_name stash_data_bag[node.chef_environment]['database']['name']
+      password stash_database_info['password']
+      database_name stash_database_info['name']
       action [:create, :grant]
     end
   else
@@ -126,6 +128,7 @@ template "#{node[:stash][:install_path]}/conf/server.xml" do
   source "server.xml.erb"
   owner  node[:stash][:run_user]
   mode   "0640"
+  variables :tomcat => stash_tomcat_info
 end
 
 template "#{node[:stash][:install_path]}/conf/web.xml" do

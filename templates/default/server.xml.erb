@@ -101,9 +101,9 @@
              secure="true"
              clientAuth="false"
              sslProtocol="TLS"
-             <%= "keyAlias=\"#{stash_data_bag[node.chef_environment][:tomcat][:keyAlias]}\"" if stash_data_bag[node.chef_environment][:tomcat][:keyAlias] %>
-             <%= "keystoreFile=\"#{stash_data_bag[node.chef_environment][:tomcat][:keystoreFile]}\"" if stash_data_bag[node.chef_environment][:tomcat][:keystoreFile] %>
-             <%= "keystorePass=\"#{stash_data_bag[node.chef_environment][:tomcat][:keystorePass]}\"" if stash_data_bag[node.chef_environment][:tomcat][:keystorePass] %>
+             <%= "keyAlias=\"#{tomcat['keyAlias']}\"" if @tomcat['keyAlias'] %>
+             <%= "keystoreFile=\"#{tomcat['keystoreFile']}\"" if @tomcat['keystoreFile'] %>
+             <%= "keystorePass=\"#{tomcat['keystorePass']}\"" if @tomcat['keystorePass'] %>
         />
 
         <!--
