@@ -24,13 +24,8 @@ stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 case stash_database_info['type']
 when "mysql"
   stash_database_info['port'] ||= "3306"
-when "postgresql"
-  stash_database_info['port'] ||= "5432"
-end
-
-if stash_database_info['host'] == "localhost"
-  case stash_database_info['type']
-  when "mysql"
+  
+  if stash_database_info['host'] == "localhost"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
     include_recipe "mysql::server"
     include_recipe "database"
@@ -54,7 +49,13 @@ if stash_database_info['host'] == "localhost"
       database_name stash_database_info['name']
       action [:create, :grant]
     end
-  when "postgresql"
+  else
+    include_recipe "mysql::client"
+  end
+when "postgresql"
+  stash_database_info['port'] ||= "5432"
+  
+  if stash_database_info['host'] == "localhost"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+PostgreSQL
     # Temporary handling of pg for COOK-1406
     chef_gem "pg"
@@ -82,8 +83,10 @@ if stash_database_info['host'] == "localhost"
       action [:create, :grant]
     end
   else
-    Chef::Log.warn("Unsupported database type for localhost database creation. Skipping.")
+    include_recipe "postgresql::client"
   end
+else
+  Chef::Log.warn("Unsupported database type for localhost database creation. Skipping.")
 end
 
 user node[:stash][:run_user] do
