@@ -20,12 +20,14 @@
 include_recipe "database"
 
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
+stash_configuration_info = stash_data_bag[node.chef_environment]['configuration']
 stash_database_info = stash_data_bag[node.chef_environment]['database']
 stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 
 case stash_database_info['type']
 when "mysql"
   stash_database_info['port'] ||= "3306"
+  stash_database_info['provider'] = Chef::Provider::Database::Mysql
   
   if stash_database_info['host'] == "localhost"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
@@ -56,6 +58,7 @@ when "mysql"
   end
 when "postgresql"
   stash_database_info['port'] ||= "5432"
+  stash_database_info['provider'] = Chef::Provider::Database::Postgresql
   
   # Temporary handling of pg for COOK-1406
   chef_gem "pg"
@@ -183,4 +186,29 @@ end
 service "stash" do
   supports :restart => true
   action [:enable, :start]
+end
+
+database_connection = {
+  :host => stash_database_info['host'],
+  :port => stash_database_info['port'],
+  :username => stash_database_info['user'],
+  :password => stash_database_info['password']
+}
+
+database stash_database_info['name'] do
+  connection database_connection
+  provider stash_database_info['provider']
+  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node[:fqdn]}')"
+  action :query
+  ignore_failure true
+end
+
+if stash_configuration_info && stash_configuration_info['license']
+  database stash_database_info['name'] do
+    connection database_connection
+    provider stash_database_info['provider']
+    sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('license','#{stash_configuration_info['license']}')"
+    action :query
+    ignore_failure true
+  end
 end

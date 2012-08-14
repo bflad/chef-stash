@@ -26,6 +26,7 @@ Create a stash/stash encrypted data bag with the following information per
 Chef environment:
 * _required:_ database type (mysql/postgresql), host (FQDN/localhost),
 name, user, password
+* _optional:_ configuration license
 * _optional:_ database port
 * _optional:_ Tomcat HTTPS Java Keystore keyAlias, keystoreFile, keystorePass
 (defaults to self-signed)
@@ -35,6 +36,9 @@ Repeat for other Chef environments as necessary. Example:
     {
       "id": "stash"
       "development": {
+        "configuration": {
+          "license": "STASH-LICENSE-KEY"
+        },
         "database": {
           "type": "postgresql",
           "host": "localhost",
@@ -50,10 +54,16 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-Add recipe[stash] to your run_list and get on your merry way. If it is a
-localhost database, it will automatically set up the database server, 
-create the database, and assign database user permissions (along with
-approriate Stash configuration of course).
+Add recipe[stash] to your run_list and get on your merry way.
+
+## More Data Bag Information:
+
+_DATABASE:_ If it is a localhost database, it will automatically set up
+the database server, create the database, and assign database user 
+permissions (along with approriate Stash configuration of course).
+
+_LICENSE:_ If entered, will automatically enter license into database.
+Can be left blank if you need to generate evaluation license.
 
 # LICENSE and AUTHOR:
       
