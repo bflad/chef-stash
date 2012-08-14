@@ -144,6 +144,13 @@ template "#{node[:stash][:install_path]}/conf/web.xml" do
   mode   "0644"
 end
 
+template "#{node[:stash][:install_path]}/stash-config.properties" do
+  source "stash-config.properties.erb"
+  owner  node[:stash][:run_user]
+  mode   "0644"
+  variables :database => stash_database_info
+end
+
 template "/etc/init.d/stash" do
   source "stash.init.erb"
   mode   "0755"
