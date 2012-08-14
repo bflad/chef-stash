@@ -117,11 +117,6 @@ execute "Extracting Stash #{node[:stash][:version]}" do
   creates "#{node[:stash][:install_path]}/atlassian-stash.war"
 end
 
-template "/etc/init.d/stash" do
-  source "stash.init.erb"
-  mode   "0755"
-end
-
 template "#{node[:stash][:install_path]}/bin/setenv.sh" do
   source "setenv.sh.erb"
   owner  node[:stash][:run_user]
@@ -138,6 +133,11 @@ template "#{node[:stash][:install_path]}/conf/web.xml" do
   source "web.xml"
   owner  node[:stash][:run_user]
   mode   "0644"
+end
+
+template "/etc/init.d/stash" do
+  source "stash.init.erb"
+  mode   "0755"
 end
 
 service "stash" do
