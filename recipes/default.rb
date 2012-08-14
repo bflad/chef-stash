@@ -21,18 +21,25 @@ stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
 stash_database_info = stash_data_bag[node.chef_environment]['database']
 stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 
+case stash_database_info['type']
+when "mysql"
+  stash_database_info['port'] ||= "3306"
+when "postgresql"
+  stash_database_info['port'] ||= "5432"
+end
+
 if stash_database_info['host'] == "localhost"
   case stash_database_info['type']
-    when "mysql"
+  when "mysql"
     # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
     include_recipe "mysql::server"
     include_recipe "database"
     database_connection = {
-      :host => "#{stash_database_info['host']}",
+      :host => stash_database_info['host'],
+      :port => stash_database_info['port'],
       :username => 'root',
       :password => node[:mysql][:server_root_password]
     }
-    database_connection << { :port => stash_database_info['port'] } if stash_database_info['port']
 
     mysql_database stash_database_info['name'] do
       connection database_connection
@@ -55,11 +62,11 @@ if stash_database_info['host'] == "localhost"
     include_recipe "postgresql::server"
     include_recipe "database"
     database_connection = {
-      :host => "#{stash_database_info['host']}",
+      :host => stash_database_info['host'],
+      :port => stash_database_info['port'],
       :username => 'postgres',
       :password => node[:postgresql][:password][:postgres]
     }
-    database_connection << { :port => stash_database_info['port'] } if stash_database_info['port']
 
     postgresql_database stash_database_info['name'] do
       connection database_connection
