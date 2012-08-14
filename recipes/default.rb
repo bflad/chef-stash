@@ -58,7 +58,7 @@ execute "Generating Self-Signed Java Keystore" do
     chown #{node[:stash][:run_user]}:#{node[:stash][:run_user]} #{node[:stash][:home_path]}/.keystore
   COMMAND
   creates "#{node[:stash][:home_path]}/.keystore"
-  only_if node[:stash][:tomcat][:keystoreFile].empty?
+  not_if "test -f #{node[:stash][:tomcat][:keystoreFile]}"
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node[:stash][:version]}.tar.gz" do
