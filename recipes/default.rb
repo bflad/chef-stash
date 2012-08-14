@@ -48,7 +48,7 @@ end
 
 execute "Generating Self-Signed Java Keystore" do
   command <<-COMMAND
-    keytool -genkey \
+    #{node[:java][:java_home]}/bin/keytool -genkey \
       -alias tomcat \
       -keyalg RSA \
       -dname 'CN=#{node[:fqdn]}, OU=Example, O=Example, L=Example, ST=Example, C=US' \
