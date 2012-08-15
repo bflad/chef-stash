@@ -133,6 +133,16 @@ if stash_database_info['type'] == "mysql"
   end
 end
 
+template "/etc/init.d/stash" do
+  source "stash.init.erb"
+  mode   "0755"
+end
+
+service "stash" do
+  supports :status => true, :restart => true
+  action :enable
+end
+
 template "#{node[:stash][:install_path]}/bin/setenv.sh" do
   source "setenv.sh.erb"
   owner  node[:stash][:run_user]
@@ -161,16 +171,6 @@ template "#{node[:stash][:install_path]}/stash-config.properties" do
   mode   "0644"
   variables :database => stash_database_info
   notifies :restart, resources(:service => "stash"), :delayed
-end
-
-template "/etc/init.d/stash" do
-  source "stash.init.erb"
-  mode   "0755"
-end
-
-service "stash" do
-  supports :status => true, :restart => true
-  action [:enable, :start]
 end
 
 database_connection = {
