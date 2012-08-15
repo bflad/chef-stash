@@ -137,6 +137,7 @@ template "#{node[:stash][:install_path]}/bin/setenv.sh" do
   source "setenv.sh.erb"
   owner  node[:stash][:run_user]
   mode   "0755"
+  notifies :restart, resources(:service => "stash"), :delayed
 end
 
 template "#{node[:stash][:install_path]}/conf/server.xml" do
@@ -144,12 +145,14 @@ template "#{node[:stash][:install_path]}/conf/server.xml" do
   owner  node[:stash][:run_user]
   mode   "0640"
   variables :tomcat => stash_tomcat_info
+  notifies :restart, resources(:service => "stash"), :delayed
 end
 
 template "#{node[:stash][:install_path]}/conf/web.xml" do
   source "web.xml"
   owner  node[:stash][:run_user]
   mode   "0644"
+  notifies :restart, resources(:service => "stash"), :delayed
 end
 
 template "#{node[:stash][:install_path]}/stash-config.properties" do
@@ -157,6 +160,7 @@ template "#{node[:stash][:install_path]}/stash-config.properties" do
   owner  node[:stash][:run_user]
   mode   "0644"
   variables :database => stash_database_info
+  notifies :restart, resources(:service => "stash"), :delayed
 end
 
 template "/etc/init.d/stash" do
