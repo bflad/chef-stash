@@ -54,8 +54,13 @@ case "$1" in
     start
     RETVAL=$?    
     ;;
+  # Status command
+  status)
+    status -p $BASE/work/catalina.pid $APP
+    RETVAL=$?
+    ;;
   *)
-    echo "Usage: $APP {start|restart|stop}"
+    echo "Usage: $APP {start|restart|stop|status}"
     RETVAL=2
     ;;
 esac
