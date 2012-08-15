@@ -28,70 +28,51 @@ case stash_database_info['type']
 when "mysql"
   stash_database_info['port'] ||= "3306"
   stash_database_info['provider'] = Chef::Provider::Database::Mysql
-  
-  if stash_database_info['host'] == "localhost"
-    # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+MySQL
-    include_recipe "mysql::server"
-    
-    database_connection = {
-      :host => stash_database_info['host'],
-      :port => stash_database_info['port'],
-      :username => 'root',
-      :password => node[:mysql][:server_root_password]
-    }
-
-    mysql_database stash_database_info['name'] do
-      connection database_connection
-      encoding "utf8"
-      collation "ut8_bin"
-      action :create
-    end
-
-    mysql_database_user stash_database_info['user'] do
-      connection database_connection
-      password stash_database_info['password']
-      database_name stash_database_info['name']
-      action [:create, :grant]
-    end
-  else
-    include_recipe "mysql::client"
-  end
 when "postgresql"
   stash_database_info['port'] ||= "5432"
   stash_database_info['provider'] = Chef::Provider::Database::Postgresql
-  
-  # Temporary handling of pg for COOK-1406
-  chef_gem "pg"
-  
-  if stash_database_info['host'] == "localhost"
-    # Documentation: https://confluence.atlassian.com/display/STASH/Connecting+Stash+to+PostgreSQL
-    include_recipe "postgresql::server"
-    
-    database_connection = {
-      :host => stash_database_info['host'],
-      :port => stash_database_info['port'],
-      :username => 'postgres',
-      :password => node[:postgresql][:password][:postgres]
-    }
-
-    postgresql_database stash_database_info['name'] do
-      connection database_connection
-      connection_limit "-1"
-      encoding "utf8"
-      action :create
-    end
-
-    postgresql_database_user stash_database_info['user'] do
-      connection database_connection
-      password stash_database_info['password']
-      database_name stash_database_info['name']
-      action [:create, :grant]
-    end
-  else
-    include_recipe "postgresql::client"
-  end
 else
-  Chef::Log.warn("Unsupported database type for localhost database creation. Skipping.")
+  Chef::Log.warn("Unsupported database type.")
+end
+
+if stash_database_info['host'] == "localhost"
+  database_connection = {
+    :host => stash_database_info['host'],
+    :port => stash_database_info['port']
+  }
+
+  case stash_database_info['type']
+  when "mysql"
+    include_recipe "mysql::server"
+    database_connection << { :username => 'root', :password => node[:mysql][:server_root_password] }
+  when "postgresql"
+    # Temporary handling of pg for COOK-1406
+    chef_gem "pg"
+    
+    include_recipe "postgresql::server"
+    database_connection << { :username => 'postgres', :password => node[:postgresql][:password][:postgres] }
+  end
+  
+  database stash_database_info['name'] do
+    connection database_connection
+    provider stash_database_info['provider']
+    encoding "utf8"
+    case stash_database_info['type']
+    when "mysql"
+      collation "ut8_bin"
+    when "postgresql"
+      connection_limit "-1"
+    end
+    action :create
+  end
+
+  database_user stash_database_info['user'] do
+    connection database_connection
+    provider stash_database_info['provider']
+    password stash_database_info['password']
+    database_name stash_database_info['name']
+    action [:create, :grant]
+  end
 end
 
 user node[:stash][:run_user] do
