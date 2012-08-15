@@ -184,7 +184,7 @@ template "/etc/init.d/stash" do
 end
 
 service "stash" do
-  supports :restart => true
+  supports :status => true, :restart => true
   action [:enable, :start]
 end
 
