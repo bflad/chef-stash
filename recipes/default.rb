@@ -195,20 +195,20 @@ database_connection = {
   :password => stash_database_info['password']
 }
 
-database stash_database_info['name'] do
-  connection database_connection
-  provider stash_database_info['provider']
-  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node[:fqdn]}')"
-  action :query
-  ignore_failure true
-end
+#database stash_database_info['name'] do
+#  connection database_connection
+#  provider stash_database_info['provider']
+#  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node[:fqdn]}')"
+#  action :query
+#  ignore_failure true
+#end
 
-if stash_configuration_info && stash_configuration_info['license']
-  database stash_database_info['name'] do
-    connection database_connection
-    provider stash_database_info['provider']
-    sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('license','#{stash_configuration_info['license']}')"
-    action :query
-    ignore_failure true
-  end
-end
+#if stash_configuration_info && stash_configuration_info['license']
+#  database stash_database_info['name'] do
+#    connection database_connection
+#    provider stash_database_info['provider']
+#    sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('license','#{stash_configuration_info['license']}')"
+#    action :query
+#    ignore_failure true
+#  end
+#end
