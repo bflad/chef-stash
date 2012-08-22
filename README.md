@@ -67,7 +67,7 @@ Can be left blank if you need to generate evaluation license.
 
 # LICENSE and AUTHOR:
       
-Author:: Brian Flad (<bflad417@gmail.com>)
+Author:: Brian Flad (<bflad@wharton.upenn.edu>)
 
 Copyright:: 2012
 
