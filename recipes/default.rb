@@ -79,7 +79,7 @@ user node[:stash][:run_user] do
   comment "Stash Service Account"
   home    node[:stash][:home_path]
   shell   "/bin/bash"
-  supports { :manage_home => true }
+  supports :manage_home => true
   system  true
   action  :create 
 end
