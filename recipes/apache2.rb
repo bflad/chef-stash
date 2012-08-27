@@ -26,7 +26,7 @@ include_recipe "apache2::mod_ssl"
 template "#{node['apache']['dir']}/sites-available/#{node['stash']['apache2']['virtual_host_name']}.conf" do
   source "stash.conf.erb"
   mode 0644
-  notifies :restart, resources(:server => "apache2")
+  notifies :restart, resources(:service => "apache2")
 end
 
 apache_site "#{node['stash']['apache2']['virtual_host_name']}.conf"
