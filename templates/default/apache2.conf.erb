@@ -18,6 +18,10 @@
 	ErrorLog <%= node['stash']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/stash-error.log" : node['stash']['apache2']['error_log'] %>
 	LogLevel warn
 
+	<Proxy *>
+		Order Deny,Allow
+		Allow from all
+	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
 </VirtualHost>
@@ -38,6 +42,10 @@
 	ErrorLog <%= node['stash']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-error.log" : node['stash']['apache2']['ssl']['error_log'] %>
 	LogLevel warn
 
+	<Proxy *>
+		Order Deny,Allow
+		Allow from all
+	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
 
