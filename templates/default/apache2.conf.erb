@@ -45,6 +45,6 @@
 	SSLCertificateFile <%= node['stash']['apache2']['ssl']['certificate_file'] %>
 	SSLCertificateKeyFile <%= node['stash']['apache2']['ssl']['key_file'] %>
 	<% unless node['stash']['apache2']['ssl']['chain_file'].empty? -%>
-	SSLCertificteChainFile <%= node['stash']['apache2']['ssl']['chain_file'] %>
+	SSLCertificateChainFile <%= node['stash']['apache2']['ssl']['chain_file'] %>
 	<% end -%>
 </VirtualHost>
