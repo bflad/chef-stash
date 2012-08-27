@@ -24,7 +24,7 @@ include_recipe "apache2::mod_proxy_http"
 include_recipe "apache2::mod_ssl"
 
 template "#{node['apache']['dir']}/sites-available/#{node['stash']['apache2']['virtual_host_name']}.conf" do
-  source "stash.conf.erb"
+  source "apache2.conf.erb"
   mode 0644
   notifies :restart, resources(:service => "apache2")
 end
