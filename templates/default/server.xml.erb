@@ -74,7 +74,7 @@
                    useBodyEncodingForURI="true"
                    compression="on"
                    compressableMimeType="text/html,text/xml,text/plain,text/css,application/json,application/javascript,application/x-javascript"
-                   <% if <% node['stash']['apache2'] -%>
+                   <% if node['stash']['apache2'] -%>
                    redirectPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    secure="true"
                    scheme="https"
