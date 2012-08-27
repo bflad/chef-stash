@@ -11,10 +11,6 @@ recipe            "stash::apache2", "Installs Atlassian Stash behind Apache2"
   supports os
 end
 
-%w{ database git java mysql postgresql }.each do |cb|
+%w{ apache2 database git java mysql postgresql }.each do |cb|
   depends cb
-end
-
-%w{ apache2 }.each do |cb|
-  suggests cb
 end
