@@ -11,6 +11,8 @@ _AND NOT RECOMMENDED FOR EVEN BETA TESTING YET._
 
 Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
+* apache2 (if using Apache 2 proxy)
+* database
 * git (once COOK-1537 is incorporated, otherwise use git cookbook fork below)
 * java
 * mysql
@@ -21,6 +23,13 @@ Third-Party Cookbooks
 * git::source from https://github.com/bflad/git (until COOK-1537 is incorporated)
 
 # USAGE:
+
+## Recipes
+
+* _recipe[stash]:_ Installs Atlassian Stash with built-in Tomcat
+* _recipe[stash::apache2]:_ Installs above with Apache 2 proxy (ports 80/443)
+
+## Required Data Bag
 
 Create a stash/stash encrypted data bag with the following information per
 Chef environment:
@@ -55,6 +64,11 @@ Repeat for other Chef environments as necessary. Example:
     }
 
 Add recipe[stash] to your run_list and get on your merry way.
+
+_PLEASE NOTE:_ Due to how Stash handles the setup process, you will
+still be asked for database information when initially setting up the
+server. I submitted [STASH-2687](https://jira.atlassian.com/browse/STASH-2687)
+to fix this.
 
 ## More Data Bag Information:
 
