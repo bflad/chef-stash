@@ -5,10 +5,10 @@
 <% case @database['type'] %>
 <% when "mysql" %>
 jdbc.driver=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://<%= @database['user'] %>:<%= @database['port'] %>/<%= @database['name'] %>?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB
+jdbc.url=jdbc:mysql://<%= @database['host'] %>:<%= @database['port'] %>/<%= @database['name'] %>?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB
 <% when "postgresql" %>
 jdbc.driver=org.postgresql.Driver
-jdbc.url=jdbc:postgresql://<%= @database['user'] %>:<%= @database['port'] %>/<%= @database['name'] %>
+jdbc.url=jdbc:postgresql://<%= @database['host'] %>:<%= @database['port'] %>/<%= @database['name'] %>
 <% end %>
 jdbc.user=<%= @database['user'] %>
 jdbc.password=<%= @database['password'] %>
