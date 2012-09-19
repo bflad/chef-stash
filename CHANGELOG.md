@@ -1,3 +1,7 @@
+## v0.2.3
+
+* Fix for Integer default port for database cookbook
+
 ## v0.2.2
 
 * Community cookbooks now including specific recipes for database resource usage

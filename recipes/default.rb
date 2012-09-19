@@ -26,10 +26,10 @@ stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 
 case stash_database_info['type']
 when "mysql"
-  stash_database_info['port'] ||= "3306"
+  stash_database_info['port'] ||= 3306
   stash_database_info['provider'] = Chef::Provider::Database::Mysql
 when "postgresql"
-  stash_database_info['port'] ||= "5432"
+  stash_database_info['port'] ||= 5432
   stash_database_info['provider'] = Chef::Provider::Database::Postgresql
 else
   Chef::Log.warn("Unsupported database type.")
