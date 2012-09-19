@@ -1,3 +1,7 @@
+## v0.2.4
+
+* Misspelled MySQL collation for localhost database creation
+
 ## v0.2.3
 
 * Fix for Integer default port for database cookbook

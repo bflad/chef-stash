@@ -58,7 +58,7 @@ if stash_database_info['host'] == "localhost"
     encoding "utf8"
     case stash_database_info['type']
     when "mysql"
-      collation "ut8_bin"
+      collation "utf8_bin"
     when "postgresql"
       connection_limit "-1"
     end
