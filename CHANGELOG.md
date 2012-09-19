@@ -1,3 +1,7 @@
+## v0.2.9
+
+* Added encrypted data bag retrieval for stash::upgrade
+
 ## v0.2.8
 
 * Bump default Stash version to 1.2.3

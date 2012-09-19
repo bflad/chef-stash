@@ -22,6 +22,9 @@
 # https://confluence.atlassian.com/display/STASH/Stash+upgrade+guide
 #
 
+stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
+stash_database_info = stash_data_bag[node.chef_environment]['database']
+
 service "stash" do
   action :stop
 end
