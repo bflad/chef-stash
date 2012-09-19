@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: stash
-# Recipe:: default
+# Recipe:: upgrade
 #
 # Copyright 2012
 #
@@ -15,6 +15,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+
+#
+# Stash Upgrade Guide:
+# https://confluence.atlassian.com/display/STASH/Stash+upgrade+guide
 #
 
 service "stash" do
