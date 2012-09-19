@@ -17,12 +17,16 @@
 # limitations under the License.
 #
 
-default[:stash][:version]       = "1.2.0"
-default[:stash][:url]           = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node[:stash][:version]}.tar.gz"
-default[:stash][:checksum]      = "e643aa62b06c38d51333855262fc36d112b39d93c29721ab085a127b78a28d2f"
-default[:stash][:install_path]  = "/opt/atlassian-stash"
-default[:stash][:run_user]      = "stash"
-default[:stash][:home_path]     = "/home/#{node[:stash][:run_user]}"
+default[:stash][:version]        = "1.2.0"
+default[:stash][:url]            = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node[:stash][:version]}.tar.gz"
+default[:stash][:checksum]       = "e643aa62b06c38d51333855262fc36d112b39d93c29721ab085a127b78a28d2f"
+default[:stash][:backup_home]    = true
+default[:stash][:backup_install] = true
+default[:stash][:install_backup] = "/tmp/atlassian-stash-backup.tgz"
+default[:stash][:install_path]   = "/opt/atlassian-stash"
+default[:stash][:run_user]       = "stash"
+default[:stash][:home_backup]    = "/tmp/atlassian-stash-home-backup.tgz"
+default[:stash][:home_path]      = "/home/#{node[:stash][:run_user]}"
 default[:stash][:jvm][:minimum_memory]  = "256m"
 default[:stash][:jvm][:maximum_memory]  = "768m"
 default[:stash][:jvm][:maximum_permgen] = "256m"
