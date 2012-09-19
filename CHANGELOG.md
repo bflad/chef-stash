@@ -1,3 +1,7 @@
+## v0.2.2
+
+* Community cookbooks now including specific recipes for database resource usage
+
 ## v0.2.1
 
 * Fix for localhost database_connection merging
