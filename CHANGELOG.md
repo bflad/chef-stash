@@ -1,3 +1,7 @@
+## v0.2.1
+
+* Fix for localhost database_connection merging
+
 ## v0.2.0
 
 * Initial upgrade recipe

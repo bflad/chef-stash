@@ -44,13 +44,13 @@ if stash_database_info['host'] == "localhost"
   case stash_database_info['type']
   when "mysql"
     include_recipe "mysql::server"
-    database_connection << { :username => 'root', :password => node[:mysql][:server_root_password] }
+    database_connection.merge!({ :username => 'root', :password => node[:mysql][:server_root_password] })
   when "postgresql"
     # Temporary handling of pg for COOK-1406
     chef_gem "pg"
     
     include_recipe "postgresql::server"
-    database_connection << { :username => 'postgres', :password => node[:postgresql][:password][:postgres] }
+    database_connection.merge!({ :username => 'postgres', :password => node[:postgresql][:password][:postgres] })
   end
   
   database stash_database_info['name'] do
