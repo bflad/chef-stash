@@ -31,7 +31,7 @@ end
 
 if node[:stash][:backup_home]
   execute "Backing up Stash Home Directory" do
-    command "tar -zcf #{node[:stash][:home_backup]} #{node[:stash][:install_path]}"
+    command "tar -zcf #{node[:stash][:home_backup]} #{node[:stash][:home_path]}"
   end
 end
 
@@ -53,7 +53,7 @@ execute "Extracting Stash #{node[:stash][:version]}" do
   command <<-COMMAND
     tar -zxf atlassian-stash-#{node[:stash][:version]}.tar.gz
     chown -R #{node[:stash][:run_user]} atlassian-stash-#{node[:stash][:version]}
-    mv atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
+    mv -f atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
   COMMAND
 end
 

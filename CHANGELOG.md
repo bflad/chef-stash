@@ -1,3 +1,8 @@
+## v0.2.10
+
+* Fixed home directory backup
+* Forcing overwrite with mv -f for new Stash version directory
+
 ## v0.2.9
 
 * Added encrypted data bag retrieval for stash::upgrade
