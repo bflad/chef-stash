@@ -1,3 +1,7 @@
+## v0.2.8
+
+* Bump default Stash version to 1.2.3
+
 ## v0.2.7
 
 * Fixing localhost MySQL host since mysql::server doesn't appear to work with
