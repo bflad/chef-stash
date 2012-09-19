@@ -69,6 +69,7 @@ if stash_database_info['host'] == "localhost"
     case stash_database_info['type']
     when "mysql"
       provider Chef::Provider::Database::MysqlUser
+      host "%"
     when "postgresql"
       provider Chef::Provider::Database::PostgresqlUser
     end

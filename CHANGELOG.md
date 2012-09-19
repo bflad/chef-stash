@@ -1,3 +1,7 @@
+## v0.2.6
+
+* Added host parameter for mysql database user grant to fix bind-address issue
+
 ## v0.2.5
 
 * Refactored and fixed database and database user provider handling
