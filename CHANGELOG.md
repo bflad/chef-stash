@@ -1,3 +1,8 @@
+## v0.2.7
+
+* Fixing localhost MySQL host since mysql::server doesn't appear to work with
+  localhost and MySQL Connector/J
+
 ## v0.2.6
 
 * Added host parameter for mysql database user grant to fix bind-address issue
