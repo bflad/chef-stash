@@ -27,10 +27,8 @@ stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 case stash_database_info['type']
 when "mysql"
   stash_database_info['port'] ||= 3306
-  stash_database_info['provider'] = Chef::Provider::Database::Mysql
 when "postgresql"
   stash_database_info['port'] ||= 5432
-  stash_database_info['provider'] = Chef::Provider::Database::Postgresql
 else
   Chef::Log.warn("Unsupported database type.")
 end
@@ -54,20 +52,26 @@ if stash_database_info['host'] == "localhost"
   
   database stash_database_info['name'] do
     connection database_connection
-    provider stash_database_info['provider']
-    encoding "utf8"
     case stash_database_info['type']
     when "mysql"
+      provider Chef::Provider::Database::Mysql
       collation "utf8_bin"
     when "postgresql"
+      provider Chef::Provider::Database::Postgresql
       connection_limit "-1"
     end
+    encoding "utf8"
     action :create
   end
 
   database_user stash_database_info['user'] do
     connection database_connection
-    provider stash_database_info['provider']
+    case stash_database_info['type']
+    when "mysql"
+      provider Chef::Provider::Database::MysqlUser
+    when "postgresql"
+      provider Chef::Provider::Database::PostgresqlUser
+    end
     password stash_database_info['password']
     database_name stash_database_info['name']
     action [:create, :grant]

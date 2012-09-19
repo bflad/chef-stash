@@ -1,3 +1,7 @@
+## v0.2.5
+
+* Refactored and fixed database and database user provider handling
+
 ## v0.2.4
 
 * Misspelled MySQL collation for localhost database creation
