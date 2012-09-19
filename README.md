@@ -1,9 +1,6 @@
 # DESCRIPTION:
 
-Installs Atlassian Stash.
-
-_NOTE: THIS COOKBOOK IS CURRENTLY UNDER HEAVY ACTIVE DEVELOPMENT_
-_AND NOT RECOMMENDED FOR EVEN BETA TESTING YET._
+Installs/Configures Atlassian Stash.
 
 # REQUIREMENTS:
 
@@ -13,14 +10,10 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
 * apache2 (if using Apache 2 proxy)
 * database
-* git (once COOK-1537 is incorporated, otherwise use git cookbook fork below)
+* git
 * java
 * mysql
 * postgresql
-
-Third-Party Cookbooks
-
-* git::source from https://github.com/bflad/git (until COOK-1537 is incorporated)
 
 # USAGE:
 
@@ -28,6 +21,7 @@ Third-Party Cookbooks
 
 * _recipe[stash]:_ Installs Atlassian Stash with built-in Tomcat
 * _recipe[stash::apache2]:_ Installs above with Apache 2 proxy (ports 80/443)
+* _recipe[stash::upgrade]:_ Upgrades Atlassian Stash
 
 ## Required Data Bag
 
@@ -63,7 +57,7 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-Add recipe[stash] to your run_list and get on your merry way.
+Add `recipe[stash]` to your run_list and get on your merry way.
 
 _PLEASE NOTE:_ Due to how Stash handles the setup process, you will
 still be asked for database information when initially setting up the
