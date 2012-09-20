@@ -53,7 +53,8 @@ execute "Extracting Stash #{node[:stash][:version]}" do
   command <<-COMMAND
     tar -zxf atlassian-stash-#{node[:stash][:version]}.tar.gz
     chown -R #{node[:stash][:run_user]} atlassian-stash-#{node[:stash][:version]}
-    mv -f atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
+    rm -rf #{node[:stash][:install_path]}
+    mv atlassian-stash-#{node[:stash][:version]} #{node[:stash][:install_path]}
   COMMAND
 end
 

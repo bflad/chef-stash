@@ -1,3 +1,7 @@
+## v0.2.11
+
+* Removing install directory before copying new Stash version directory
+
 ## v0.2.10
 
 * Fixed home directory backup
