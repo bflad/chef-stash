@@ -1,3 +1,5 @@
+# chef-stash  [![Build Status](https://secure.travis-ci.org/bflad/chef-stash.png?branch=master)](http://travis-ci.org/bflad/chef-stash)
+
 # DESCRIPTION:
 
 Installs/Configures Atlassian Stash.
