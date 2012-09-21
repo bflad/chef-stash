@@ -1,3 +1,7 @@
+## v0.2.12
+
+* FC001: Use strings in preference to symbols to access node attributes
+
 ## v0.2.11
 
 * Removing install directory before copying new Stash version directory

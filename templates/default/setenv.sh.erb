@@ -7,20 +7,20 @@
 # One way to set the STASH HOME path is here via this variable.  Simply uncomment it and set a valid path like
 # /stash/home.  You can of course set it outside in the command terminal; that will also work.
 #
-STASH_HOME="<%= node[:stash][:home_path] %>"
+STASH_HOME="<%= node['stash']['home_path'] %>"
 
 #
 # Occasionally Atlassian Support may recommend that you set some specific JVM arguments.  You can use this variable
 # below to do that.
 #
-JVM_SUPPORT_RECOMMENDED_ARGS="<%= node[:stash][:jvm][:support_args] %>"
+JVM_SUPPORT_RECOMMENDED_ARGS="<%= node['stash']['jvm']['support_args'] %>"
 
 #
 # The following 2 settings control the minimum and maximum given to the Atlassian Stash Java virtual machine.
 # In larger Stash instances, the maximum amount will need to be increased.
 #
-JVM_MINIMUM_MEMORY="<%= node[:stash][:jvm][:minimum_memory] %>"
-JVM_MAXIMUM_MEMORY="<%= node[:stash][:jvm][:maximum_memory] %>"
+JVM_MINIMUM_MEMORY="<%= node['stash']['jvm']['minimum_memory'] %>"
+JVM_MAXIMUM_MEMORY="<%= node['stash']['jvm']['maximum_memory'] %>"
 
 #
 # File encoding passed into the Atlassian Stash Java virtual machine
@@ -35,7 +35,7 @@ JVM_REQUIRED_ARGS="-Djava.awt.headless=true -Dfile.encoding=${JVM_FILE_ENCODING}
 #
 # Additional JVM arguments
 #
-JAVA_OPTS="<%= node[:stash][:jvm][:java_opts] %> ${JAVA_OPTS}"
+JAVA_OPTS="<%= node['stash']['jvm']['java_opts'] %> ${JAVA_OPTS}"
 
 #-----------------------------------------------------------------------------------
 #
@@ -74,7 +74,7 @@ JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JAVA_OPTS} ${JV
 
 # PermGen size needs to be increased if encountering OutOfMemoryError: PermGen problems. Specifying PermGen size is
 # not valid on IBM JDKs
-STASH_MAX_PERM_SIZE="<%= node[:stash][:jvm][:maximum_permgen] %>"
+STASH_MAX_PERM_SIZE="<%= node['stash']['jvm']['maximum_permgen'] %>"
 if [ -f "${PRGDIR}/permgen.sh" ]; then
     echo "Detecting JVM PermGen support..."
     . "${PRGDIR}/permgen.sh"

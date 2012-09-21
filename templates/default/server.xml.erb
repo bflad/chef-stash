@@ -69,7 +69,7 @@
              APR (HTTP/AJP) Connector: /docs/apr.html
              Define a non-SSL HTTP/1.1 Connector on port 7990
         -->
-        <Connector port="<%= node[:stash][:tomcat][:port] %>" protocol="HTTP/1.1"
+        <Connector port="<%= node['stash']['tomcat']['port'] %>" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    useBodyEncodingForURI="true"
                    compression="on"
@@ -96,7 +96,7 @@
              connector should be using the OpenSSL style configuration
              described in the APR documentation -->
         
-        <Connector port="<%= node[:stash][:tomcat][:ssl_port] %>"
+        <Connector port="<%= node['stash']['tomcat']['ssl_port'] %>"
              maxHttpHeaderSize="8192"
              SSLEnabled="true"
              maxThreads="150"
