@@ -29,16 +29,14 @@ service "stash" do
   action :stop
 end
 
-if node['stash']['backup_home']
-  execute "Backing up Stash Home Directory" do
-    command "tar -zcf #{node['stash']['home_backup']} #{node['stash']['home_path']}"
-  end
+execute "Backing up Stash Home Directory" do
+  command "tar -zcf #{node['stash']['home_backup']} #{node['stash']['home_path']}"
+  only_if { node['stash']['backup_home'] }
 end
 
-if node['stash']['backup_install']
-  execute "Backing up Stash Install Directory" do
-    command "tar -zcf #{node['stash']['install_backup']} #{node['stash']['install_path']}"
-  end
+execute "Backing up Stash Install Directory" do
+  command "tar -zcf #{node['stash']['install_backup']} #{node['stash']['install_path']}"
+  only_if { node['stash']['backup_install'] }
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node['stash']['version']}.tar.gz" do
