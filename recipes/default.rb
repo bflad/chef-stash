@@ -47,11 +47,11 @@ if stash_database_info['host'] == "localhost"
   when "mysql"
     include_recipe "mysql::server"
     include_recipe "database::mysql"
-    database_connection.merge!({ :username => 'root', :password => node[:mysql][:server_root_password] })
+    database_connection.merge!({ :username => 'root', :password => node['mysql']['server_root_password'] })
   when "postgresql"
     include_recipe "postgresql::server"
     include_recipe "database::postgresql"
-    database_connection.merge!({ :username => 'postgres', :password => node[:postgresql][:password][:postgres] })
+    database_connection.merge!({ :username => 'postgres', :password => node['postgresql']['password']['postgres'] })
   end
   
   database stash_database_info['name'] do
