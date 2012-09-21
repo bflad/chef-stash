@@ -90,10 +90,10 @@ end
 
 execute "Generating Self-Signed Java Keystore" do
   command <<-COMMAND
-    #{node[:java][:java_home]}/bin/keytool -genkey \
+    #{node['java']['java_home']}/bin/keytool -genkey \
       -alias tomcat \
       -keyalg RSA \
-      -dname 'CN=#{node[:fqdn]}, OU=Example, O=Example, L=Example, ST=Example, C=US' \
+      -dname 'CN=#{node['fqdn']}, OU=Example, O=Example, L=Example, ST=Example, C=US' \
       -keypass changeit \
       -storepass changeit \
       -keystore #{node['stash']['home_path']}/.keystore
@@ -164,7 +164,7 @@ template "#{node['stash']['install_path']}/conf/server.xml" do
 end
 
 template "#{node['stash']['install_path']}/conf/web.xml" do
-  source "web.xml"
+  source "web.xml.erb"
   owner  node['stash']['run_user']
   mode   "0644"
   notifies :restart, resources(:service => "stash"), :delayed
@@ -188,7 +188,7 @@ database_connection = {
 #database stash_database_info['name'] do
 #  connection database_connection
 #  provider stash_database_info['provider']
-#  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node[:fqdn]}')"
+#  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node['fqdn']}')"
 #  action :query
 #  ignore_failure true
 #end
