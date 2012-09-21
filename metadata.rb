@@ -12,6 +12,6 @@ recipe            "stash::upgrade", "Upgrades Atlassian Stash"
   supports os
 end
 
-%w{ apache2 database git java mysql postgresql }.each do |cb|
+%w{ apache2 database git java mysql postgresql stash }.each do |cb|
   depends cb
 end
