@@ -1,12 +1,16 @@
 # chef-stash  [![Build Status](https://secure.travis-ci.org/bflad/chef-stash.png?branch=master)](http://travis-ci.org/bflad/chef-stash)
 
-# DESCRIPTION:
+## Description
 
 Installs/Configures Atlassian Stash.
 
-# REQUIREMENTS:
+## Requirements
 
-## Cookbooks:
+### Platforms
+
+* RedHat 6.3
+
+### Cookbooks
 
 Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
@@ -17,24 +21,76 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 * mysql
 * postgresql
 
-# USAGE:
+## Attributes
+
+* `node['stash']['version']` - Stash version to install (use
+  `recipe[stash::upgrade]` to upgrade to version defined)
+* `node['stash']['url']` - URL for Stash installer .tar.gz
+* `node['stash']['checksum']` - SHA256 checksum for Stash installer .tar.gz
+* `node['stash']['backup_home']` - backup home directory during upgrade,
+  defaults to true
+* `node['stash']['backup_install']` - backup install directory during upgrade,
+  defaults to true
+* `node['stash']['install_backup']` - location of install directory backup
+  during upgrade
+* `node['stash']['install_path']` - location to install Stash, defaults to
+  `/opt/atlassian-stash`
+* `node['stash']['run_user']` - user to run Stash, defaults to "stash"
+* `node['stash']['home_backup']` - location of home directory backup during
+  upgrade
+* `node['stash']['home_path']` - home directory for Stash run_user, defaults to
+  `/home/#{node['stash']['run_user']}`
+
+### Stash JVM Attributes
+
+* `node['stash']['jvm']['minimum_memory']` - defaults to "256m"
+* `node['stash']['jvm']['maximum_memory']` - defaults to "768m"
+* `node['stash']['jvm']['maximum_permgen']` - defaults to "256m"
+* `node['stash']['jvm']['java_opts']` - additional JAVA_OPTS to be passed to
+  Stash JVM during startup
+* `node['stash']['jvm']['support_args']` - additional JAVA_OPTS recommended by
+  Atlassian support for Stash JVM during startup
+
+### Stash MySQL Attributes
+
+* `node['stash']['mysql']['connector']['version']` - MySQL Connector/J version
+  (if required)
+* `node['stash']['mysql']['connector']['url']` - URL for MySQL Connector/J
+* `node['stash']['mysql']['connector']['checksum']` - SHA256 checksum of MySQL
+  Connector/J
+
+### Stash Tomcat Attributes
+
+* `node['stash']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
+  7990
+* `node['stash']['tomcat']['ssl_port']` - port to run Tomcat HTTPS, defaults
+  to 8443
 
 ## Recipes
 
-* _recipe[stash]:_ Installs Atlassian Stash with built-in Tomcat
-* _recipe[stash::apache2]:_ Installs above with Apache 2 proxy (ports 80/443)
-* _recipe[stash::upgrade]:_ Upgrades Atlassian Stash
+* `recipe[stash]` Installs Atlassian Stash with built-in Tomcat
+* `recipe[stash::apache2]` Installs above with Apache 2 proxy (ports 80/443)
+* `recipe[stash::upgrade]` Upgrades Atlassian Stash
 
-## Required Data Bag
+## Usage
+
+### Required Stash Data Bag
 
 Create a stash/stash encrypted data bag with the following information per
 Chef environment:
-* _required:_ database type (mysql/postgresql), host (FQDN/localhost),
-name, user, password
-* _optional:_ configuration license
-* _optional:_ database port
-* _optional:_ Tomcat HTTPS Java Keystore keyAlias, keystoreFile, keystorePass
-(defaults to self-signed)
+
+_required:_
+* `['database']['type']` - mysql/postgresql
+* `['database']['host']` - FQDN/localhost
+* `['database']['name']` - Name of database
+* `['database']['user']` - Credentials username
+* `['database']['password']` - Credentials password
+_optional:_
+* `['configuration']['license']` - _NOT OPERATIONAL_ - Stash License
+* `['database']['port']` - Database port
+* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias
+* `['tomcat']['keystoreFile']` - Tomcat HTTPS Java Keystore keystoreFile
+* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass
 
 Repeat for other Chef environments as necessary. Example:
 
@@ -59,23 +115,29 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-Add `recipe[stash]` to your run_list and get on your merry way.
+### Stash Installation
 
-_PLEASE NOTE:_ Due to how Stash handles the setup process, you will
+* Create required encrypted data bag
+* Add `recipe[stash]` to your run_list.
+
+_PLEASE NOTE:_ Due to how Stash handles the setup process, you might
 still be asked for database information when initially setting up the
 server. I submitted [STASH-2687](https://jira.atlassian.com/browse/STASH-2687)
 to fix this.
 
-## More Data Bag Information:
+### Stash with Apache2 Frontend
 
-_DATABASE:_ If it is a localhost database, it will automatically set up
-the database server, create the database, and assign database user 
-permissions (along with approriate Stash configuration of course).
+* Create required encrypted data bag
+* Add `recipe[stash::apache2]` to your run_list.
 
-_LICENSE:_ If entered, will automatically enter license into database.
-Can be left blank if you need to generate evaluation license.
+### Stash Upgrades
 
-# LICENSE and AUTHOR:
+* Update `node['stash']['version']` and `node['stash']['checksum']` attributes
+* Add `recipe[stash::upgrade]` to your run_list, such as:
+  `knife node run_list add NODE_NAME "recipe[stash::upgrade]"`
+  It will automatically remove itself from the run_list after completion.
+
+## License and Author
       
 Author:: Brian Flad (<bflad@wharton.upenn.edu>)
 
