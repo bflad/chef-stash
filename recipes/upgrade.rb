@@ -46,7 +46,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node['stash']['
   action    :create_if_missing
 end
 
-execute "Extracting Stash #{node['stash']['version']}" do
+execute "Extracting Stash #{node['stash']['version']} for Upgrade" do
   cwd Chef::Config[:file_cache_path]
   command <<-COMMAND
     tar -zxf atlassian-stash-#{node['stash']['version']}.tar.gz
