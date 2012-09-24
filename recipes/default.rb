@@ -70,9 +70,7 @@ if stash_database_info['host'] == "localhost"
   database_user stash_database_info['user'] do
     connection database_connection
     provider stash_database_info['provider_user']
-    if stash_database_info['type'] == "mysql"
-      host "%"
-    end
+    host "%" if stash_database_info['type'] == "mysql"
     password stash_database_info['password']
     database_name stash_database_info['name']
     action [:create, :grant]
