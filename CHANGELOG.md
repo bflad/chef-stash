@@ -1,3 +1,7 @@
+## v0.2.14
+
+* Added templates to upgrade recipe
+
 ## v0.2.13
 
 * Renamed upgrade recipe execute block description to prevent caching issue

@@ -75,6 +75,32 @@ if stash_database_info['type'] == "mysql"
   end
 end
 
+template "#{node['stash']['install_path']}/bin/setenv.sh" do
+  source "setenv.sh.erb"
+  owner  node['stash']['run_user']
+  mode   "0755"
+end
+
+template "#{node['stash']['install_path']}/conf/server.xml" do
+  source "server.xml.erb"
+  owner  node['stash']['run_user']
+  mode   "0640"
+  variables :tomcat => stash_tomcat_info
+end
+
+template "#{node['stash']['install_path']}/conf/web.xml" do
+  source "web.xml.erb"
+  owner  node['stash']['run_user']
+  mode   "0644"
+end
+
+template "#{node['stash']['install_path']}/stash-config.properties" do
+  source "stash-config.properties.erb"
+  owner  node['stash']['run_user']
+  mode   "0644"
+  variables :database => stash_database_info
+end
+
 service "stash" do
   action :start
 end
