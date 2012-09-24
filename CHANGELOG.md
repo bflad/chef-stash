@@ -1,3 +1,7 @@
+## v0.2.15
+
+* Fixed loading all encrypted databag objects for upgrade recipe
+
 ## v0.2.14
 
 * Added templates to upgrade recipe

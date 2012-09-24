@@ -23,7 +23,9 @@
 #
 
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
+stash_configuration_info = stash_data_bag[node.chef_environment]['configuration']
 stash_database_info = stash_data_bag[node.chef_environment]['database']
+stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
 
 service "stash" do
   action :stop
