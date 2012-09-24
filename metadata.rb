@@ -3,7 +3,7 @@ maintainer_email  "bflad@wharton.upenn.edu"
 license           "Apache 2.0"
 description       "Installs/Configures Atlassian Stash"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           "0.2.15"
+version           "0.2.16"
 recipe            "stash", "Installs/Configures Atlassian Stash"
 recipe            "stash::apache2", "Installs Atlassian Stash behind Apache2"
 recipe            "stash::upgrade", "Upgrades Atlassian Stash"

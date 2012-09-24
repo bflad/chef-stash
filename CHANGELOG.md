@@ -1,3 +1,7 @@
+## v0.2.16
+
+* Renamed upgrade template blocks to prevent caching issues
+
 ## v0.2.15
 
 * Fixed loading all encrypted databag objects for upgrade recipe
