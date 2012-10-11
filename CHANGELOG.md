@@ -1,3 +1,9 @@
+## v1.0.0
+
+* Ready for production, supports Stash 1.3
+* Fixed upgrade recipe template names
+* Documentation updated for actual functionality
+
 ## v0.2.16
 
 * Renamed upgrade template blocks to prevent caching issues
