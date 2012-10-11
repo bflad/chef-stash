@@ -107,6 +107,6 @@ service "stash" do
   action :start
 end
 
-ruby_block "remove_recipe" do
+ruby_block "remove_recipe_stash_upgrade" do
   block { node.run_list.remove("recipe[stash::upgrade]") }
 end
