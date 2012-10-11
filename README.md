@@ -10,6 +10,11 @@ Installs/Configures Atlassian Stash.
 
 * RedHat 6.3
 
+### Databases
+
+* MySQL
+* Postgres
+
 ### Cookbooks
 
 Opscode Cookbooks (http://github.com/opscode-cookbooks/)
@@ -80,26 +85,28 @@ Create a stash/stash encrypted data bag with the following information per
 Chef environment:
 
 _required:_
-* `['database']['type']` - mysql/postgresql
-* `['database']['host']` - FQDN/localhost
-* `['database']['name']` - Name of database
-* `['database']['user']` - Credentials username
-* `['database']['password']` - Credentials password
+* `['database']['type']` - "mysql" or "postgresql"
+* `['database']['host']` - FQDN or "localhost" (localhost automatically
+  installs `['database']['type']` server)
+* `['database']['name']` - Name of Stash database
+* `['database']['user']` - Stash database username
+* `['database']['password']` - Stash database username password
+
 _optional:_
-* `['configuration']['license']` - _NOT OPERATIONAL_ - Stash License
-* `['database']['port']` - Database port
-* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias
-* `['tomcat']['keystoreFile']` - Tomcat HTTPS Java Keystore keystoreFile
-* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass
+* `['database']['port']` - Database port, defaults to standard database port for
+  `['database']['type']`
+* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias, defaults to
+  self-signed certifcate
+* `['tomcat']['keystoreFile']` - Tomcat HTTPS Java Keystore keystoreFile,
+  defaults to self-signed certificate
+* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass,
+  defaults to self-signed certificate
 
 Repeat for other Chef environments as necessary. Example:
 
     {
       "id": "stash"
       "development": {
-        "configuration": {
-          "license": "STASH-LICENSE-KEY"
-        },
         "database": {
           "type": "postgresql",
           "host": "localhost",
@@ -136,6 +143,10 @@ to fix this.
 * Add `recipe[stash::upgrade]` to your run_list, such as:
   `knife node run_list add NODE_NAME "recipe[stash::upgrade]"`
   It will automatically remove itself from the run_list after completion.
+
+## Contributing
+
+Please use standard Github issues/pull requests.
 
 ## License and Author
       
