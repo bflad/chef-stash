@@ -114,7 +114,7 @@ execute "Extracting Stash #{node['stash']['version']}" do
     chown -R #{node['stash']['run_user']} atlassian-stash-#{node['stash']['version']}
     mv atlassian-stash-#{node['stash']['version']} #{node['stash']['install_path']}
   COMMAND
-  creates "#{node['stash']['install_path']}/atlassian-stash.war"
+  creates "#{node['stash']['install_path']}/atlassian-stash"
 end
 
 if stash_database_info['type'] == "mysql"
