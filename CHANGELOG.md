@@ -1,3 +1,7 @@
+## v1.0.3
+
+* Fixes broken apache VirtualHost minitest
+
 ## v1.0.2
 
 * Includes initial minitests
