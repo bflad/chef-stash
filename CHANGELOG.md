@@ -1,3 +1,7 @@
+## v1.0.2
+
+* Includes initial minitests
+
 ## v1.0.1
 
 * Fixes installation existance check from change in Stash 1.3
