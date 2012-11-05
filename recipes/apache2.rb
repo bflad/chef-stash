@@ -29,4 +29,4 @@ include_recipe "apache2::mod_proxy"
 include_recipe "apache2::mod_proxy_http"
 include_recipe "apache2::mod_ssl"
 
-web_app "#{node['stash']['apache2']['virtual_host_name']}"
+web_app node['stash']['apache2']['virtual_host_name']
