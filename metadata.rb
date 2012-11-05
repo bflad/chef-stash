@@ -1,3 +1,4 @@
+name              "stash"
 maintainer        "Brian Flad"
 maintainer_email  "bflad@wharton.upenn.edu"
 license           "Apache 2.0"
