@@ -1,3 +1,12 @@
+## v2.0.0
+
+* Uses mysql_connector cookbook for handling MySQL Connector/J installation
+* stash::upgrade recipe now just calls stash::default rather than duplicating
+  code
+* Includes git::source recipe on "rhel" platform_family since Git package
+  version is not new enough
+* Refactored to use apache2 cookbook web_app
+
 ## v1.0.3
 
 * Fixes broken apache VirtualHost minitest

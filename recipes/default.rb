@@ -18,6 +18,7 @@
 #
 
 include_recipe "database"
+include_recipe "git::source" if node['platform_family'] == "rhel"
 
 stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
 stash_configuration_info = stash_data_bag[node.chef_environment]['configuration']
@@ -118,22 +119,8 @@ execute "Extracting Stash #{node['stash']['version']}" do
 end
 
 if stash_database_info['type'] == "mysql"
-  remote_file "#{Chef::Config[:file_cache_path]}/mysql-connector-java-#{node['stash']['mysql']['connector']['version']}.tar.gz" do
-    source    node['stash']['mysql']['connector']['url']
-    checksum  node['stash']['mysql']['connector']['checksum']
-    mode      "0644"
-    action    :create_if_missing
-  end
-
-  execute "Extracting MySQL Connector Java #{node['stash']['mysql']['connector']['version']}" do
-    cwd Chef::Config[:file_cache_path]
-    command <<-COMMAND
-      tar -zxf mysql-connector-java-#{node['stash']['mysql']['connector']['version']}.tar.gz
-      chown -R #{node['stash']['run_user']} mysql-connector-java-#{node['stash']['mysql']['connector']['version']}
-      mv mysql-connector-java-#{node['stash']['mysql']['connector']['version']}/mysql-connector-java-#{node['stash']['mysql']['connector']['version']}-bin.jar #{node['stash']['install_path']}/lib
-    COMMAND
-    creates "#{node['stash']['install_path']}/lib/mysql-connector-java-#{node['stash']['mysql']['connector']['version']}-bin.jar"
-  end
+  include_recipe "mysql_connector"
+  mysql_connector_j "#{node['stash']['install_path']}/lib"
 end
 
 template "/etc/init.d/stash" do

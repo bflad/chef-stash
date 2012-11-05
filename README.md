@@ -23,8 +23,12 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 * database
 * git
 * java
-* mysql
-* postgresql
+* mysql (if using MySQL database)
+* postgresql (if using Postgres database)
+
+Third-Party Cookbooks
+
+* mysql_connector (if using MySQL database): https://github.com/bflad/chef-mysql_connector
 
 ## Attributes
 
@@ -55,14 +59,6 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
   Stash JVM during startup
 * `node['stash']['jvm']['support_args']` - additional JAVA_OPTS recommended by
   Atlassian support for Stash JVM during startup
-
-### Stash MySQL Attributes
-
-* `node['stash']['mysql']['connector']['version']` - MySQL Connector/J version
-  (if required)
-* `node['stash']['mysql']['connector']['url']` - URL for MySQL Connector/J
-* `node['stash']['mysql']['connector']['checksum']` - SHA256 checksum of MySQL
-  Connector/J
 
 ### Stash Tomcat Attributes
 
@@ -127,12 +123,7 @@ Repeat for other Chef environments as necessary. Example:
 * Create required encrypted data bag
 * Add `recipe[stash]` to your run_list.
 
-_PLEASE NOTE:_ Due to how Stash handles the setup process, you might
-still be asked for database information when initially setting up the
-server. I submitted [STASH-2687](https://jira.atlassian.com/browse/STASH-2687)
-to fix this.
-
-### Stash with Apache2 Frontend
+### Stash Installation with Apache 2 Frontend
 
 * Create required encrypted data bag
 * Add `recipe[stash::apache2]` to your run_list.
