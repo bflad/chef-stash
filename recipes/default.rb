@@ -114,7 +114,7 @@ execute "Extracting Stash #{node['stash']['version']}" do
     chown -R #{node['stash']['run_user']} atlassian-stash-#{node['stash']['version']}
     mv atlassian-stash-#{node['stash']['version']} #{node['stash']['install_path']}
   COMMAND
-  creates "#{node['stash']['install_path']}/atlassian-stash.war"
+  creates "#{node['stash']['install_path']}/atlassian-stash"
 end
 
 if stash_database_info['type'] == "mysql"
@@ -175,28 +175,3 @@ template "#{node['stash']['install_path']}/stash-config.properties" do
   variables :database => stash_database_info
   notifies :restart, resources(:service => "stash"), :delayed
 end
-
-database_connection = {
-  :host => stash_database_info['host'],
-  :port => stash_database_info['port'],
-  :username => stash_database_info['user'],
-  :password => stash_database_info['password']
-}
-
-#database stash_database_info['name'] do
-#  connection database_connection
-#  provider stash_database_info['provider']
-#  sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('instance.url','https://#{node['fqdn']}')"
-#  action :query
-#  ignore_failure true
-#end
-
-#if stash_configuration_info && stash_configuration_info['license']
-#  database stash_database_info['name'] do
-#    connection database_connection
-#    provider stash_database_info['provider']
-#    sql "INSERT INTO app_property ('prop_key','prop_value') VALUES ('license','#{stash_configuration_info['license']}')"
-#    action :query
-#    ignore_failure true
-#  end
-#end

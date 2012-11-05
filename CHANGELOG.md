@@ -1,3 +1,21 @@
+## v1.0.3
+
+* Fixes broken apache VirtualHost minitest
+
+## v1.0.2
+
+* Includes initial minitests
+
+## v1.0.1
+
+* Fixes installation existance check from change in Stash 1.3
+
+## v1.0.0
+
+* Ready for production, supports Stash 1.3
+* Fixed upgrade recipe template names
+* Documentation updated for actual functionality
+
 ## v0.2.16
 
 * Renamed upgrade template blocks to prevent caching issues
