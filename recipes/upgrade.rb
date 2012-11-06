@@ -22,7 +22,8 @@
 # https://confluence.atlassian.com/display/STASH/Stash+upgrade+guide
 #
 
-service "stash" do
+service "Stopping Stash" do
+  service_name "stash"
   action :stop
 end
 
