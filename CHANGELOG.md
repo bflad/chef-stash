@@ -1,3 +1,9 @@
+## v2.0.1
+
+* Renamed service in upgrade recipe to prevent resource caching issues
+* Fixed service notifications in default recipe
+* Subscribed stash service to java_ark[jdk] updates
+
 ## v2.0.0
 
 * Uses mysql_connector cookbook for handling MySQL Connector/J installation
