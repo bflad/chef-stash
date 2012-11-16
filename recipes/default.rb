@@ -151,7 +151,7 @@ template "#{node['stash']['install_path']}/conf/web.xml" do
   notifies :restart, "service[stash]", :delayed
 end
 
-template "#{node['stash']['install_path']}/stash-config.properties" do
+template "#{node['stash']['home_path']}/stash-config.properties" do
   source "stash-config.properties.erb"
   owner  node['stash']['run_user']
   mode   "0644"
