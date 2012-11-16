@@ -1,3 +1,7 @@
+## v2.0.2
+
+* Fixed location of stash-config.properties
+
 ## v2.0.1
 
 * Renamed service in upgrade recipe to prevent resource caching issues
