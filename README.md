@@ -28,7 +28,7 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
 Third-Party Cookbooks
 
-* mysql_connector (if using MySQL database): https://github.com/bflad/chef-mysql_connector
+* [mysql_connector](https://github.com/bflad/chef-mysql_connector) (if using MySQL database)
 
 ## Attributes
 
@@ -121,12 +121,16 @@ Repeat for other Chef environments as necessary. Example:
 ### Stash Installation
 
 * Create required encrypted data bag
-* Add `recipe[stash]` to your run_list.
+  * `knife data bag create stash`
+  * `knife data bag edit stash stash --secret-file=path/to/secret`
+* Add `recipe[stash]` to your node's run list.
 
 ### Stash Installation with Apache 2 Frontend
 
 * Create required encrypted data bag
-* Add `recipe[stash::apache2]` to your run_list.
+  * `knife data bag create stash`
+  * `knife data bag edit stash stash --secret-file=path/to/secret`
+* Add `recipe[stash::apache2]` to your node's run list.
 
 ### Stash Upgrades
 
