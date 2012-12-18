@@ -26,4 +26,6 @@ action :deploy do
     action new_resource.action
     ssh_wrapper "#{node['stash']['install_path']}/#{new_resource.deploy_key}_ssh_wrapper.sh"
   end
+
+  new_resource.updated_by_last_action(true)
 end

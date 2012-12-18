@@ -21,7 +21,7 @@ action :create do
   key_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_key.pem"
   wrapper_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_wrapper.sh"
 
-  directory "#{node['stash']['install_path']}" do
+  directory node['stash']['install_path'] do
     owner "root"
     group "root"
     mode 0755
@@ -42,4 +42,6 @@ action :create do
     mode 0500
     variables( :key_path => key_path )
   end
+
+  new_resource.updated_by_last_action(true)
 end
