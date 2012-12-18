@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs/Configures Atlassian Stash.
+Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash.
 
 ## Requirements
 
@@ -79,9 +79,14 @@ Third-Party Cookbooks
 * `recipe[stash::apache2]` Installs above with Apache 2 proxy (ports 80/443)
 * `recipe[stash::upgrade]` Upgrades Atlassian Stash
 
+## LWRPs
+
+* `stash_deploy` - wrapper Git resource for using a `stash_deploy_key`, project, and repository for code deployment
+* `stash_deploy_key` - creates SSH private key file and SSH wrapper for code deployment
+
 ## Usage
 
-### Required Stash Data Bag
+### Stash Server Required Data Bag
 
 Create a stash/stash encrypted data bag with the following information per
 Chef environment:
@@ -124,26 +129,43 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-### Stash Installation
+### Stash Server Installation
 
 * Create required encrypted data bag
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash]` to your node's run list.
 
-### Stash Installation with Apache 2 Frontend
+### Stash Server Installation with Apache 2 Frontend
 
 * Create required encrypted data bag
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash::apache2]` to your node's run list.
 
-### Stash Upgrades
+### Stash Server Upgrades
 
 * Update `node['stash']['version']` and `node['stash']['checksum']` attributes
 * Add `recipe[stash::upgrade]` to your run_list, such as:
   `knife node run_list add NODE_NAME "recipe[stash::upgrade]"`
   It will automatically remove itself from the run_list after completion.
+
+### Code Deployment From Stash
+
+* Ensure your node has Git installed
+* Create a `stash_deploy_key` with the SSH private key contents (using `\n` for newlines) of a Stash user with permissions to your repository. For example:
+
+    stash_deploy_key "deployment_user" do
+      key "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIB..."
+    end
+
+* In this example, now you can either directly use the ssh_wrapper available at `#{node['stash']['install_path']}/deployment_user_ssh_wrapper.sh` or use the `stash_deploy` LWRP such as:
+
+    stash_deploy "/opt/shibboleth-idp/conf" do
+      deploy_key "deployment_user"
+      project "SHIBIDP"
+      repository "configuration"
+    end
 
 ## Contributing
 
