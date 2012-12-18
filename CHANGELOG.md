@@ -1,3 +1,8 @@
+## v2.1.0 ##
+
+* Added `stash_deploy` and `stash_deploy_key` LWRPs
+* Added SSH attributes
+
 ## v2.0.2
 
 * Fixed location of stash-config.properties
