@@ -27,10 +27,16 @@ default['stash']['install_path']   = "/opt/atlassian-stash"
 default['stash']['run_user']       = "stash"
 default['stash']['home_backup']    = "/tmp/atlassian-stash-home-backup.tgz"
 default['stash']['home_path']      = "/home/#{node['stash']['run_user']}"
+
 default['stash']['jvm']['minimum_memory']  = "256m"
 default['stash']['jvm']['maximum_memory']  = "768m"
 default['stash']['jvm']['maximum_permgen'] = "256m"
 default['stash']['jvm']['java_opts']       = ""
 default['stash']['jvm']['support_args']    = ""
+
+default['stash']['ssh']['hostname'] = node['fqdn']
+default['stash']['ssh']['port'] = "7999"
+default['stash']['ssh']['uri']  = "ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}"
+
 default['stash']['tomcat']['port']     = "7990"
 default['stash']['tomcat']['ssl_port'] = "8443"
