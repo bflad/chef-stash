@@ -60,6 +60,12 @@ Third-Party Cookbooks
 * `node['stash']['jvm']['support_args']` - additional JAVA_OPTS recommended by
   Atlassian support for Stash JVM during startup
 
+### Stash SSH Attributes ###
+
+* `node['stash']['ssh']['hostname']` - Stash SSH hostname, defaults to `node['fqdn']`
+* `node['stash']['ssh']['port']` - Stash SSH port, defaults to 7999
+* `node['stash']['ssh']['uri']` - Stash SSH URI, defaults to `"ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}"`
+
 ### Stash Tomcat Attributes
 
 * `node['stash']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
