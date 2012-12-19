@@ -1,3 +1,7 @@
+## v2.1.5 ##
+
+* Removed SSH URI default attribute to prevent caching issues with SSH hostname
+
 ## v2.1.4 ##
 
 * Corrected ssh_wrapper.sh template

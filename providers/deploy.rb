@@ -19,7 +19,7 @@
 
 action :deploy do
   git new_resource.destination do
-    repository "#{node['stash']['ssh']['uri']}/#{new_resource.project}/#{new_resource.repository}.git"
+    repository "ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}/#{new_resource.project}/#{new_resource.repository}.git"
     revision new_resource.revision
     user new_resource.user
     group new_resource.group

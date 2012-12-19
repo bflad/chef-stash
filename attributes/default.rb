@@ -36,7 +36,6 @@ default['stash']['jvm']['support_args']    = ""
 
 default['stash']['ssh']['hostname'] = node['fqdn']
 default['stash']['ssh']['port'] = "7999"
-default['stash']['ssh']['uri']  = "ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}"
 
 default['stash']['tomcat']['port']     = "7990"
 default['stash']['tomcat']['ssl_port'] = "8443"
