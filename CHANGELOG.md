@@ -1,3 +1,7 @@
+## v2.1.3 ##
+
+* deploy LWRP s/owner/user/g for Git resource
+
 ## v2.1.2 ##
 
 * deploy LWRP fixed action attribute to deploy_action so it can be passed through
