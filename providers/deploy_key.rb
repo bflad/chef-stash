@@ -38,6 +38,7 @@ action :create do
   
   template wrapper_path do
     source "ssh_wrapper.sh.erb"
+    cookbook "stash"
     owner new_resource.owner
     mode 0500
     variables( :key_path => key_path )

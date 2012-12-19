@@ -1,3 +1,7 @@
+## v2.1.1 ##
+
+* Set deploy_key cookbook for ssh_wrapper.sh template to stash
+
 ## v2.1.0 ##
 
 * Added `stash_deploy` and `stash_deploy_key` LWRPs
