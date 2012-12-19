@@ -23,7 +23,7 @@ action :deploy do
     revision new_resource.revision
     owner new_resource.owner 
     group new_resource.group
-    action new_resource.action
+    action new_resource.deploy_action
     ssh_wrapper "#{node['stash']['install_path']}/#{new_resource.deploy_key}_ssh_wrapper.sh"
   end
 

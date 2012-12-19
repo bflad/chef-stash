@@ -1,3 +1,7 @@
+## v2.1.2 ##
+
+* deploy LWRP fixed action attribute to deploy_action so it can be passed through
+
 ## v2.1.1 ##
 
 * Set deploy_key cookbook for ssh_wrapper.sh template to stash
