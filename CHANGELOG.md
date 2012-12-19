@@ -1,3 +1,7 @@
+## v2.1.4 ##
+
+* Corrected ssh_wrapper.sh template
+
 ## v2.1.3 ##
 
 * deploy LWRP s/owner/user/g for Git resource
