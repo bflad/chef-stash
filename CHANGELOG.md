@@ -1,3 +1,7 @@
+## v2.1.6 ##
+
+* Made stash_deploy LWRP only updated if underlying Git resource was updated
+
 ## v2.1.5 ##
 
 * Removed SSH URI default attribute to prevent caching issues with SSH hostname
