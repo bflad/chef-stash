@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash.
+Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash. Please see COMPATIBILITY.md for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
 
 ## Requirements
 
