@@ -1,6 +1,7 @@
 ## Stash 2.x ##
 
 Cookbook Versions: 3.x
+
 Tested OSes:
 * RHEL 6.3
 
@@ -12,6 +13,7 @@ Tested OSes:
 ## Stash 1.3.x ##
 
 Cookbook Versions: 1.x - 2.x
+
 Tested OSes:
 * RHEL 6.3
 
