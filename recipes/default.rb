@@ -68,6 +68,14 @@ if stash_database_info['host'] == "localhost"
     action :create
   end
 
+  # See this MySQL bug: http://bugs.mysql.com/bug.php?id=31061
+  mysql_database_user "" do
+    connection database_connection
+    host "localhost"
+    action :drop
+    only_if { stash_database_info['type'] == "mysql" }
+  end
+
   database_user stash_database_info['user'] do
     connection database_connection
     provider stash_database_info['provider_user']

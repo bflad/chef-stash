@@ -1,3 +1,7 @@
+## v2.1.7 ##
+
+* On MySQL, drop anonymous localhost user due to MySQL issue
+
 ## v2.1.6 ##
 
 * Made stash_deploy LWRP only updated if underlying Git resource was updated
