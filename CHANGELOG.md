@@ -1,3 +1,7 @@
+## v2.1.8 ##
+
+* Use generic database_user with provider for last MySQL fix
+
 ## v2.1.7 ##
 
 * On MySQL, drop anonymous localhost user due to MySQL issue
