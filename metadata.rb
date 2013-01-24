@@ -13,6 +13,6 @@ recipe            "stash::upgrade", "Upgrades Atlassian Stash"
   supports os
 end
 
-%w{ apache2 database git java mysql mysql_connector postgresql stash }.each do |cb|
+%w{ apache2 database git java mysql mysql_connector postgresql }.each do |cb|
   depends cb
 end
