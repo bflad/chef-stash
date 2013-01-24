@@ -1,3 +1,9 @@
+## v2.2.0
+
+* Added Chef Solo support by refactoring settings into library function
+* Refactored localhost database handling in default recipe
+* Additional `node['stash']['database']` and `node['stash']['tomcat']` attributes from settings refactoring
+
 ## v2.1.8 ##
 
 * Use generic database_user with provider for last MySQL fix

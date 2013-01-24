@@ -17,73 +17,61 @@
 # limitations under the License.
 #
 
-include_recipe "database"
 include_recipe "git::source" if node['platform_family'] == "rhel"
 
-stash_data_bag = Chef::EncryptedDataBagItem.load("stash","stash")
-stash_configuration_info = stash_data_bag[node.chef_environment]['configuration']
-stash_database_info = stash_data_bag[node.chef_environment]['database']
-stash_tomcat_info = stash_data_bag[node.chef_environment]['tomcat']
+settings = Stash.settings(node)
 
-case stash_database_info['type']
-when "mysql"
-  stash_database_info['port'] ||= 3306
-  stash_database_info['provider'] = Chef::Provider::Database::Mysql
-  stash_database_info['provider_user'] = Chef::Provider::Database::MysqlUser
-when "postgresql"
-  stash_database_info['port'] ||= 5432
-  stash_database_info['provider'] = Chef::Provider::Database::Postgresql
-  stash_database_info['provider_user'] = Chef::Provider::Database::PostgresqlUser
-else
-  Chef::Log.warn("Unsupported database type.")
-end
-
-if stash_database_info['host'] == "localhost"
+if settings['database']['host'] == "localhost"
   database_connection = {
-    :host => stash_database_info['host'],
-    :port => stash_database_info['port']
+    :host => settings['database']['host'],
+    :port => settings['database']['port']
   }
 
-  case stash_database_info['type']
+  case settings['database']['type']
   when "mysql"
     include_recipe "mysql::server"
     include_recipe "database::mysql"
     database_connection.merge!({ :username => 'root', :password => node['mysql']['server_root_password'] })
+    
+    mysql_database settings['database']['name'] do
+      connection database_connection
+      collation "utf8_bin"
+      encoding "utf8"
+      action :create
+    end
+
+    # See this MySQL bug: http://bugs.mysql.com/bug.php?id=31061
+    mysql_database_user "" do
+      connection database_connection
+      host "localhost"
+      action :drop
+    end
+
+    mysql_database_user settings['database']['user'] do
+      connection database_connection
+      host "%"
+      password settings['database']['password']
+      database_name settings['database']['name']
+      action [:create, :grant]
+    end
   when "postgresql"
     include_recipe "postgresql::server"
     include_recipe "database::postgresql"
     database_connection.merge!({ :username => 'postgres', :password => node['postgresql']['password']['postgres'] })
-  end
-  
-  database stash_database_info['name'] do
-    connection database_connection
-    provider stash_database_info['provider']
-    case stash_database_info['type']
-    when "mysql"
-      collation "utf8_bin"
-    when "postgresql"
+    
+    postgresql_database settings['database']['name'] do
+      connection database_connection
       connection_limit "-1"
+      encoding "utf8"
+      action :create
     end
-    encoding "utf8"
-    action :create
-  end
 
-  # See this MySQL bug: http://bugs.mysql.com/bug.php?id=31061
-  database_user "" do
-    connection database_connection
-    provider stash_database_info['provider']
-    host "localhost"
-    action :drop
-    only_if { stash_database_info['type'] == "mysql" }
-  end
-
-  database_user stash_database_info['user'] do
-    connection database_connection
-    provider stash_database_info['provider_user']
-    host "%" if stash_database_info['type'] == "mysql"
-    password stash_database_info['password']
-    database_name stash_database_info['name']
-    action [:create, :grant]
+    postgresql_database_user settings['database']['user'] do
+      connection database_connection
+      password settings['database']['password']
+      database_name settings['database']['name']
+      action [:create, :grant]
+    end
   end
 end
 
@@ -99,15 +87,16 @@ end
 execute "Generating Self-Signed Java Keystore" do
   command <<-COMMAND
     #{node['java']['java_home']}/bin/keytool -genkey \
-      -alias tomcat \
+      -alias #{settings['tomcat']['keyAlias']} \
       -keyalg RSA \
       -dname 'CN=#{node['fqdn']}, OU=Example, O=Example, L=Example, ST=Example, C=US' \
-      -keypass changeit \
-      -storepass changeit \
-      -keystore #{node['stash']['home_path']}/.keystore
-    chown #{node['stash']['run_user']}:#{node['stash']['run_user']} #{node['stash']['home_path']}/.keystore
+      -keypass #{settings['tomcat']['keystorePass']} \
+      -storepass #{settings['tomcat']['keystorePass']} \
+      -keystore #{settings['tomcat']['keystoreFile']}
+    chown #{node['stash']['run_user']}:#{node['stash']['run_user']} #{settings['tomcat']['keystoreFile']}
   COMMAND
-  creates "#{node['stash']['home_path']}/.keystore"
+  creates settings['tomcat']['keystoreFile']
+  only_if { settings['tomcat']['keystoreFile'] == "#{node['stash']['home_path']}/.keystore" }
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node['stash']['version']}.tar.gz" do
@@ -127,7 +116,7 @@ execute "Extracting Stash #{node['stash']['version']}" do
   creates "#{node['stash']['install_path']}/atlassian-stash"
 end
 
-if stash_database_info['type'] == "mysql"
+if settings['database']['type'] == "mysql"
   include_recipe "mysql_connector"
   mysql_connector_j "#{node['stash']['install_path']}/lib"
 end
@@ -149,7 +138,7 @@ template "#{node['stash']['install_path']}/conf/server.xml" do
   source "server.xml.erb"
   owner  node['stash']['run_user']
   mode   "0640"
-  variables :tomcat => stash_tomcat_info
+  variables :tomcat => settings['tomcat']
   notifies :restart, "service[stash]", :delayed
 end
 
@@ -164,7 +153,7 @@ template "#{node['stash']['home_path']}/stash-config.properties" do
   source "stash-config.properties.erb"
   owner  node['stash']['run_user']
   mode   "0644"
-  variables :database => stash_database_info
+  variables :database => settings['database']
   notifies :restart, "service[stash]", :delayed
 end
 

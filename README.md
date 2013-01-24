@@ -50,6 +50,17 @@ Third-Party Cookbooks
 * `node['stash']['home_path']` - home directory for Stash run_user, defaults to
   `/home/#{node['stash']['run_user']}`
 
+### Stash Database Attributes
+
+All of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+
+* `node['stash']['database']['host']` - FQDN or "localhost" (localhost automatically installs `['database']['type']` server), defaults to "localhost"
+* `node['stash']['database']['name']` - defaults to "stash"
+* `node['stash']['database']['password']` - defaults to "changeit"
+* `node['stash']['database']['port']` - defaults to 3306
+* `node['stash']['database']['type']` - "mysql" or "postgresql", defaults to "mysql"
+* `node['stash']['database']['user']` - defaults to "stash"
+
 ### Stash JVM Attributes
 
 * `node['stash']['jvm']['minimum_memory']` - defaults to "256m"
@@ -68,6 +79,11 @@ Third-Party Cookbooks
 
 ### Stash Tomcat Attributes
 
+Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+
+* `node['stash']['tomcat']['keyAlias']` - defaults to "tomcat"
+* `node['stash']['tomcat']['keystoreFile']` - will automatically generate self-signed keystore file if left as default, defaults to `#{node['stash']['home_path']}/.keystore`
+* `node['stash']['tomcat']['keystorePass'] - defaults to "changeit"
 * `node['stash']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
   7990
 * `node['stash']['tomcat']['ssl_port']` - port to run Tomcat HTTPS, defaults
@@ -86,10 +102,9 @@ Third-Party Cookbooks
 
 ## Usage
 
-### Stash Server Required Data Bag
+### Stash Server Data Bag
 
-Create a stash/stash encrypted data bag with the following information per
-Chef environment:
+For securely overriding attributes on Hosted Chef, create a `stash/stash` encrypted data bag with the model below. Chef Solo can override the same attributes with a `stash/stash` unencrypted data bag of the same information.
 
 _required:_
 * `['database']['type']` - "mysql" or "postgresql"
@@ -131,14 +146,14 @@ Repeat for other Chef environments as necessary. Example:
 
 ### Stash Server Installation
 
-* Create required encrypted data bag
+* Optionally (un)encrypted data bag or set attributes
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash]` to your node's run list.
 
 ### Stash Server Installation with Apache 2 Frontend
 
-* Create required encrypted data bag
+* Optionally (un)encrypted data bag or set attributes
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash::apache2]` to your node's run list.
@@ -175,7 +190,7 @@ Please use standard Github issues/pull requests.
       
 Author:: Brian Flad (<bflad@wharton.upenn.edu>)
 
-Copyright:: 2012
+Copyright:: 2012-2013
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

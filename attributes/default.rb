@@ -28,6 +28,13 @@ default['stash']['run_user']       = "stash"
 default['stash']['home_backup']    = "/tmp/atlassian-stash-home-backup.tgz"
 default['stash']['home_path']      = "/home/#{node['stash']['run_user']}"
 
+default['stash']['database']['host']     = "localhost"
+default['stash']['database']['name']     = "stash"
+default['stash']['database']['password'] = "changeit"
+default['stash']['database']['port']     = 3306
+default['stash']['database']['type']     = "mysql"
+default['stash']['database']['user']     = "stash"
+
 default['stash']['jvm']['minimum_memory']  = "256m"
 default['stash']['jvm']['maximum_memory']  = "768m"
 default['stash']['jvm']['maximum_permgen'] = "256m"
@@ -35,7 +42,10 @@ default['stash']['jvm']['java_opts']       = ""
 default['stash']['jvm']['support_args']    = ""
 
 default['stash']['ssh']['hostname'] = node['fqdn']
-default['stash']['ssh']['port'] = "7999"
+default['stash']['ssh']['port']     = "7999"
 
-default['stash']['tomcat']['port']     = "7990"
-default['stash']['tomcat']['ssl_port'] = "8443"
+default['stash']['tomcat']['keyAlias']     = "tomcat"
+default['stash']['tomcat']['keystoreFile'] = "#{node['stash']['home_path']}/.keystore"
+default['stash']['tomcat']['keystorePass'] = "changeit"
+default['stash']['tomcat']['port']         = "7990"
+default['stash']['tomcat']['ssl_port']     = "8443"
