@@ -182,9 +182,29 @@ Repeat for other Chef environments as necessary. Example:
       repository "configuration"
     end
 
+## Testing and Development
+
+Here's how you can quickly get testing or developing against the cookbook thanks to [Vagrant](http://vagrantup.com/) and [Berkshelf](http://berkshelf.com/).
+
+    gem install bundler --no-ri --no-rdoc
+    git clone git://github.com/bflad/chef-stash.git
+    cd chef-stash
+    bundle install
+    bundle exec vagrant up
+
+The running Stash server is accessible from the host machine:
+
+* Web UI: https://33.33.33.10/
+* Stash SSH: ssh://git@33.33.33.10:7999/
+
+You can then SSH into the running VM using the `vagrant ssh` command.
+The VM can easily be stopped and deleted with the `vagrant destroy`
+command. Please see the official [Vagrant documentation](http://vagrantup.com/v1/docs/commands.html)
+for a more in depth explanation of available commands.
+
 ## Contributing
 
-Please use standard Github issues/pull requests.
+Please use standard Github issues/pull requests and if possible, in combination with testing on the Vagrant boxes.
 
 ## License and Author
       
