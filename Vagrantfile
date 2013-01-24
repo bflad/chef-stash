@@ -23,16 +23,24 @@ Vagrant::Config.run do |config|
 
     dist_config.vm.provision :chef_solo do |chef|
       chef.provisioning_path = guest_cache_path
-      #chef.log_level         = :debug
+      chef.log_level         = :debug
 
       chef.json = {
         "java" => {
-          "install_flavor" => "oracle"
+          "install_flavor" => "oracle",
+          "oracle" => {
+            "accept_oracle_download_terms" => true
+          }
+        },
+        "mysql" => {
+          "server_root_password" => "iloverandompasswordsbutthiswilldo",
+          "server_repl_password" => "iloverandompasswordsbutthiswilldo",
+          "server_debian_password" => "iloverandompasswordsbutthiswilldo"
         }
       }
 
       chef.run_list = %w{
-        recipe[stash]
+        recipe[java]
         recipe[stash::apache2]
       }
     end
