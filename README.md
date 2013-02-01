@@ -32,62 +32,65 @@ Third-Party Cookbooks
 
 ## Attributes
 
-* `node['stash']['version']` - Stash version to install (use
-  `recipe[stash::upgrade]` to upgrade to version defined)
-* `node['stash']['url']` - URL for Stash installer .tar.gz
-* `node['stash']['checksum']` - SHA256 checksum for Stash installer .tar.gz
-* `node['stash']['backup_home']` - backup home directory during upgrade,
-  defaults to true
-* `node['stash']['backup_install']` - backup install directory during upgrade,
-  defaults to true
-* `node['stash']['install_backup']` - location of install directory backup
-  during upgrade
-* `node['stash']['install_path']` - location to install Stash, defaults to
-  `/opt/atlassian-stash`
-* `node['stash']['run_user']` - user to run Stash, defaults to "stash"
-* `node['stash']['home_backup']` - location of home directory backup during
-  upgrade
-* `node['stash']['home_path']` - home directory for Stash run_user, defaults to
-  `/home/#{node['stash']['run_user']}`
+These attributes are under the `node['stash']` namespace.
+
+Attribute | Description | Type | Default
+----------------------------------------
+version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 1.3.0
+url | URL for Stash installer .tar.gz | String | `http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz`
+checksum | SHA256 checksum for Stash installer .tar.gz | String | see attributes/default.rb
+backup_home | backup home directory during upgrade | Boolean | true
+backup_install | backup install directory during upgrade | Boolean | true
+install_backup | location of install directory backup during upgrade | String | /tmp/atlassian-stash-backup.tgz
+install_path | location to install Stash | String | /opt/atlassian-stash
+run_user | user to run Stash | String | stash
+home_backup | location of home directory backup during upgrade | String | /tmp/atlassian-stash-home-backup.tgz
+home_path | home directory for Stash user | String | `/home/#{node['stash']['run_user']}`
 
 ### Stash Database Attributes
 
-All of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+All of these `node['stash']['database']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
-* `node['stash']['database']['host']` - FQDN or "localhost" (localhost automatically installs `['database']['type']` server), defaults to "localhost"
-* `node['stash']['database']['name']` - defaults to "stash"
-* `node['stash']['database']['password']` - defaults to "changeit"
-* `node['stash']['database']['port']` - defaults to 3306
-* `node['stash']['database']['type']` - "mysql" or "postgresql", defaults to "mysql"
-* `node['stash']['database']['user']` - defaults to "stash"
+Attribute | Description | Type | Default
+----------------------------------------
+host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server) | String | localhost
+name | Stash database name | String | stash
+password | Stash database user password | String | changeit
+port | Stash database port | Fixnum | 3306
+type | Stash database type - "mysql" or "postgresql" | String | mysql
+user | Stash database user | String | stash
 
 ### Stash JVM Attributes
 
-* `node['stash']['jvm']['minimum_memory']` - defaults to "256m"
-* `node['stash']['jvm']['maximum_memory']` - defaults to "768m"
-* `node['stash']['jvm']['maximum_permgen']` - defaults to "256m"
-* `node['stash']['jvm']['java_opts']` - additional JAVA_OPTS to be passed to
-  Stash JVM during startup
-* `node['stash']['jvm']['support_args']` - additional JAVA_OPTS recommended by
-  Atlassian support for Stash JVM during startup
+These attributes are under the `node['stash']['jvm']` namespace.
+
+Attribute | Description | Type | Default
+----------------------------------------
+minimum_memory | JVM minimum memory | String | 256m
+maximum_memory | JVM maximum memory | String | 768m
+maximum_permgen | JVM maximum PermGen memory | String | 256m
+java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
+support_args | additional JAVA_OPTS recommended by Atlassian support for Stash JVM during startup | String | ""
 
 ### Stash SSH Attributes ###
 
-* `node['stash']['ssh']['hostname']` - Stash SSH hostname, defaults to `node['fqdn']`
-* `node['stash']['ssh']['port']` - Stash SSH port, defaults to 7999
-* `node['stash']['ssh']['uri']` - Stash SSH URI, defaults to `"ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}"`
+Attribute | Description | Type | Default
+----------------------------------------
+hostname | Stash SSH hostname | String | `node['fqdn']`
+port | Stash SSH port | Fixnum | 7999
+uri | Stash SSH URI | String | `ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}`
 
 ### Stash Tomcat Attributes
 
 Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
-* `node['stash']['tomcat']['keyAlias']` - defaults to "tomcat"
-* `node['stash']['tomcat']['keystoreFile']` - will automatically generate self-signed keystore file if left as default, defaults to `#{node['stash']['home_path']}/.keystore`
-* `node['stash']['tomcat']['keystorePass'] - defaults to "changeit"
-* `node['stash']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
-  7990
-* `node['stash']['tomcat']['ssl_port']` - port to run Tomcat HTTPS, defaults
-  to 8443
+Attribute | Description | Type | Default
+----------------------------------------
+keyAlias | Tomcat SSL keystore alias | String | tomcat
+keystoreFile | Tomcat SSL keystore file - will automatically generate self-signed keystore file if left as default | String | `#{node['stash']['home_path']}/.keystore`
+keystorePass | Tomcat SSL keystore passphrase | String | changeit
+port | Tomcat HTTP port | Fixnum | 7990
+ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 ## Recipes
 
@@ -107,22 +110,19 @@ Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash`
 For securely overriding attributes on Hosted Chef, create a `stash/stash` encrypted data bag with the model below. Chef Solo can override the same attributes with a `stash/stash` unencrypted data bag of the same information.
 
 _required:_
-* `['database']['type']` - "mysql" or "postgresql"
-* `['database']['host']` - FQDN or "localhost" (localhost automatically
+* `['database']['type']` "mysql" or "postgresql"
+* `['database']['host']` FQDN or "localhost" (localhost automatically
   installs `['database']['type']` server)
-* `['database']['name']` - Name of Stash database
-* `['database']['user']` - Stash database username
-* `['database']['password']` - Stash database username password
+* `['database']['name']` Name of Stash database
+* `['database']['user']` Stash database username
+* `['database']['password']` Stash database username password
 
 _optional:_
-* `['database']['port']` - Database port, defaults to standard database port for
+* `['database']['port']` Database port, standard database port for
   `['database']['type']`
-* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias, defaults to
-  self-signed certifcate
-* `['tomcat']['keystoreFile']` - Tomcat HTTPS Java Keystore keystoreFile,
-  defaults to self-signed certificate
-* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass,
-  defaults to self-signed certificate
+* `['tomcat']['keyAlias']` Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
+* `['tomcat']['keystoreFile']` Tomcat HTTPS Java Keystore keystoreFile, self-signed certificate
+* `['tomcat']['keystorePass']` Tomcat HTTPS Java Keystore keystorePass, self-signed certificate
 
 Repeat for other Chef environments as necessary. Example:
 
@@ -207,7 +207,7 @@ for a more in depth explanation of available commands.
 Please use standard Github issues/pull requests and if possible, in combination with testing on the Vagrant boxes.
 
 ## License and Author
-      
+
 Author:: Brian Flad (<bflad@wharton.upenn.edu>)
 
 Copyright:: 2012-2013
