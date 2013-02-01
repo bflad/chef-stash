@@ -35,7 +35,7 @@ Third-Party Cookbooks
 These attributes are under the `node['stash']` namespace.
 
 Attribute | Description | Type | Default
-----------------------------------------
+----------|-------------|------|--------
 version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 1.3.0
 url | URL for Stash installer .tar.gz | String | `http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz`
 checksum | SHA256 checksum for Stash installer .tar.gz | String | see attributes/default.rb
@@ -52,7 +52,7 @@ home_path | home directory for Stash user | String | `/home/#{node['stash']['run
 All of these `node['stash']['database']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
 Attribute | Description | Type | Default
-----------------------------------------
+----------|-------------|------|--------
 host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server) | String | localhost
 name | Stash database name | String | stash
 password | Stash database user password | String | changeit
@@ -65,7 +65,7 @@ user | Stash database user | String | stash
 These attributes are under the `node['stash']['jvm']` namespace.
 
 Attribute | Description | Type | Default
-----------------------------------------
+----------|-------------|------|--------
 minimum_memory | JVM minimum memory | String | 256m
 maximum_memory | JVM maximum memory | String | 768m
 maximum_permgen | JVM maximum PermGen memory | String | 256m
@@ -75,7 +75,7 @@ support_args | additional JAVA_OPTS recommended by Atlassian support for Stash J
 ### Stash SSH Attributes ###
 
 Attribute | Description | Type | Default
-----------------------------------------
+----------|-------------|------|--------
 hostname | Stash SSH hostname | String | `node['fqdn']`
 port | Stash SSH port | Fixnum | 7999
 uri | Stash SSH URI | String | `ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}`
@@ -85,7 +85,7 @@ uri | Stash SSH URI | String | `ssh://git@#{node['stash']['ssh']['hostname']}:#{
 Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
 Attribute | Description | Type | Default
-----------------------------------------
+----------|-------------|------|--------
 keyAlias | Tomcat SSL keystore alias | String | tomcat
 keystoreFile | Tomcat SSL keystore file - will automatically generate self-signed keystore file if left as default | String | `#{node['stash']['home_path']}/.keystore`
 keystorePass | Tomcat SSL keystore passphrase | String | changeit
