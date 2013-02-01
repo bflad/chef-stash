@@ -74,6 +74,8 @@ support_args | additional JAVA_OPTS recommended by Atlassian support for Stash J
 
 ### Stash SSH Attributes ###
 
+These attributes are under the `node['stash']['ssh']` namespace.
+
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
 hostname | Stash SSH hostname | String | `node['fqdn']`
@@ -81,6 +83,8 @@ port | Stash SSH port | Fixnum | 7999
 uri | Stash SSH URI | String | `ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}`
 
 ### Stash Tomcat Attributes
+
+These attributes are under the `node['stash']['tomcat']` namespace.
 
 Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
