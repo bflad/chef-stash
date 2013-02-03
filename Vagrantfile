@@ -13,8 +13,7 @@ Vagrant::Config.run do |config|
   config.vm.define :centos6 do |dist_config|
     dist_config.vm.host_name = 'stash-centos-6'
     dist_config.vm.box       = 'opscode-centos-6.3'
-    dist_config.vm.box_url   = 'https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box'
-
+    dist_config.vm.box_url   = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-10.18.2.box'
     
     dist_config.vm.customize ["modifyvm", :id, "--memory", 1024]
     dist_config.vm.network :hostonly, '33.33.33.10'
