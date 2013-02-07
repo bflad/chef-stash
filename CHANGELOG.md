@@ -1,3 +1,7 @@
+## v2.3.1
+
+* Chef 11 fixes for apache2 recipe
+
 ## v2.3.0
 
 * Stash 2.x support

@@ -19,10 +19,8 @@
 
 include_recipe "stash"
 
-node['apache']['listen_ports'] << node['stash']['apache2']['port'] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['port'])
-node['apache']['listen_ports'] << node['stash']['apache2']['ssl']['port'] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['ssl']['port'])
-
-node['apache']['default_site_enabled'] = false if node['stash']['apache2']['virtual_host_alias'] == node['fqdn']
+node.set['apache']['listen_ports'] << node['stash']['apache2']['port'] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['port'])
+node.set['apache']['listen_ports'] << node['stash']['apache2']['ssl']['port'] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['ssl']['port'])
 
 include_recipe "apache2"
 include_recipe "apache2::mod_proxy"
