@@ -2,7 +2,7 @@
 # Cookbook Name:: stash
 # Attributes:: stash
 #
-# Copyright 2012
+# Copyright 2012-2013
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-default['stash']['version']        = "1.3.0"
+default['stash']['version']        = "2.1.1"
 default['stash']['url']            = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz"
-default['stash']['checksum']       = "2731997d6e223cb512906183f5c231be602319ce05d2794cdf5b957a1fd06e08"
+default['stash']['checksum']       = "be29bf0c2044466fa0cd60f2f597053967644d92ae354510c4262385d00ad8cd"
 default['stash']['backup_home']    = true
 default['stash']['backup_install'] = true
 default['stash']['install_backup'] = "/tmp/atlassian-stash-backup.tgz"
@@ -35,7 +35,7 @@ default['stash']['database']['port']     = 3306
 default['stash']['database']['type']     = "mysql"
 default['stash']['database']['user']     = "stash"
 
-default['stash']['jvm']['minimum_memory']  = "256m"
+default['stash']['jvm']['minimum_memory']  = "512m"
 default['stash']['jvm']['maximum_memory']  = "768m"
 default['stash']['jvm']['maximum_permgen'] = "256m"
 default['stash']['jvm']['java_opts']       = ""

@@ -21,6 +21,8 @@ include_recipe "git::source" if node['platform_family'] == "rhel"
 
 settings = Stash.settings(node)
 
+stash_version = Chef::Version.new(node['stash']['version'])
+
 if settings['database']['host'] == "localhost"
   database_connection = {
     :host => settings['database']['host'],
@@ -110,8 +112,8 @@ execute "Extracting Stash #{node['stash']['version']}" do
   cwd Chef::Config[:file_cache_path]
   command <<-COMMAND
     tar -zxf atlassian-stash-#{node['stash']['version']}.tar.gz
-    chown -R #{node['stash']['run_user']} atlassian-stash-#{node['stash']['version']}
     mv atlassian-stash-#{node['stash']['version']} #{node['stash']['install_path']}
+    chown -R #{node['stash']['run_user']} #{node['stash']['install_path']}
   COMMAND
   creates "#{node['stash']['install_path']}/atlassian-stash"
 end
@@ -135,7 +137,11 @@ template "#{node['stash']['install_path']}/bin/setenv.sh" do
 end
 
 template "#{node['stash']['install_path']}/conf/server.xml" do
-  source "server.xml.erb"
+  if stash_version.major == 1
+    source "server.xml.erb"
+  else
+    source "server-tomcat7.xml.erb"
+  end
   owner  node['stash']['run_user']
   mode   "0640"
   variables :tomcat => settings['tomcat']
@@ -143,7 +149,11 @@ template "#{node['stash']['install_path']}/conf/server.xml" do
 end
 
 template "#{node['stash']['install_path']}/conf/web.xml" do
-  source "web.xml.erb"
+  if stash_version.major == 1
+    source "web.xml.erb"
+  else
+    source "web-tomcat7.xml.erb"
+  end
   owner  node['stash']['run_user']
   mode   "0644"
   notifies :restart, "service[stash]", :delayed

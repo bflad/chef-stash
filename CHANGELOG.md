@@ -1,3 +1,8 @@
+## v2.3.0
+
+* Stash 2.x support
+* Bumped default Stash installation to 2.1.1
+
 ## v2.2.0
 
 * Added Chef Solo support by refactoring settings into library function
