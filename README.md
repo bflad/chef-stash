@@ -8,6 +8,7 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ### Platforms
 
+* CentOS 6.3
 * RedHat 6.3
 
 ### Databases
@@ -36,7 +37,7 @@ These attributes are under the `node['stash']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 1.3.0
+version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.1.1
 url | URL for Stash installer .tar.gz | String | `http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz`
 checksum | SHA256 checksum for Stash installer .tar.gz | String | see attributes/default.rb
 backup_home | backup home directory during upgrade | Boolean | true
@@ -66,7 +67,7 @@ These attributes are under the `node['stash']['jvm']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-minimum_memory | JVM minimum memory | String | 256m
+minimum_memory | JVM minimum memory | String | 512m
 maximum_memory | JVM maximum memory | String | 768m
 maximum_permgen | JVM maximum PermGen memory | String | 256m
 java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
