@@ -2,7 +2,7 @@
 # Cookbook Name:: stash
 # Recipe:: default
 #
-# Copyright 2012
+# Copyright 2012-2013
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,13 @@
 # limitations under the License.
 #
 
-include_recipe "git::source" if node['platform_family'] == "rhel"
+case node['platform_family']
+when 'rhel'
+  include_recipe "git::source"
+else
+  include_recipe "git"
+end
+include_recipe "perl"
 
 settings = Stash.settings(node)
 

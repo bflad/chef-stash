@@ -15,7 +15,12 @@
 ### END INIT INFO
 
 # Source function library.
+<% case node['platform_family'] -%>
+<% when 'rhel' -%>
 . /etc/rc.d/init.d/functions
+<% else -%>
+. /lib/lsb/init-functions
+<% end -%>
 
 # Define some variables
 # Name of app ( JIRA, Confluence, etc )
@@ -25,13 +30,13 @@ USER=<%= node['stash']['run_user'] %>
 # Location of application's base directory
 BASE=<%= node['stash']['install_path'] %>
 
-function start {
+start() {
   echo "Starting $APP"
   su -l $USER -c $BASE/bin/start-stash.sh
   return $?
 }
 
-function stop {
+stop() {
   echo "Stopping $APP"
   su -l $USER -c $BASE/bin/stop-stash.sh
   return $?
@@ -52,11 +57,16 @@ case "$1" in
   restart)
     stop
     start
-    RETVAL=$?    
+    RETVAL=$?
     ;;
   # Status command
   status)
+    <% case node['platform_family'] -%>
+    <% when 'rhel' -%>
     status -p $BASE/work/catalina.pid $APP
+    <% else -%>
+    status_of_proc -p $BASE/work/catalina.pid $JAVA_HOME/bin/java $APP
+    <% end -%>
     RETVAL=$?
     ;;
   *)

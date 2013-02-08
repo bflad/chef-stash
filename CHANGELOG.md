@@ -1,3 +1,9 @@
+## v2.4.0
+
+* Added Perl dependency (required for Stash 2.X)
+* Ubuntu 12.04 support
+* Better handling of apache2 listen_ports in apache2 recipe
+
 ## v2.3.1
 
 * Chef 11 fixes for apache2 recipe

@@ -10,6 +10,7 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 * CentOS 6.3
 * RedHat 6.3
+* Ubuntu 12.04
 
 ### Databases
 
@@ -25,6 +26,7 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 * git
 * java
 * mysql (if using MySQL database)
+* perl
 * postgresql (if using Postgres database)
 
 Third-Party Cookbooks
@@ -195,12 +197,22 @@ Here's how you can quickly get testing or developing against the cookbook thanks
     git clone git://github.com/bflad/chef-stash.git
     cd chef-stash
     bundle install
-    bundle exec vagrant up
+    bundle exec vagrant up BOX # BOX being centos6 or ubuntu1204
+
+You may need to add the following hosts entries:
+
+* 33.33.33.10 stash-centos-6
+* 33.33.33.11 stash-ubuntu-1204
 
 The running Stash server is accessible from the host machine:
 
+CentOS 6 Box:
 * Web UI: https://33.33.33.10/
 * Stash SSH: ssh://git@33.33.33.10:7999/
+
+Ubuntu 12.04 Box:
+* Web UI: https://33.33.33.11/
+* Stash SSH: ssh://git@33.33.33.11:7999/
 
 You can then SSH into the running VM using the `vagrant ssh` command.
 The VM can easily be stopped and deleted with the `vagrant destroy`
