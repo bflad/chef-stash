@@ -17,9 +17,11 @@
 # limitations under the License.
 #
 
-default['stash']['version']        = "2.1.1"
+set['build_essential']['compiletime'] = true
+
+default['stash']['version']        = "2.2.0"
 default['stash']['url']            = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz"
-default['stash']['checksum']       = "be29bf0c2044466fa0cd60f2f597053967644d92ae354510c4262385d00ad8cd"
+default['stash']['checksum']       = "3e8a461f30dbb6bd31a0d9aa42d639a147a3da2b9c534e7923eccca4169bf052"
 default['stash']['backup_home']    = true
 default['stash']['backup_install'] = true
 default['stash']['install_backup'] = "/tmp/atlassian-stash-backup.tgz"

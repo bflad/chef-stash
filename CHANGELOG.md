@@ -1,3 +1,10 @@
+## v2.5.0
+
+* Default to installing Stash 2.2.0
+* Use new `node['stash']['home_path']/lib` directory support for persistent MySQL Connector/J library
+* Set `node['build_essential']['compiletime'] = true` to ensure build tools are ready
+* Oracle JDK 7 for Vagrant testing
+
 ## v2.4.0
 
 * Added Perl dependency (required for Stash 2.X)

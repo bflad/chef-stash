@@ -125,8 +125,14 @@ execute "Extracting Stash #{node['stash']['version']}" do
 end
 
 if settings['database']['type'] == "mysql"
-  include_recipe "mysql_connector"
-  mysql_connector_j "#{node['stash']['install_path']}/lib"
+  directory "#{node['stash']['home_path']}/lib" do
+    owner node['stash']['run_user']
+    group node['stash']['run_user']
+    mode 00755
+    action :create
+  end
+  
+  mysql_connector_j "#{node['stash']['home_path']}/lib"
 end
 
 template "/etc/init.d/stash" do
