@@ -1,3 +1,8 @@
+## 2.6.0
+
+* Default to installing Stash 2.3.0
+* Updated Vagrant box URLs to Chef 11.2.0 since tested and works
+
 ## 2.5.0
 
 * Default to installing Stash 2.2.0

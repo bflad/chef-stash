@@ -3,9 +3,14 @@
 Cookbook Versions: 2.3+
 
 Tested OSes:
-* CentOS 6.3
-* RHEL 6.3
+* CentOS 6
+* RHEL 6
 * Ubuntu 12.04
+
+### Stash 2.3.0 ###
+
+* `node['stash']['version']`: "2.3.0"
+* `node['stash']['checksum']`: "584bde276b4acb079e4c32266352f09fba3ed018ce3ec0984f2c6ebded9067db"
 
 ### Stash 2.2.0 ###
 

@@ -19,9 +19,9 @@
 
 set['build_essential']['compiletime'] = true
 
-default['stash']['version']        = "2.2.0"
+default['stash']['version']        = "2.3.0"
 default['stash']['url']            = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz"
-default['stash']['checksum']       = "3e8a461f30dbb6bd31a0d9aa42d639a147a3da2b9c534e7923eccca4169bf052"
+default['stash']['checksum']       = "584bde276b4acb079e4c32266352f09fba3ed018ce3ec0984f2c6ebded9067db"
 default['stash']['backup_home']    = true
 default['stash']['backup_install'] = true
 default['stash']['install_backup'] = "/tmp/atlassian-stash-backup.tgz"
