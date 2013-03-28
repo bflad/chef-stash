@@ -8,8 +8,8 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ### Platforms
 
-* CentOS 6.3
-* RedHat 6.3
+* CentOS 6
+* RedHat 6
 * Ubuntu 12.04
 
 ### Databases
@@ -39,7 +39,7 @@ These attributes are under the `node['stash']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.1.1
+version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.3.0
 url | URL for Stash installer .tar.gz | String | `http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz`
 checksum | SHA256 checksum for Stash installer .tar.gz | String | see attributes/default.rb
 backup_home | backup home directory during upgrade | Boolean | true
