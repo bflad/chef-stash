@@ -1,3 +1,7 @@
+## 2.6.1
+
+* Bump default Stash to 2.3.1
+
 ## 2.6.0
 
 * Default to installing Stash 2.3.0
