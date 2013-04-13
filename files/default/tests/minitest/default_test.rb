@@ -12,7 +12,7 @@ describe_recipe "stash::default" do
   end
 
   it 'creates Stash properties file' do
-  	file("#{node['stash']['install_path']}/stash-config.properties").must_exist
+  	file("#{node['stash']['home_path']}/stash-config.properties").must_exist
   end
 
   it 'starts Stash' do
