@@ -9,6 +9,9 @@ jdbc.url=jdbc:mysql://<%= @database['host'] == "localhost" ? node['mysql']['bind
 <% when "postgresql" %>
 jdbc.driver=org.postgresql.Driver
 jdbc.url=jdbc:postgresql://<%= @database['host'] %>:<%= @database['port'] %>/<%= @database['name'] %>
+<% when "sqlserver" %>
+jdbc.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+jdbc.url=jdbc:sqlserver://<%= @database['host'] %>:<%= @database['port'] %>;databaseName=<%= @database['name'] %>;
 <% end %>
 jdbc.user=<%= @database['user'] %>
 jdbc.password=<%= @database['password'] %>

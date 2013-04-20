@@ -1,3 +1,7 @@
+## 2.7.0
+
+* Untested support for Microsoft SQL server
+
 ## 2.6.1
 
 * Bump default Stash to 2.3.1
