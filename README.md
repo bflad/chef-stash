@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash. Please see COMPATIBILITY.md for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
+Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
 
 ## Requirements
 
@@ -20,15 +20,15 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ### Cookbooks
 
-Opscode Cookbooks (http://github.com/opscode-cookbooks/)
+Required [Opscode Cookbooks](https://github.com/opscode-cookbooks/)
 
-* apache2 (if using Apache 2 proxy)
-* database
-* git
-* java
-* mysql (if using MySQL database)
-* perl
-* postgresql (if using Postgres database)
+* [apache2](https://github.com/opscode-cookbooks/apache2) (if using Apache 2 proxy)
+* [database](https://github.com/opscode-cookbooks/database)
+* [git](https://github.com/opscode-cookbooks/git)
+* [java](https://github.com/opscode-cookbooks/java)
+* [mysql](https://github.com/opscode-cookbooks/mysql) (if using MySQL database)
+* [perl](https://github.com/opscode-cookbooks/perl)
+* [postgresql](https://github.com/opscode-cookbooks/postgresql) (if using Postgres database)
 
 Third-Party Cookbooks
 
@@ -200,20 +200,20 @@ Here's how you can quickly get testing or developing against the cookbook thanks
     bundle install
     bundle exec vagrant up BOX # BOX being centos6 or ubuntu1204
 
-You may need to add the following hosts entries:
+You need to add the following hosts entries:
 
-* 33.33.33.10 stash-centos-6
-* 33.33.33.11 stash-ubuntu-1204
+* 192.168.50.10 stash-centos-6
+* 192.168.50.11 stash-ubuntu-1204
 
 The running Stash server is accessible from the host machine:
 
 CentOS 6 Box:
-* Web UI: https://33.33.33.10/
-* Stash SSH: ssh://git@33.33.33.10:7999/
+* Web UI: https://stash-centos-6/
+* Stash SSH: ssh://git@stash-centos-6:7999/
 
 Ubuntu 12.04 Box:
-* Web UI: https://33.33.33.11/
-* Stash SSH: ssh://git@33.33.33.11:7999/
+* Web UI: https://stash-ubuntu-1204/
+* Stash SSH: ssh://git@stash-ubuntu-1204:7999/
 
 You can then SSH into the running VM using the `vagrant ssh` command.
 The VM can easily be stopped and deleted with the `vagrant destroy`
