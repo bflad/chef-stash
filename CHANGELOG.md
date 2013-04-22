@@ -1,3 +1,8 @@
+## 2.8.0
+
+* Checksum attribute auto-detection
+* Added url_base attribute
+
 ## 2.7.0
 
 * Untested support for Microsoft SQL server

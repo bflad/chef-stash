@@ -40,16 +40,17 @@ These attributes are under the `node['stash']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.3.0
-url | URL for Stash installer .tar.gz | String | `http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash-#{node['stash']['version']}.tar.gz`
-checksum | SHA256 checksum for Stash installer .tar.gz | String | see attributes/default.rb
 backup_home | backup home directory during upgrade | Boolean | true
 backup_install | backup install directory during upgrade | Boolean | true
+checksum | SHA256 checksum for Stash install | String | auto-detected (see attributes/default.rb)
+home_backup | location of home directory backup during upgrade | String | /tmp/atlassian-stash-home-backup.tgz
+home_path | home directory for Stash user | String | `/home/#{node['stash']['run_user']}`
 install_backup | location of install directory backup during upgrade | String | /tmp/atlassian-stash-backup.tgz
 install_path | location to install Stash | String | /opt/atlassian-stash
 run_user | user to run Stash | String | stash
-home_backup | location of home directory backup during upgrade | String | /tmp/atlassian-stash-home-backup.tgz
-home_path | home directory for Stash user | String | `/home/#{node['stash']['run_user']}`
+url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
+url | URL for Stash install | String | auto-detected (see attributes/default.rb)
+version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.3.1
 
 ### Stash Database Attributes
 
