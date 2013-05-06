@@ -1,3 +1,7 @@
+## 2.10.0
+
+* Add repo LWRP for interfacing with stash repositories
+
 ## 2.9.0
 
 * Add hook LWRP for interfacing with stash hooks
