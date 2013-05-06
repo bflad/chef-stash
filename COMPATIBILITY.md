@@ -7,6 +7,11 @@ Tested OSes:
 * RHEL 6
 * Ubuntu 12.04
 
+### Stash 2.4.0 ###
+
+* `node['stash']['version']`: "2.4.0"
+* `node['stash']['checksum']`: "f71fd89a5b0364179cd3d50476be8843291fe2629d2a379f6dcc8434ae724a97"
+
 ### Stash 2.3.1 ###
 
 * `node['stash']['version']`: "2.3.1"
