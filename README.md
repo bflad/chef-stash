@@ -111,6 +111,8 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 * `stash_deploy` - wrapper Git resource for using a `stash_deploy_key`, project, and repository for code deployment
 * `stash_deploy_key` - creates SSH private key file and SSH wrapper for code deployment
+* `hook` - Wrapper to enable/disable/configure a stash hook (requires the user account password to be in chef-vault)
+* `repo` - Wrapper to create/delete a stash repository (requires the user account password to be in chef-vault)
 
 ## Usage
 
