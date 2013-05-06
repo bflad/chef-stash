@@ -20,9 +20,9 @@
 module Stash
   module Helper
     REST_BASE = "rest/api/1.0"
-    
+
     def stash_uri(host, rest_endpoint)
-      URI.parse(stash_url(rest_endpoint))
+      URI.parse(stash_url(host, rest_endpoint))
     end
 
     def stash_url(host, rest_endpoint)
@@ -30,12 +30,9 @@ module Stash
     end
 
     def stash_base64_creds(user)
-      base64_creds ||= begin
-        require 'chef-vault'
-        vault = ChefVault.new("passwords")
-        user = vault.user(user)
-        Base64.encode64("#{user}:#{user.decrypt_password}").strip!
-      end
+      vault = ChefVault.new("passwords")
+      user_vault = vault.user(user)
+      Base64.encode64("#{user}:#{user_vault.decrypt_password}").strip!
     end
 
     def stash_put(uri, user, json=nil)
@@ -46,9 +43,10 @@ module Stash
       request = Net::HTTP::Put.new(uri.request_uri)
       request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
       request.content_type = 'application/json'
-      request.body = JSON.pretty_generate(json) if json
+      request.body = json if json
 
       response = http.request(request)
+      check_for_errors(response)
       response
     end
 
@@ -61,6 +59,7 @@ module Stash
       request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
 
       response = http.request(request)
+      check_for_errors(response)
       response
     end
 
@@ -73,7 +72,26 @@ module Stash
       request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
 
       response = http.request(request)
+      check_for_errors(response)
       response
+    end
+
+    def check_for_errors(http_response)
+      unless http_response.code == "200"
+        Chef::Log.debug("http response code: #{http_response.code}")
+        Chef::Log.debug("http response body: #{http_response.read_body}")
+        Chef::Application.fatal!("error making stash request")
+      end
+    end
+
+    def install_chef_vault(source="http://rubygems.org", version="1.2.0")
+      gem_installer = Chef::Resource::ChefGem.new("chef-vault", run_context)
+      gem_installer.version version
+      gem_installer.options "--clear-sources --source #{source}"
+      gem_installer.action :install
+      gem_installer.after_created
+
+      require 'chef-vault'
     end
   end
 end

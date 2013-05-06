@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+include Stash::Helper
+
 def whyrun_supported?
   true
 end
@@ -72,12 +75,15 @@ def load_current_resource
   repo = @new_resource.repo
   hook = @new_resource.hook
 
+  # Make sure chef-vault is installed
+  install_chef_vault(@new_resource.chef_vault_source, @new_resource.chef_vault_version)
+
   @current_resource = Chef::Resource::StashHook.new(hook)
   @current_resource.enabled = enabled?(server, user, project, repo, hook)
   @current_resource.configured = configured?(server, user, project, repo, hook)
   
   if @current_resource.configured
-    @current_resource.settings = hook_settings(server, user, project, repo, hook)
+    @current_resource.settings hook_settings(server, user, project, repo, hook)
   end
 end
 
@@ -88,7 +94,7 @@ def enabled?(server, user, project, repo, hook)
   response = stash_get(uri, user)
 
   details = JSON.parse(response.read_body)
-  response.code == "200" && details["enabled"]
+  details["enabled"]
 end
 
 def configured?(server, user, project, repo, hook)
@@ -97,7 +103,7 @@ def configured?(server, user, project, repo, hook)
   response = stash_get(uri, user)
 
   details = JSON.parse(response.read_body)
-  response.code == "200" && details["configured"]
+  details["configured"]
 end
 
 def hook_settings(server, user, project, repo, hook)
@@ -109,16 +115,19 @@ def hook_settings(server, user, project, repo, hook)
 end
 
 def enable(server, user, project, repo, hook)
+  Chef::Log.debug("Enabling #{hook} on #{repo}...")
   uri = stash_uri(server, "projects/#{project}/repos/#{repo}/settings/hooks/#{hook}/enabled")
   stash_put(uri, user)
 end
 
 def configure(server, user, project, repo, hook, settings)
+  Chef::Log.debug("Configuring #{hook} on #{repo}...")
   uri = stash_uri(server, "projects/#{project}/repos/#{repo}/settings/hooks/#{hook}/settings")
-  stash_put(uri, user, settings)
+  stash_put(uri, user, settings.to_json)
 end
 
 def disable(server, user, project, repo, hook)
+  Chef::Log.debug("Disabling #{hook} on #{repo}...")
   uri = stash_uri(server, "projects/#{project}/repos/#{repo}/settings/hooks/#{hook}/enabled")
   stash_delete(uri, user)
 end
