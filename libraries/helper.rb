@@ -35,7 +35,7 @@ module Stash
       Base64.encode64("#{user}:#{user_vault.decrypt_password}").strip!
     end
 
-    def stash_put(uri, user, json=nil)
+    def stash_put(uri, user, json=nil, success_codes=["200"])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -46,11 +46,26 @@ module Stash
       request.body = json if json
 
       response = http.request(request)
-      check_for_errors(response)
+      check_for_errors(response, success_codes)
       response
     end
 
-    def stash_get(uri, user)
+    def stash_post(uri, user, json=nil, success_codes=["200"])
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
+      request.content_type = 'application/json'
+      request.body = json if json
+
+      response = http.request(request)
+      check_for_errors(response, success_codes)
+      response
+    end
+
+    def stash_get(uri, user, success_codes=["200"])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -59,11 +74,11 @@ module Stash
       request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
 
       response = http.request(request)
-      check_for_errors(response)
+      check_for_errors(response, success_codes)
       response
     end
 
-    def stash_delete(uri, user)
+    def stash_delete(uri, user, success_codes=["200"])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -72,12 +87,12 @@ module Stash
       request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
 
       response = http.request(request)
-      check_for_errors(response)
+      check_for_errors(response, success_codes)
       response
     end
 
-    def check_for_errors(http_response)
-      unless http_response.code == "200"
+    def check_for_errors(http_response, success_codes)
+      unless success_codes.include?(http_response.code)
         Chef::Log.debug("http response code: #{http_response.code}")
         Chef::Log.debug("http response body: #{http_response.read_body}")
         Chef::Application.fatal!("error making stash request")
