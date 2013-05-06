@@ -157,14 +157,14 @@ Repeat for other Chef environments as necessary. Example:
 
 ### Stash Server Installation
 
-* Optionally (un)encrypted data bag or set attributes
+* Optionally use (un)encrypted data bag or set attributes
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash]` to your node's run list.
 
 ### Stash Server Installation with Apache 2 Frontend
 
-* Optionally (un)encrypted data bag or set attributes
+* Optionally use (un)encrypted data bag or set attributes
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash::apache2]` to your node's run list.
@@ -179,13 +179,17 @@ Repeat for other Chef environments as necessary. Example:
 ### Code Deployment From Stash
 
 * Ensure your node has Git installed
-* Create a `stash_deploy_key` with the SSH private key contents (using `\n` for newlines) of a Stash user with permissions to your repository. For example:
+* Create a `stash_deploy_key` with the SSH private key contents (using `\n` for newlines) of a Stash user with permissions to your repository.
+
+For example:
 
     stash_deploy_key "deployment_user" do
       key "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIB..."
     end
 
-* In this example, now you can either directly use the ssh_wrapper available at `#{node['stash']['install_path']}/deployment_user_ssh_wrapper.sh` or use the `stash_deploy` LWRP such as:
+* In this example, now you can either directly use the ssh_wrapper available at `#{node['stash']['install_path']}/deployment_user_ssh_wrapper.sh` or use the `stash_deploy` LWRP. 
+
+Such as:
 
     stash_deploy "/opt/shibboleth-idp/conf" do
       deploy_key "deployment_user"
