@@ -227,11 +227,13 @@ for a more in depth explanation of available commands.
 
 Please use standard Github issues/pull requests and if possible, in combination with testing on the Vagrant boxes.
 
-## License and Author
+## License and Authors
 
-Author:: Brian Flad (<bflad@wharton.upenn.edu>)
+Author:: Brian Flad (<bflad417@gmail.com>)
+Author:: Kevin Moser
 
-Copyright:: 2012-2013
+Copyright:: 2012-2013 Brian Flad
+Copyright:: 2013 Nordstrom, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
