@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## 3.0.0 (upcoming)
 
 * split default recipe into separate recipes
@@ -17,6 +16,10 @@
     * If you're not upgrading Stash: mkdir /opt/atlassian && mv /opt/atlassian-stash /opt/atlassian/stash
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
+
+## 2.10.1
+
+* Add LWRP update notifications
 
 ## 2.10.0
 
