@@ -1,3 +1,27 @@
+## 3.0.0 (upcoming)
+
+* split default recipe into separate recipes
+* apache2 recipe no longer includes default recipe
+* Rename `run_user` attribute to `user`
+* Fix default path attributes to match Atlassian recommendations
+  * `home_path`: /home/stash to /var/atlassian/application-data/stash
+  * `install_path`: /opt/atlassian-stash to /opt/atlassian/stash
+  * To upgrade your instance (with the defaults):
+    * Ensure Chef client won't run (service chef-client stop, etc.)
+    * service stash stop
+    * mkdir -p /var/atlassian/application-data
+    * chown stash:stash /var/atlassian/application-data
+    * usermod -d /var/atlassian/application-data/stash -m stash
+    * If you're upgrading Stash: rm -rf /opt/atlassian-stash
+    * If you're not upgrading Stash: mkdir /opt/atlassian && mv /opt/atlassian-stash /opt/atlassian/stash
+    * Start Chef client again (service chef-client start, etc.)
+* Moved apache2 attributes to default attributes file
+
+## 2.9.0
+
+* Bump default Stash version to 2.4.0
+* Fix run_user attribute ordering
+
 ## 2.8.0
 
 * Checksum attribute auto-detection
