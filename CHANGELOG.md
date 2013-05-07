@@ -17,6 +17,11 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.11.0
+
+* Add default sqlserver port to settings library
+* Tested support for Microsoft SQL Server
+
 ## 2.10.1
 
 * Add LWRP update notifications

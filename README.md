@@ -14,7 +14,7 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ### Databases
 
-* Microsoft SQL Server (untested)
+* Microsoft SQL Server
 * MySQL
 * Postgres
 

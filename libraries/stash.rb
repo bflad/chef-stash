@@ -41,6 +41,8 @@ class Chef::Recipe::Stash
         settings['database']['port'] ||= 3306
       when "postgresql"
         settings['database']['port'] ||= 5432
+      when "sqlserver"
+        settings['database']['port'] ||= 1433
       else
         Chef::Log.warn("Unsupported database type.")
       end
