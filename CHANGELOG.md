@@ -17,6 +17,10 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.12.0
+
+* Bump default Stash version to 2.4.1
+
 ## 2.11.0
 
 * Add default sqlserver port to settings library
