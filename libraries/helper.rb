@@ -20,6 +20,7 @@
 module Stash
   module Helper
     REST_BASE = "rest/api/1.0"
+    @@chef_vault_installed = false
 
     def stash_uri(host, rest_endpoint)
       URI.parse(stash_url(host, rest_endpoint))
@@ -100,13 +101,17 @@ module Stash
     end
 
     def install_chef_vault(source="http://rubygems.org", version="1.2.0")
-      gem_installer = Chef::Resource::ChefGem.new("chef-vault", run_context)
-      gem_installer.version version
-      gem_installer.options "--clear-sources --source #{source}"
-      gem_installer.action :install
-      gem_installer.after_created
+      unless @@chef_vault_installed
+        gem_installer = Chef::Resource::ChefGem.new("chef-vault", run_context)
+        gem_installer.version version
+        gem_installer.options "--clear-sources --source #{source}"
+        gem_installer.action :install
+        gem_installer.after_created
 
-      require 'chef-vault'
+        require 'chef-vault'
+
+        @@chef_vault_installed = true
+      end
     end
   end
 end
