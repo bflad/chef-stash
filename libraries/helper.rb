@@ -21,6 +21,7 @@ module Stash
   module Helper
     REST_BASE = "rest/api/1.0"
     @@chef_vault_installed = false
+    @cookie = nil
 
     def stash_uri(host, rest_endpoint)
       URI.parse(stash_url(host, rest_endpoint))
@@ -34,6 +35,51 @@ module Stash
       vault = ChefVault.new("passwords")
       user_vault = vault.user(user)
       Base64.encode64("#{user}:#{user_vault.decrypt_password}").strip!
+    end
+
+    def stash_login(uri, user, success_codes=["200"])
+      @cookie ||= begin
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+        request = Net::HTTP::Get.new(uri.request_uri)
+        request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
+
+        response = http.request(request)
+        check_for_errors(response, success_codes)
+        response.response["set-cookie"]
+      end
+    end
+
+    def stash_web_get(uri, user, success_codes=["200"])
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Get.new(uri.request_uri)
+      request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
+      request["Cookie"] = stash_login(uri, user, ["200", "302"])
+
+      response = http.request(request)
+      check_for_errors(response, success_codes)
+      response
+    end
+
+    def stash_web_post(uri, user, form_data=nil, success_codes=["200"])
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request["AUTHORIZATION"] = "Basic #{stash_base64_creds(user)}"
+      request["Cookie"] = stash_login(uri, user, ["200", "302"])
+      request.content_type = 'application/x-www-form-urlencoded'
+      request.body = form_data if form_data
+
+      response = http.request(request)
+      check_for_errors(response, success_codes)
+      response
     end
 
     def stash_put(uri, user, json=nil, success_codes=["200"])
