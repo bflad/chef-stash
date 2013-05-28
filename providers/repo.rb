@@ -18,7 +18,6 @@
 #
 
 include Stash::Helper
-require 'nokogiri'
 
 def whyrun_supported?
   true
@@ -66,6 +65,8 @@ def load_current_resource
 
   # Make sure chef-vault is installed
   install_chef_vault(@new_resource.chef_vault_source, @new_resource.chef_vault_version)
+  # Make sure nokogiri is installed
+  install_nokogiri(@new_resource.nokogiri_source, @new_resource.nokogiri_version)
 
   @current_resource = Chef::Resource::StashRepo.new(repo)
   @current_resource.exists = exists?(server, user, project, repo)

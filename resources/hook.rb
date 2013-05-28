@@ -28,5 +28,7 @@ attribute :settings, :kind_of => Hash, :default => nil
 attribute :user, :kind_of => String
 attribute :chef_vault_version, :kind_of => String, :default => "1.2.0"
 attribute :chef_vault_source, :kind_of => String, :default => "http://rubygems.org"
+attribute :nokogiri_version, :kind_of => String, :default => "1.5.9"
+attribute :nokogiri_source, :kind_of => String, :default => "http://rubygems.org"
 
 attr_accessor :enabled, :configured

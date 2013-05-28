@@ -28,5 +28,7 @@ attribute :pull_request_approvers, :kind_of => Integer, :default => 0
 attribute :pull_request_builds, :kind_of => Integer, :default => 0
 attribute :chef_vault_version, :kind_of => String, :default => "1.2.0"
 attribute :chef_vault_source, :kind_of => String, :default => "http://rubygems.org"
+attribute :nokogiri_version, :kind_of => String, :default => "1.5.9"
+attribute :nokogiri_source, :kind_of => String, :default => "http://rubygems.org"
 
 attr_accessor :exists

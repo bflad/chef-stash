@@ -21,6 +21,7 @@ module Stash
   module Helper
     REST_BASE = "rest/api/1.0"
     @@chef_vault_installed = false
+    @@nokogiri_installed = false
     @cookie = nil
 
     def stash_uri(host, rest_endpoint)
@@ -157,6 +158,20 @@ module Stash
         require 'chef-vault'
 
         @@chef_vault_installed = true
+      end
+    end
+
+    def install_nokogiri(source="http://rubygems.org", version="1.5.9")
+      unless @@nokogiri_installed
+        gem_installer = Chef::Resource::ChefGem.new("nokogiri", run_context)
+        gem_installer.version version
+        gem_installer.options "--clear-sources --source #{source}"
+        gem_installer.action :install
+        gem_installer.after_created
+
+        require 'nokogiri'
+
+        @@nokogiri_installed = true
       end
     end
   end
