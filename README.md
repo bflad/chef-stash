@@ -6,6 +6,8 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ## Requirements
 
+libxml2 and libxslt must be installed before using the repo and hook LWRPs.  This is a dependency of installing the nokogiri gem.  If those LWRPs are not going to be used these packages do not need to be installed.
+
 ### Platforms
 
 * CentOS 6
