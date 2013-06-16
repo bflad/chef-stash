@@ -8,17 +8,18 @@ FileUtils.mkdir(host_cache_path) unless File.exist?(host_cache_path)
 
 Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
+  config.omnibus.chef_version = :latest
 
   config.vm.define :centos6 do |centos6|
-    centos6.vm.box      = 'opscode-centos-6.3'
-    centos6.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_chef-11.4.4.box'
+    centos6.vm.box      = 'opscode-centos-6.4'
+    centos6.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box'
     centos6.vm.hostname = 'stash-centos-6'
     centos6.vm.network :private_network, ip: '192.168.50.10'
   end
 
   config.vm.define :ubuntu1204 do |ubuntu1204|
     ubuntu1204.vm.box      = 'opscode-ubuntu-12.04'
-    ubuntu1204.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-11.4.4.box'
+    ubuntu1204.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box'
     ubuntu1204.vm.hostname = 'stash-ubuntu-1204'
     ubuntu1204.vm.network :private_network, ip: '192.168.50.11'
   end
