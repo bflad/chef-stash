@@ -50,7 +50,7 @@ install_path | location to install Stash | String | /opt/atlassian-stash
 run_user | user to run Stash | String | stash
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
-version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.5.0
+version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.6.3
 
 ### Stash Database Attributes
 

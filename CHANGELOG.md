@@ -17,6 +17,10 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.16.0
+
+* Bump default Stash version to 2.6.3
+
 ## 2.15.0
 
 * Bump default Stash version to 2.6.0
