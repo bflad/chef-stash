@@ -17,6 +17,11 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.17.0
+
+* Initial HSQLDB support (not recommended for production)
+  * Only need to set "hsqldb" for `node['stash']['database']['type']` and select internal database on setup
+
 ## 2.16.0
 
 * Bump default Stash version to 2.6.3

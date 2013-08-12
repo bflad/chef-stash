@@ -3,6 +3,9 @@
 #  Local modifications will be overwritten by Chef.
 #
 <% case @database['type'] %>
+<% when "hsqldb" %>
+jdbc.driver=org.hsqldb.jdbcDriver
+jdbc.url=jdbc:hsqldb:${stash.home}/data/db;shutdown=true
 <% when "mysql" %>
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://<%= @database['host'] == "localhost" ? node['mysql']['bind_address'] : @database['host'] %>:<%= @database['port'] %>/<%= @database['name'] %>?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB

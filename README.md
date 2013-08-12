@@ -14,6 +14,7 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 
 ### Databases
 
+* HSQLDB (not recommended for production usage)
 * Microsoft SQL Server
 * MySQL
 * Postgres
@@ -62,7 +63,7 @@ host | FQDN or "localhost" (localhost automatically installs `['database']['type
 name | Stash database name | String | stash
 password | Stash database user password | String | changeit
 port | Stash database port | Fixnum | 3306
-type | Stash database type - "mysql", "postgresql", or "sqlserver" | String | mysql
+type | Stash database type - "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver" | String | mysql
 user | Stash database user | String | stash
 
 ### Stash JVM Attributes
@@ -121,7 +122,7 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 For securely overriding attributes on Hosted Chef, create a `stash/stash` encrypted data bag with the model below. Chef Solo can override the same attributes with a `stash/stash` unencrypted data bag of the same information.
 
 _required:_
-* `['database']['type']` "mysql", "postgresql", or "sqlserver"
+* `['database']['type']` "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver"
 * `['database']['host']` FQDN or "localhost" (localhost automatically
   installs `['database']['type']` server)
 * `['database']['name']` Name of Stash database
