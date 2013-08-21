@@ -51,6 +51,8 @@ Vagrant.configure("2") do |config|
     chef.run_list = %w{
       recipe[java]
       recipe[stash::apache2]
+      recipe[stash::backup_client]
+      recipe[stash::backup_client_cron]
     }
   end
 

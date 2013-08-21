@@ -48,6 +48,25 @@ when "2.6.4"; "f561ee131977f96bf049ee0b889f4b5905b6ccc2faa36ac5a73c366e3aaaafca"
 when "2.7.0"; "e41d1d79ab94d3256c443b66c8536d526f9cba72ac5a190a7b19a83d006c18ee"
 end
 
+default['stash']['backup_client']['backup_path']  = "/tmp"
+default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
+default['stash']['backup_client']['install_path'] = "/opt/atlassian-stash-backup-client"
+default['stash']['backup_client']['password']     = "changeit"
+default['stash']['backup_client']['url_base']     = "http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution"
+default['stash']['backup_client']['user']         = "admin"
+default['stash']['backup_client']['version']      = "1.0.0-beta-11"
+
+default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
+default['stash']['backup_client']['checksum'] = case node['stash']['backup_client']['version']
+when "1.0.0-beta-11"; "b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced075c694bbafb2"
+end
+
+default['stash']['backup_client']['cron']['day'] = "*"
+default['stash']['backup_client']['cron']['hour'] = "0"
+default['stash']['backup_client']['cron']['minute'] = "0"
+default['stash']['backup_client']['cron']['month'] = "*"
+default['stash']['backup_client']['cron']['weekday'] = "*"
+
 default['stash']['database']['host']     = "localhost"
 default['stash']['database']['name']     = "stash"
 default['stash']['database']['password'] = "changeit"

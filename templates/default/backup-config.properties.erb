@@ -1,0 +1,27 @@
+# This file defines how and what the Stash backup client backs up. All properties in this file are commented out.
+# To uncomment them, remove the leading '#' on the relevant lines and append a valid property value to them.
+
+# Defines the username of the Stash user with administrative privileges you wish to perform the backup.
+# If omitted here it will be taken from the Java system property of the same name if supplied to the backup client on
+# the command line. As a required value, backup will fail if it is not supplied through one of these mechanisms.
+stash.user=<%= @backup_client['user'] %>
+
+# Defines the password of the Stash user with administrative privileges you wish to perform the backup.
+# If omitted here it will be taken from the Java system property of the same name if supplied on the command line
+# to the backup client. As a required value, backup will fail if it is not supplied through one of these mechanisms.
+stash.password=<%= @backup_client['password'] %>
+
+# Defines base URL of the Stash instance you wish to back up. E.g. http://localhost:7990/stash or http://stashserver/
+# If omitted here it will be taken from the Java system property of the same name if supplied on the command line
+# to the backup client. As a required value, backup will fail if it is not supplied through one of these mechanisms.
+stash.baseUrl=<%= @backup_client['baseurl'] %>
+
+# Defines location of the home directory of the Stash instance you wish to back up.
+# If omitted here it will be taken from the STASH_HOME environment variable or the Java system property of the same name
+# if supplied to the backup client on the command line.  As a required value, backup will fail if it is not supplied
+# through one of these mechanisms.
+stash.home=<%= node['stash']['home_path'] %>
+
+# Defines where the backup client will store its own files, such as backup archives.
+# If not specified, these files are stored beneath the working directory for the backup client.
+backup.home=<%= @backup_client['backup_path'] %>

@@ -17,6 +17,11 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.19.0
+
+* Add backup_client and backup_client_cron recipes for installing/configuring [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client)
+* Add [cron cookbook](https://github.com/opscode-cookbooks/cron) dependency
+
 ## 2.18.0
 
 * Bump default Stash version to 2.7.0

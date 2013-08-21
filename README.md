@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
+Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/) server and [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client). Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
 
 ## Requirements
 
@@ -24,6 +24,7 @@ Installs/Configures Atlassian Stash server. Provides LWRPs for code deployment v
 Required [Opscode Cookbooks](https://github.com/opscode-cookbooks/)
 
 * [apache2](https://github.com/opscode-cookbooks/apache2) (if using Apache 2 proxy)
+* [cron](https://github.com/opscode-cookbooks/cron)
 * [database](https://github.com/opscode-cookbooks/database)
 * [git](https://github.com/opscode-cookbooks/git)
 * [java](https://github.com/opscode-cookbooks/java)
@@ -52,6 +53,33 @@ run_user | user to run Stash | String | stash
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.7.0
+
+### Stash Backup Client Attributes
+
+These attributes are under the `node['stash']['backup_client']` namespace. Some of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+backup_path | Path for backups | String | /tmp
+baseurl | Stash base URL | String | `https://#{node['fqdn']}/`
+checksum | SHA256 checksum for Stash Backup Client install | String | auto-detected (see attributes/default.rb)
+install_path | location to install Stash Backup Client | String | /opt/atlassian-stash-backup-client
+password | Stash administrative user password | String | changeit
+url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
+user | Stash administrative user | String | admin
+version | Stash Backup Client version to install | String | 1.0.0-beta-11
+
+### Stash Backup Client Cron Attributes
+
+These attributes are under the `node['stash']['backup_client']['cron']` namespace. All of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+day | Day of month | String | *
+hour | Hour of day | String | 0
+minute | Minute of hour | String | 0
+month | Month of year | String | *
+weekday | Day of week | String | *
 
 ### Stash Database Attributes
 
@@ -106,6 +134,8 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 * `recipe[stash]` Installs Atlassian Stash with built-in Tomcat
 * `recipe[stash::apache2]` Installs above with Apache 2 proxy (ports 80/443)
+* `recipe[stash::backup_client]` Installs/configures Atlassian Stash Backup Client
+* `recipe[stash::backup_client_cron]` Installs/configures Atlassian Stash Backup Client cron.d
 * `recipe[stash::upgrade]` Upgrades Atlassian Stash
 
 ## LWRPs
@@ -130,6 +160,8 @@ _required:_
 * `['database']['password']` Stash database username password
 
 _optional:_
+* `['backup_client']['user']` Stash administrative username for backup client
+* `['backup_client']['password']` Stash administrative password for backup client
 * `['database']['port']` Database port, standard database port for
   `['database']['type']`
 * `['tomcat']['keyAlias']` Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
@@ -176,6 +208,20 @@ Repeat for other Chef environments as necessary. Example:
 * Add `recipe[stash::upgrade]` to your run_list, such as:
   `knife node run_list add NODE_NAME "recipe[stash::upgrade]"`
   It will automatically remove itself from the run_list after completion.
+
+### Stash Backup Client Installation
+
+* Optionally use (un)encrypted data bag or set attributes
+  * `knife data bag create stash`
+  * `knife data bag edit stash stash --secret-file=path/to/secret`
+* Add `recipe[stash]['backup_client']` to your node's run list.
+
+### Stash Backup Client Cron Installation
+
+* Optionally use (un)encrypted data bag or set attributes
+  * `knife data bag create stash`
+  * `knife data bag edit stash stash --secret-file=path/to/secret`
+* Add `recipe[stash]['backup_client_cron']` to your node's run list.
 
 ### Code Deployment From Stash
 
