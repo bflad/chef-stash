@@ -28,7 +28,7 @@ default['stash']['home_path']      = "/home/#{node['stash']['run_user']}"
 default['stash']['install_backup'] = "/tmp/atlassian-stash-backup.tgz"
 default['stash']['install_path']   = "/opt/atlassian-stash"
 default['stash']['url_base']       = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash"
-default['stash']['version']        = "2.6.3"
+default['stash']['version']        = "2.7.0"
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] = case node['stash']['version']

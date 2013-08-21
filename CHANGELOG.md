@@ -17,6 +17,10 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.18.0
+
+* Bump default Stash version to 2.7.0
+
 ## 2.17.0
 
 * Initial HSQLDB support (not recommended for production)
