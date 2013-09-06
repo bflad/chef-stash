@@ -24,6 +24,7 @@ else
   include_recipe "git"
 end
 include_recipe "perl"
+include_recipe "ark"
 
 settings = Stash.settings(node)
 
@@ -107,21 +108,13 @@ execute "Generating Self-Signed Java Keystore" do
   only_if { settings['tomcat']['keystoreFile'] == "#{node['stash']['home_path']}/.keystore" }
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node['stash']['version']}.tar.gz" do
-  source    node['stash']['url']
-  checksum  node['stash']['checksum']
-  mode      "0644"
-  action    :create_if_missing
-end
-
-execute "Extracting Stash #{node['stash']['version']}" do
-  cwd Chef::Config[:file_cache_path]
-  command <<-COMMAND
-    tar -zxf atlassian-stash-#{node['stash']['version']}.tar.gz
-    mv atlassian-stash-#{node['stash']['version']} #{node['stash']['install_path']}
-    chown -R #{node['stash']['run_user']} #{node['stash']['install_path']}
-  COMMAND
-  creates "#{node['stash']['install_path']}/atlassian-stash"
+ark node['stash']['name'] do
+  url node['stash']['url']
+  home_dir node['stash']['install_path']
+  checksum node['stash']['checksum']
+  version node['stash']['version']
+  owner node['stash']['run_user']
+  group node['stash']['run_user']
 end
 
 if settings['database']['type'] == "mysql"

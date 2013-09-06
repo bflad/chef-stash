@@ -15,6 +15,6 @@ recipe            "stash::upgrade", "Upgrades Atlassian Stash"
   supports os
 end
 
-%w{ apache2 cron database git java mysql mysql_connector perl postgresql }.each do |cb|
+%w{ apache2 cron database git java mysql mysql_connector perl postgresql ark }.each do |cb|
   depends cb
 end
