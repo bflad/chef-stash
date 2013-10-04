@@ -28,7 +28,7 @@ default['stash']['home_path']      = "/home/#{node['stash']['run_user']}"
 default['stash']['install_backup'] = "/tmp/atlassian-stash-backup.tgz"
 default['stash']['install_path']   = "/opt/atlassian-stash"
 default['stash']['url_base']       = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash"
-default['stash']['version']        = "2.7.0"
+default['stash']['version']        = "2.8.1"
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] = case node['stash']['version']
@@ -56,9 +56,9 @@ default['stash']['backup_client']['backup_path']  = "/tmp"
 default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup_client']['install_path'] = "/opt/atlassian-stash-backup-client"
 default['stash']['backup_client']['password']     = "changeit"
-default['stash']['backup_client']['url_base']     = "http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution"
+default['stash']['backup_client']['url_base']     = "http://downloads.atlassian.com/software/stash/downloads/stash-backup-client"
 default['stash']['backup_client']['user']         = "admin"
-default['stash']['backup_client']['version']      = "1.0.0-beta-11"
+default['stash']['backup_client']['version']      = "1.0.0"
 
 default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
 default['stash']['backup_client']['checksum'] = case node['stash']['backup_client']['version']
