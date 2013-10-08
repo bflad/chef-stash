@@ -106,6 +106,14 @@ maximum_permgen | JVM maximum PermGen memory | String | 256m
 java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
 support_args | additional JAVA_OPTS recommended by Atlassian support for Stash JVM during startup | String | ""
 
+### Stash Plugin Attributes
+
+All of these `node['stash']['plugin']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+`key` | A key/value pair to be inserted into stash-config.properties as plugin.`key`=`value` | - | -
+
 ### Stash SSH Attributes ###
 
 These attributes are under the `node['stash']['ssh']` namespace.
@@ -164,6 +172,7 @@ _optional:_
 * `['backup_client']['password']` Stash administrative password for backup client
 * `['database']['port']` Database port, standard database port for
   `['database']['type']`
+* `['plugin']['KEY']` plugin.`KEY`=`VALUE` to be inserted in stash-config.properties
 * `['tomcat']['keyAlias']` Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
 * `['tomcat']['keystoreFile']` Tomcat HTTPS Java Keystore keystoreFile, self-signed certificate
 * `['tomcat']['keystorePass']` Tomcat HTTPS Java Keystore keystorePass, self-signed certificate
