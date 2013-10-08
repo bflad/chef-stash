@@ -17,6 +17,10 @@
     * Start Chef client again (service chef-client start, etc.)
 * Moved apache2 attributes to default attributes file
 
+## 2.21.0
+
+* Add plugin attributes/databag items for insertion into stash-config.properties
+
 ## 2.20.0
 
 * Default to Stash 2.8.1
