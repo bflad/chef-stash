@@ -5,7 +5,7 @@ gem 'chefspec',      '~> 2.0'
 gem 'foodcritic',    '~> 3.0'
 gem 'guard',         '~> 2.0'
 gem 'guard-kitchen'
-gem 'guard-rubocop', '~> 1.0'
+#gem 'guard-rubocop', '~> 1.0'
 gem 'guard-rspec',   '~> 3.0'
 gem 'rb-inotify',    :require => false
 gem 'rb-fsevent',    :require => false
