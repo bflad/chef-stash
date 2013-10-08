@@ -26,9 +26,9 @@
 # Name of app ( JIRA, Confluence, etc )
 APP=stash
 # Name of the user to run as
-USER=<%= node['stash']['run_user'] %>
+USER=<%= node['stash']['user'] %>
 # Location of application's base directory
-BASE=<%= node['stash']['install_path'] %>
+BASE=<%= node['stash']['install_path'] %>/stash
 
 start() {
   echo "Starting $APP"

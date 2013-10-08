@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of stash_test.
 
+## 0.1.1:
+
+* Fixed references to Helpers::StashTest
+
 ## 0.1.0:
 
 * Initial release of stash_test

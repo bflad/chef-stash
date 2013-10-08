@@ -1,21 +1,71 @@
-## 3.0.0 (upcoming)
+## 3.0.0
 
-* split default recipe into separate recipes
-* apache2 recipe no longer includes default recipe
-* Rename `run_user` attribute to `user`
-* Fix default path attributes to match Atlassian recommendations
-  * `home_path`: /home/stash to /var/atlassian/application-data/stash
-  * `install_path`: /opt/atlassian-stash to /opt/atlassian/stash
-  * To upgrade your instance (with the defaults):
-    * Ensure Chef client won't run (service chef-client stop, etc.)
-    * service stash stop
-    * mkdir -p /var/atlassian/application-data
-    * chown stash:stash /var/atlassian/application-data
-    * usermod -d /var/atlassian/application-data/stash -m stash
-    * If you're upgrading Stash: rm -rf /opt/atlassian-stash
-    * If you're not upgrading Stash: mkdir /opt/atlassian && mv /opt/atlassian-stash /opt/atlassian/stash
-    * Start Chef client again (service chef-client start, etc.)
-* Moved apache2 attributes to default attributes file
+### 3.0.0 Major Changes
+
+#### Additions
+
+* Cookbook dependency: ark (handling downloads and extracting)
+* Recipe: default (installs backup_client recipe -- use backup_client_cron if you'd like it automatically running via cron)
+* Attribute: `node['stash']['install_type']` (possible future usage, defaults to standalone)
+* Attribute: `node['stash']['service_type']` (possible future usage, defaults to init)
+
+#### Removals
+
+* Recipe: upgrade (ark handles symlinks automatically and use Stash Backup Client for backups)
+* Attribute `node['stash']['backup_home']` (use Stash Backup Client instead)
+* Attribute `node['stash']['backup_install']` (use Stash Backup Client instead)
+* Attribute `node['stash']['home_backup']` (use Stash Backup Client instead)
+* Attribute `node['stash']['install_backup']` (use Stash Backup Client instead)
+
+#### Modifications
+
+* apache2 recipe: no longer includes default recipe
+* Attribute renamed:
+  * From: `node['stash']['run_user']`
+  * To: `node['stash']['user']`
+  * Reasoning: Consistency with other cookbooks
+* Attribute default: `node['stash']['home_path']`
+  * From: /home/stash
+  * To: /var/atlassian/application-data/stash
+  * Reasoning: Match Atlassian recommendations
+  * See Migrating home_path and install_path section for manual steps to perform cookbook upgrade
+* Attribute default: `node['stash']['home_path']`
+  * From: /opt/atlassian-stash
+  * To: /opt/atlassian (symlinks /opt/atlassian/stash-X.Y.Z to /opt/atlassian/stash)
+  * Reasoning: Match Atlassian recommendations
+  * See Migrating home_path and install_path section for manual steps to perform cookbook upgrade
+* Attributes moved:
+  * From: apache2.rb
+  * To: default.rb
+* default recipe: separate recipes
+  * configuration
+  * database
+  * linux_standalone
+  * service_init
+  * tomcat_configuration
+
+#### Migrating home_path and install_path
+
+To switch to new defaults:
+  * Ensure Chef client won't run (service chef-client stop, etc.)
+  * service stash stop
+  * mkdir -p /var/atlassian/application-data
+  * usermod -d /var/atlassian/application-data/stash -m stash
+  * mkdir /opt/atlassian
+  * mv /opt/atlassian-stash /opt/atlassian/stash-X.Y.Z
+  * ln -s /opt/atlassian/stash-X.Y.Z /opt/atlassian/stash
+  * Start Chef client again (service chef-client start, etc.)
+
+### 3.0.0 Minor Changes
+
+* Update COMPATIBILITY.md to easier to read format and migrate checksums to default attributes
+* Added vagrant-cachier to Vagrantfile
+* Added ubuntu1210 and ubuntu1304 to Test Kitchen and Vagrantfile
+* Added TESTING.md for documentation about Test Kitchen
+* Added Guardfile
+* Added .rubocop.yml
+* Bump Gemfile.ci to Chef 11.6.0
+* Move all licensing statements to LICENSE
 
 ## 2.21.0
 

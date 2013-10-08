@@ -1,5 +1,18 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'berkshelf'
-gem 'test-kitchen', git: 'git://github.com/opscode/test-kitchen.git', branch: '1.0'
-gem 'kitchen-vagrant', :group => :integration
+gem 'berkshelf',     '~> 2.0'
+gem 'chefspec',      '~> 2.0'
+gem 'foodcritic',    '~> 3.0'
+gem 'guard',         '~> 2.0'
+gem 'guard-kitchen'
+gem 'guard-rubocop', '~> 1.0'
+gem 'guard-rspec',   '~> 3.0'
+gem 'rb-inotify',    :require => false
+gem 'rb-fsevent',    :require => false
+gem 'rb-fchange',    :require => false
+gem 'rubocop',       '~> 0.14'
+
+group :integration do
+  gem 'test-kitchen',    '~> 1.0.0.beta'
+  gem 'kitchen-vagrant', '~> 0.11'
+end

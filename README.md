@@ -9,8 +9,8 @@ Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/)
 ### Platforms
 
 * CentOS 6
-* RedHat 6
-* Ubuntu 12.04
+* RHEL 6
+* Ubuntu 12.04, 12.10, 13.04
 
 ### Databases
 
@@ -24,6 +24,7 @@ Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/)
 Required [Opscode Cookbooks](https://github.com/opscode-cookbooks/)
 
 * [apache2](https://github.com/opscode-cookbooks/apache2) (if using Apache 2 proxy)
+* [ark](https://github.com/opscode-cookbooks/ark)
 * [cron](https://github.com/opscode-cookbooks/cron)
 * [database](https://github.com/opscode-cookbooks/database)
 * [git](https://github.com/opscode-cookbooks/git)
@@ -42,17 +43,14 @@ These attributes are under the `node['stash']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-backup_home | backup home directory during upgrade | Boolean | true
-backup_install | backup install directory during upgrade | Boolean | true
 checksum | SHA256 checksum for Stash install | String | auto-detected (see attributes/default.rb)
-home_backup | location of home directory backup during upgrade | String | /tmp/atlassian-stash-home-backup.tgz
-home_path | home directory for Stash user | String | `/home/#{node['stash']['run_user']}`
-install_backup | location of install directory backup during upgrade | String | /tmp/atlassian-stash-backup.tgz
-install_path | location to install Stash | String | /opt/atlassian-stash
-run_user | user to run Stash | String | stash
+home_path | home data directory for Stash user | String | /var/atlassian/application-data/stash
+install_path | location to install Stash | String | /opt/atlassian
+install_type | Stash install type - "standalone" only for now | String | standalone
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
-version | Stash version to install (use `recipe[stash::upgrade]` to upgrade to version defined) | String | 2.7.0
+user | user to run Stash | String | stash
+version | Stash version to install | String | 2.8.1
 
 ### Stash Backup Client Attributes
 
@@ -141,10 +139,14 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 ## Recipes
 
 * `recipe[stash]` Installs Atlassian Stash with built-in Tomcat
-* `recipe[stash::apache2]` Installs above with Apache 2 proxy (ports 80/443)
+* `recipe[stash::apache2]` Installs/configures Apache 2 proxy for Stash (ports 80/443)
 * `recipe[stash::backup_client]` Installs/configures Atlassian Stash Backup Client
 * `recipe[stash::backup_client_cron]` Installs/configures Atlassian Stash Backup Client cron.d
-* `recipe[stash::upgrade]` Upgrades Atlassian Stash
+* `recipe[stash::configuration]` Configures Stash's settings
+* `recipe[stash::database]` Installs/configures MySQL/Postgres server, database, and user for Stash
+* `recipe[stash::linux_standalone]` Installs/configures Stash via Linux standalone archive
+* `recipe[stash::service_init]` Installs/configures Stash init service
+* `recipe[stash::tomcat_configuration]` Configures Stash's built-in Tomcat
 
 ## LWRPs
 
@@ -260,8 +262,9 @@ Here's how you can quickly get testing or developing against the cookbook thanks
     git clone git://github.com/bflad/chef-stash.git
     cd chef-stash
     vagrant plugin install vagrant-berkshelf
+    vagrant plugin install vagrant-cachier
     vagrant plugin install vagrant-omnibus
-    vagrant up BOX # BOX being centos6 or ubuntu1204
+    vagrant up BOX # BOX being centos6, ubuntu1204, ubuntu1210, or ubuntu1304
 
 You need to add the following hosts entries:
 
@@ -278,31 +281,22 @@ Ubuntu 12.04 Box:
 * Web UI: https://stash-ubuntu-1204/
 * Stash SSH: ssh://git@stash-ubuntu-1204:7999/
 
-You can then SSH into the running VM using the `vagrant ssh` command.
-The VM can easily be stopped and deleted with the `vagrant destroy`
-command. Please see the official [Vagrant documentation](http://vagrantup.com/v1/docs/commands.html)
-for a more in depth explanation of available commands.
+You can then SSH into the running VM using the `vagrant ssh BOX` command.
+
+The VM can easily be stopped and deleted with the `vagrant destroy` command. Please see the official [Vagrant documentation](http://docs.vagrantup.com/v2/cli/index.html) for a more in depth explanation of available commands.
+
+### Test Kitchen
+
+Please see documentation in: [TESTING.md](TESTING.md)
 
 ## Contributing
 
 Please use standard Github issues/pull requests and if possible, in combination with testing on the Vagrant boxes.
 
-## License and Authors
+## License and Contributors
 
-* Author:: Brian Flad (<bflad417@gmail.com>)
-* Author:: Kevin Moser
+Please see license information in: [LICENSE](LICENSE)
 
-* Copyright:: 2012-2013 Brian Flad
-* Copyright:: 2013 Nordstrom, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+* Brian Flad (<bflad417@gmail.com>)
+* Kevin Moser
+* @ramonskie

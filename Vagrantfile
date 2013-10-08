@@ -8,6 +8,7 @@ FileUtils.mkdir(host_cache_path) unless File.exist?(host_cache_path)
 
 Vagrant.configure("2") do |config|
   config.berkshelf.enabled = true
+  config.cache.auto_detect = true
   config.omnibus.chef_version = :latest
 
   config.vm.define :centos6 do |centos6|
@@ -22,6 +23,20 @@ Vagrant.configure("2") do |config|
     ubuntu1204.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box'
     ubuntu1204.vm.hostname = 'stash-ubuntu-1204'
     ubuntu1204.vm.network :private_network, ip: '192.168.50.11'
+  end
+
+  config.vm.define :ubuntu1210 do |ubuntu1210|
+    ubuntu1210.vm.box      = 'opscode-ubuntu-12.10'
+    ubuntu1210.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.10_provisionerless.box'
+    ubuntu1210.vm.hostname = 'stash-ubuntu-1210'
+    ubuntu1210.vm.network :private_network, ip: '192.168.50.11'
+  end
+
+  config.vm.define :ubuntu1304 do |ubuntu1304|
+    ubuntu1304.vm.box      = 'opscode-ubuntu-13.04'
+    ubuntu1304.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box'
+    ubuntu1304.vm.hostname = 'stash-ubuntu-1304'
+    ubuntu1304.vm.network :private_network, ip: '192.168.50.11'
   end
 
   config.vm.provider "virtualbox" do |v|
@@ -50,8 +65,7 @@ Vagrant.configure("2") do |config|
 
     chef.run_list = %w{
       recipe[java]
-      recipe[stash::apache2]
-      recipe[stash::backup_client]
+      recipe[stash]
       recipe[stash::backup_client_cron]
     }
   end
