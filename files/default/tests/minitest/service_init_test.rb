@@ -10,5 +10,5 @@ describe_recipe 'stash::service_init' do
   it 'enables Stash' do
     service('stash').must_be_enabled
   end
-  
+
 end

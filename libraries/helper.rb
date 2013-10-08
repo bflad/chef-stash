@@ -1,23 +1,6 @@
-#
-# Cookbook Name:: stash
-# Library:: helper
-#
-# Copyright 2013-2014, Nordstrom, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
+# Cookbook module
 module Stash
+  # Helper module
   module Helper
     REST_BASE = 'rest/api/1.0'
 
@@ -35,7 +18,7 @@ module Stash
       Base64.encode64("#{user}:#{user_vault.decrypt_password}").strip!
     end
 
-    def stash_put(uri, user, json=nil, success_codes=['200'])
+    def stash_put(uri, user, json = nil, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -50,7 +33,7 @@ module Stash
       response
     end
 
-    def stash_post(uri, user, json=nil, success_codes=['200'])
+    def stash_post(uri, user, json = nil, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -65,7 +48,7 @@ module Stash
       response
     end
 
-    def stash_get(uri, user, success_codes=['200'])
+    def stash_get(uri, user, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -78,7 +61,7 @@ module Stash
       response
     end
 
-    def stash_delete(uri, user, success_codes=['200'])
+    def stash_delete(uri, user, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -99,7 +82,7 @@ module Stash
       end
     end
 
-    def install_chef_vault(source='http://rubygems.org', version='1.2.0')
+    def install_chef_vault(source = 'http://rubygems.org', version = '1.2.0')
       gem_installer = Chef::Resource::ChefGem.new('chef-vault', run_context)
       gem_installer.version version
       gem_installer.options "--clear-sources --source #{source}"
@@ -111,6 +94,7 @@ module Stash
   end
 end
 
+# Hash extension class
 class Hash
   # Returns a hash that represents the difference between two hashes.
   #
@@ -119,7 +103,7 @@ class Hash
   #   {}.diff(1 => 2)               # => {1 => 2}
   #   {1 => 2, 3 => 4}.diff(1 => 2) # => {3 => 4}
   def diff(other)
-    dup.delete_if { |k, v| other[k] == v }.
-      merge!(other.dup.delete_if { |k, v| key?(k) })
+    dup.delete_if { |k, v| other[k] == v }
+      .merge!(other.dup.delete_if { |k, v| key?(k) })
   end
 end

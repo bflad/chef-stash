@@ -6,5 +6,5 @@ describe_recipe 'stash::configuration' do
   it 'creates Stash properties file' do
     file("#{node['stash']['home_path']}/stash-config.properties").must_exist
   end
-  
+
 end

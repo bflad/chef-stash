@@ -14,7 +14,7 @@ user node['stash']['user'] do
   shell   '/bin/bash'
   supports :manage_home => true
   system  true
-  action  :create 
+  action  :create
 end
 
 execute 'Generating Self-Signed Java Keystore' do
@@ -40,23 +40,6 @@ directory node['stash']['install_path'] do
   recursive true
 end
 
-# remote_file "#{Chef::Config[:file_cache_path]}/atlassian-stash-#{node['stash']['version']}.tar.gz" do
-#   source    node['stash']['url']
-#   checksum  node['stash']['checksum']
-#   mode      "0644"
-#   action    :create_if_missing
-# end
-
-# execute "Extracting Stash #{node['stash']['version']}" do
-#   cwd Chef::Config[:file_cache_path]
-#   command <<-COMMAND
-#     tar -zxf atlassian-stash-#{node['stash']['version']}.tar.gz
-#     mv atlassian-stash-#{node['stash']['version']} #{node['stash']['install_path']}
-#     chown -R #{node['stash']['user']} #{node['stash']['install_path']}
-#   COMMAND
-#   creates "#{node['stash']['install_path']}/atlassian-stash"
-# end
-
 ark 'stash' do
   url         node['stash']['url']
   prefix_root node['stash']['install_path']
@@ -74,6 +57,6 @@ if settings['database']['type'] == 'mysql'
     mode 00755
     action :create
   end
-  
+
   mysql_connector_j "#{node['stash']['home_path']}/lib"
 end

@@ -9,7 +9,8 @@ default['stash']['user']         = 'stash'
 default['stash']['version']      = '2.8.1'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
-default['stash']['checksum'] = case node['stash']['version']
+default['stash']['checksum'] =
+case node['stash']['version']
 when '1.3.0' then '2731997d6e223cb512906183f5c231be602319ce05d2794cdf5b957a1fd06e08'
 when '1.3.1' then '6e9e344fa9f4976afef862f27e1a0f4fae4adc6dad771f3ffbc2cedd5addb243'
 when '2.0.0' then 'f943df5262c0cfdf03a087fab08649e83f437300e4f409ac7b542d4da53179fd'
@@ -69,7 +70,8 @@ default['stash']['backup_client']['user']         = 'admin'
 default['stash']['backup_client']['version']      = '1.0.0'
 
 default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
-default['stash']['backup_client']['checksum'] = case node['stash']['backup_client']['version']
+default['stash']['backup_client']['checksum'] =
+case node['stash']['backup_client']['version']
 when '1.0.0-beta-11' then 'b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced075c694bbafb2'
 when '1.0.0' then 'a3c063ac04c484d9a5d36de68a1162e9869f08c4703cc1241157738cf17dc92e'
 end

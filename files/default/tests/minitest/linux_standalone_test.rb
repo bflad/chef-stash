@@ -10,5 +10,5 @@ describe_recipe 'stash::linux_standalone' do
   it 'creates Java KeyStore' do
     file("#{node['stash']['home_path']}/.keystore").must_exist.with(:owner, node['stash']['user'])
   end
-  
+
 end
