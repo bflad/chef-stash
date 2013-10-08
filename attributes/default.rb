@@ -85,6 +85,8 @@ default['stash']['jvm']['maximum_permgen'] = "256m"
 default['stash']['jvm']['java_opts']       = ""
 default['stash']['jvm']['support_args']    = ""
 
+default['stash']['plugin'] = {}
+
 default['stash']['ssh']['hostname'] = node['fqdn']
 default['stash']['ssh']['port']     = "7999"
 
