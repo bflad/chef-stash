@@ -97,7 +97,7 @@ def enabled?(server, user, project, repo, hook)
   response = stash_get(uri, user)
 
   details = JSON.parse(response.read_body)
-  details["enabled"]
+  details['enabled']
 end
 
 def configured?(server, user, project, repo, hook)
@@ -106,7 +106,7 @@ def configured?(server, user, project, repo, hook)
   response = stash_get(uri, user)
 
   details = JSON.parse(response.read_body)
-  details["configured"]
+  details['configured']
 end
 
 def hook_settings(server, user, project, repo, hook)

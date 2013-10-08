@@ -68,21 +68,21 @@ private
 def exists?(server, user, project, repo)
   uri = stash_uri(server, "projects/#{project}/repos/#{repo}")
 
-  response = stash_get(uri, user, ["200", "404"])
-  response.code == "200"  
+  response = stash_get(uri, user, ['200', '404'])
+  response.code == '200'  
 end
 
 def create(server, user, project, repo)
   Chef::Log.debug("Creating #{repo} in #{project}...")
   uri = stash_uri(server, "projects/#{project}/repos")
   settings = {
-    "name" => repo
+    'name' => repo
   }
-  stash_post(uri, user, settings.to_json, ["201"])
+  stash_post(uri, user, settings.to_json, ['201'])
 end
 
 def delete(server, user, project, repo)
   Chef::Log.debug("Deleting #{repo} in #{project}...")
   uri = stash_uri(server, "projects/#{project}/repos/#{repo}")
-  stash_delete(uri, user, ["202"])
+  stash_delete(uri, user, ['202'])
 end

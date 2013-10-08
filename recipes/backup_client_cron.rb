@@ -1,7 +1,7 @@
 
 settings = Stash.settings(node)
 
-cron_d "atlassian-stash-backup-client" do
+cron_d 'atlassian-stash-backup-client' do
   hour settings['backup_client']['cron']['hour']
   minute settings['backup_client']['cron']['minute']
   day settings['backup_client']['cron']['day']

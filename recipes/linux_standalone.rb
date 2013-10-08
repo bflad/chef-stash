@@ -1,23 +1,23 @@
 settings = Stash.settings(node)
 
 directory File.dirname(node['stash']['home_path']) do
-  owner "root"
-  group "root"
+  owner 'root'
+  group 'root'
   mode 00755
   action :create
   recursive true
 end
 
 user node['stash']['user'] do
-  comment "Stash Service Account"
+  comment 'Stash Service Account'
   home    node['stash']['home_path']
-  shell   "/bin/bash"
+  shell   '/bin/bash'
   supports :manage_home => true
   system  true
   action  :create 
 end
 
-execute "Generating Self-Signed Java Keystore" do
+execute 'Generating Self-Signed Java Keystore' do
   command <<-COMMAND
     #{node['java']['java_home']}/bin/keytool -genkey \
       -alias #{settings['tomcat']['keyAlias']} \
@@ -33,8 +33,8 @@ execute "Generating Self-Signed Java Keystore" do
 end
 
 directory node['stash']['install_path'] do
-  owner "root"
-  group "root"
+  owner 'root'
+  group 'root'
   mode 00755
   action :create
   recursive true
@@ -57,7 +57,7 @@ end
 #   creates "#{node['stash']['install_path']}/atlassian-stash"
 # end
 
-ark "stash" do
+ark 'stash' do
   url         node['stash']['url']
   prefix_root node['stash']['install_path']
   prefix_home node['stash']['install_path']
@@ -67,7 +67,7 @@ ark "stash" do
   group       node['stash']['user']
 end
 
-if settings['database']['type'] == "mysql"
+if settings['database']['type'] == 'mysql'
   directory "#{node['stash']['home_path']}/lib" do
     owner node['stash']['user']
     group node['stash']['user']

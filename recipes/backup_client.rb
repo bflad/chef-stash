@@ -1,7 +1,7 @@
 
 settings = Stash.settings(node)
 
-package "unzip"
+package 'unzip'
 
 # remote_file "#{Chef::Config[:file_cache_path]}/stash-backup-client-#{node['stash']['backup_client']['version']}.zip" do
 #   source    node['stash']['backup_client']['url']
@@ -20,7 +20,7 @@ package "unzip"
 #   creates "#{node['stash']['backup_client']['install_path']}/stash-backup-client.jar"
 # end
 
-ark "stash-backup-client" do
+ark 'stash-backup-client' do
   url         node['stash']['backup_client']['url']
   prefix_root node['stash']['backup_client']['install_path']
   prefix_home node['stash']['backup_client']['install_path']
@@ -31,9 +31,9 @@ ark "stash-backup-client" do
 end
 
 template "#{node['stash']['home_path']}/backup-config.properties" do
-  source "backup-config.properties.erb"
+  source 'backup-config.properties.erb'
   owner  node['stash']['user']
-  mode   "0644"
+  mode   '0644'
   variables :backup_client => settings['backup_client']
 end
 

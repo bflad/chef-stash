@@ -1,6 +1,6 @@
 require File.expand_path('../support/helpers', __FILE__)
 
-describe_recipe "stash::linux_standalone" do
+describe_recipe 'stash::linux_standalone' do
   include Helpers::Stash
 
   it 'has stash user' do

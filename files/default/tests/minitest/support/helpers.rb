@@ -6,9 +6,9 @@ module Helpers
 
     def apache_service
       service(case node['platform']
-              when "debian","ubuntu" then "apache2"
-              when "freebsd" then "apache22"
-              else "httpd"
+              when 'debian','ubuntu' then 'apache2'
+              when 'freebsd' then 'apache22'
+              else 'httpd'
               end)
     end
 

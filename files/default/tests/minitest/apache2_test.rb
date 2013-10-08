@@ -1,6 +1,6 @@
 require File.expand_path('../support/helpers', __FILE__)
 
-describe_recipe "stash::apache2" do
+describe_recipe 'stash::apache2' do
   include Helpers::Stash
 
   it 'has apache VirtualHost' do
