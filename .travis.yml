@@ -4,6 +4,6 @@ bundler_args: --without development
 before_script:
   - bundle exec berks install
 script: 
-  - bundle exec knife cookbook test cookbook -o .
+  - bundle exec knife cookbook test -a -o .
   - bundle exec foodcritic -f any .
   - bundle exec rubocop
