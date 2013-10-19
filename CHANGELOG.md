@@ -1,3 +1,7 @@
+## 3.0.1
+
+* Syntax adjustment to Hash diff helper method to support Ruby 1.8
+
 ## 3.0.0
 
 ### 3.0.0 Major Changes
