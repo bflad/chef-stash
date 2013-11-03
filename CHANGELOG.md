@@ -1,3 +1,8 @@
+## 3.1.0
+
+* Default to Stash 2.8.2
+* Switch subscribes to string notation in service_init recipe
+
 ## 3.0.1
 
 * Syntax adjustment to Hash diff helper method to support Ruby 1.8
