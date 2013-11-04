@@ -138,7 +138,7 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 ## Recipes
 
-* `recipe[stash]` Installs Atlassian Stash with built-in Tomcat
+* `recipe[stash]` Installs Atlassian Stash with built-in Tomcat and Apache 2 proxy
 * `recipe[stash::apache2]` Installs/configures Apache 2 proxy for Stash (ports 80/443)
 * `recipe[stash::backup_client]` Installs/configures Atlassian Stash Backup Client
 * `recipe[stash::backup_client_cron]` Installs/configures Atlassian Stash Backup Client cron.d
@@ -199,26 +199,12 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-### Stash Server Installation
+### Stash Server Default Installation
 
 * Optionally use (un)encrypted data bag or set attributes
   * `knife data bag create stash`
   * `knife data bag edit stash stash --secret-file=path/to/secret`
 * Add `recipe[stash]` to your node's run list.
-
-### Stash Server Installation with Apache 2 Frontend
-
-* Optionally use (un)encrypted data bag or set attributes
-  * `knife data bag create stash`
-  * `knife data bag edit stash stash --secret-file=path/to/secret`
-* Add `recipe[stash::apache2]` to your node's run list.
-
-### Stash Server Upgrades
-
-* Update `node['stash']['version']` and `node['stash']['checksum']` attributes
-* Add `recipe[stash::upgrade]` to your run_list, such as:
-  `knife node run_list add NODE_NAME "recipe[stash::upgrade]"`
-  It will automatically remove itself from the run_list after completion.
 
 ### Stash Backup Client Installation
 
