@@ -1,3 +1,7 @@
+## 3.1.1
+
+* Stash database connection fix for localhost MySQL setup with bind_address set to 0.0.0.0 
+
 ## 3.1.0
 
 * Default to Stash 2.8.2
