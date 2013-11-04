@@ -18,6 +18,13 @@ Vagrant.configure("2") do |config|
     centos6.vm.network :private_network, ip: '192.168.50.10'
   end
 
+  config.vm.define :ubuntu1004 do |ubuntu1004|
+    ubuntu1004.vm.box      = 'opscode-ubuntu-10.04'
+    ubuntu1004.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-10.04_provisionerless.box'
+    ubuntu1004.vm.hostname = 'stash-ubuntu-1004'
+    ubuntu1004.vm.network :private_network, ip: '192.168.50.11'
+  end
+
   config.vm.define :ubuntu1204 do |ubuntu1204|
     ubuntu1204.vm.box      = 'opscode-ubuntu-12.04'
     ubuntu1204.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box'
