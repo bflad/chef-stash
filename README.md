@@ -12,6 +12,10 @@ Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/)
 * RHEL 6
 * Ubuntu 12.04, 12.10, 13.04
 
+### Chef
+
+* Version 3.X of cookbook requires Chef 11 due to `ark` usage
+
 ### Databases
 
 * HSQLDB (not recommended for production usage)
