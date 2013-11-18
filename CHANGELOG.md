@@ -1,3 +1,7 @@
+## 3.2.0
+
+* Default to Stash 2.8.4
+
 ## 3.1.2
 
 * Bugfix: [GH-19] Add `node['database']['testInterval']` attribute (defaults to 2) to reduce remote idle connection disconnects
