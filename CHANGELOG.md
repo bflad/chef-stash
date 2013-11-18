@@ -1,3 +1,7 @@
+## 3.1.2
+
+* Bugfix: [GH-19] Add `node['database']['testInterval']` attribute (defaults to 2) to reduce remote idle connection disconnects
+
 ## 3.1.1
 
 * Stash database connection fix for localhost MySQL setup with bind_address set to 0.0.0.0 

@@ -18,6 +18,7 @@ class Chef::Recipe::Stash
     ensure
       settings ||= node['stash']
       settings['database']['port'] ||= default_database_port settings['database']['type']
+      settings['database']['testInterval'] ||= 2
     end
 
     settings

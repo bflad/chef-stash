@@ -87,6 +87,7 @@ default['stash']['database']['host']     = 'localhost'
 default['stash']['database']['name']     = 'stash'
 default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['port']     = 3306
+default['stash']['database']['testInterval'] = 2
 default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['user']     = 'stash'
 
