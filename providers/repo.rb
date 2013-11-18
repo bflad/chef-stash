@@ -52,6 +52,7 @@ def load_current_resource
 end
 
 private
+
 def project_repos_uri(repo_opts)
   "projects/#{repo_opts['project']}/repos"
 end

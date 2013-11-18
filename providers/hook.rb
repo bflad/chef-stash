@@ -78,6 +78,7 @@ def load_current_resource
 end
 
 private
+
 def enabled?(server, user, hook_opts)
   uri = stash_uri(server, hook_base_uri(hook_opts))
 

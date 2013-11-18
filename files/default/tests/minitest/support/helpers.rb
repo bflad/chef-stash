@@ -13,6 +13,5 @@ module Helpers
               else 'httpd'
               end)
     end
-
   end
 end
