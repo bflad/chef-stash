@@ -1,3 +1,7 @@
+## 3.30
+
+* Default to Stash 2.9.2
+
 ## 3.2.0
 
 * Default to Stash 2.8.4
