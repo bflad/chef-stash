@@ -10,9 +10,18 @@
 STASH_HOME="<%= node['stash']['home_path'] %>"
 
 #
+# Native libraries, such as the Tomcat native library, can be placed here for use by Stash. Alternatively, native
+# libraries can also be placed in $STASH_HOME/lib/native, where they will also be included in the library path used
+# by the JVM. By placing libraries in $STASH_HOME, they can be preserved across Stash upgrades.
+#
+# NOTE: You must choose the library architecture, x86 or x64, based on the JVM you'll be running, _not_ based on the OS.
+#
+JVM_LIBRARY_PATH="$CATALINA_HOME/lib/native:$STASH_HOME/lib/native"
+
+#
 # Occasionally Atlassian Support may recommend that you set some specific JVM arguments.  You can use this variable
 # below to do that.
-#
+
 JVM_SUPPORT_RECOMMENDED_ARGS="<%= node['stash']['jvm']['support_args'] %>"
 
 #
@@ -30,7 +39,7 @@ JVM_FILE_ENCODING="UTF-8"
 #
 # The following are the required arguments needed for Atlassian Stash.
 #
-JVM_REQUIRED_ARGS="-Djava.awt.headless=true -Dfile.encoding=${JVM_FILE_ENCODING} -Datlassian.standalone=STASH -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dmail.mime.decodeparameters=true  -Dorg.apache.catalina.connector.Response.ENFORCE_ENCODING_IN_GET_WRITER=false"
+JVM_REQUIRED_ARGS="-Djava.awt.headless=true -Dfile.encoding=${JVM_FILE_ENCODING} -Datlassian.standalone=STASH -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true -Dmail.mime.decodeparameters=true -Dorg.apache.catalina.connector.Response.ENFORCE_ENCODING_IN_GET_WRITER=false"
 
 #
 # Additional JVM arguments
@@ -69,6 +78,11 @@ if [ $? -eq 0 ]; then
 fi
 
 STASH_HOME_MINUSD=-Dstash.home=$STASH_HOME
+
+if [ "$JVM_LIBRARY_PATH" != "" ]; then
+    JVM_LIBRARY_PATH_MINUSD=-Djava.library.path=$JVM_LIBRARY_PATH
+    JVM_REQUIRED_ARGS="${JVM_REQUIRED_ARGS} ${JVM_LIBRARY_PATH_MINUSD}"
+fi
 
 JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${STASH_HOME_MINUSD}"
 
