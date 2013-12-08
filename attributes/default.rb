@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '2.9.2'
+default['stash']['version']      = '2.9.4'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
