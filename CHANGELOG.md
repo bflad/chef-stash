@@ -1,3 +1,7 @@
+## 3.5.0
+
+* Default to Stash Backup Client 1.0.3
+
 ## 3.4.0
 
 * Default to Stash 2.9.4
