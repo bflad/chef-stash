@@ -250,17 +250,18 @@ Such as:
 
 Here's how you can quickly get testing or developing against the cookbook thanks to [Vagrant](http://vagrantup.com/) and [Berkshelf](http://berkshelf.com/).
 
-    git clone git://github.com/bflad/chef-stash.git
-    cd chef-stash
     vagrant plugin install vagrant-berkshelf
     vagrant plugin install vagrant-cachier
     vagrant plugin install vagrant-omnibus
-    vagrant up BOX # BOX being centos6, ubuntu1204, ubuntu1210, or ubuntu1304
+    git clone git://github.com/bflad/chef-stash.git
+    cd chef-stash
+    vagrant up BOX # BOX being centos5, centos6, debian7, fedora18, fedora19, fedora20, freebsd9, ubuntu1204, ubuntu1210, ubuntu1304, or ubuntu1310
 
 You need to add the following hosts entries:
 
 * 192.168.50.10 stash-centos-6
-* 192.168.50.11 stash-ubuntu-1204
+* 192.168.50.10 stash-ubuntu-1204
+* (etc.)
 
 The running Stash server is accessible from the host machine:
 
