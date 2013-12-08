@@ -4,7 +4,7 @@ maintainer_email  'bflad417@gmail.com'
 license           'Apache 2.0'
 description       'Installs/Configures Atlassian Stash'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '3.3.0'
+version           '3.4.0'
 recipe            'stash', 'Installs/Configures Atlassian Stash'
 recipe            'stash::apache2', 'Installs/Configures Apache 2 proxy for Stash'
 recipe            'stash::backup_client', 'Installs/Configures Atlassian Stash Backup Client'
