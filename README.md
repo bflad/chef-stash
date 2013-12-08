@@ -69,7 +69,7 @@ install_path | location to install Stash Backup Client | String | /opt/atlassian
 password | Stash administrative user password | String | changeit
 url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
 user | Stash administrative user | String | admin
-version | Stash Backup Client version to install | String | 1.0.0
+version | Stash Backup Client version to install | String | 1.0.3
 
 ### Stash Backup Client Cron Attributes
 

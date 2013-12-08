@@ -75,13 +75,14 @@ default['stash']['backup_client']['install_path'] = node['stash']['install_path'
 default['stash']['backup_client']['password']     = 'changeit'
 default['stash']['backup_client']['url_base']     = 'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
 default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.0.0'
+default['stash']['backup_client']['version']      = '1.0.3'
 
 default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
 default['stash']['backup_client']['checksum'] =
 case node['stash']['backup_client']['version']
 when '1.0.0-beta-11' then 'b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced075c694bbafb2'
 when '1.0.0' then 'a3c063ac04c484d9a5d36de68a1162e9869f08c4703cc1241157738cf17dc92e'
+when '1.0.3' then '7a557242e76612757d0b623afa9dc757c12f51a706216be88d3355195ec0ca97'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
