@@ -22,14 +22,26 @@ Once installed, you must install the `vagrant-berkshelf` plugin:
 
     $ vagrant plugin install vagrant-berkshelf
 
+Development
+-----------
+1. Clone the git repository from GitHub:
 
-Test Kitchen
-------------
-Install required gems.
+        $ git clone git@github.com:bflad/chef-COOKBOOK.git
 
-    $ bundle install
+2. Install the dependencies using bundler:
 
-Once the above are installed, you should be able to run Test Kitchen:
+        $ bundle install
 
-    $ kitchen list
-    $ kitchen test
+3. Create a branch for your changes:
+
+        $ git checkout -b my_bug_fix
+
+4. Make any changes
+5. Write tests to support those changes. It is highly recommended you write both unit and integration tests.
+6. Run the tests:
+    - `bundle exec rspec`
+    - `bundle exec foodcritic .`
+    - `bundle exec rubocop`
+    - `bundle exec kitchen test`
+
+7. Assuming the tests pass, open a Pull Request on GitHub
