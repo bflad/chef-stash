@@ -6,6 +6,6 @@ end
 
 service 'stash' do
   supports :status => true, :restart => true
-  action [:enable, :start]
+  action [:enable]
   subscribes :restart, 'java_ark[jdk]'
 end
