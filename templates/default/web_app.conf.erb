@@ -17,6 +17,8 @@
 	CustomLog <%= node['stash']['apache2']['access_log'].empty? ? node['apache']['log_dir']+"/stash-access.log" : node['stash']['apache2']['access_log'] %> combined
 	ErrorLog <%= node['stash']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/stash-error.log" : node['stash']['apache2']['error_log'] %>
 	LogLevel warn
+        ProxyRequests Off
+        ProxyPreserveHost On
 
 	<Proxy *>
 		Order Deny,Allow
@@ -41,6 +43,8 @@
 	CustomLog <%= node['stash']['apache2']['ssl']['access_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-access.log" : node['stash']['apache2']['ssl']['access_log'] %> combined
 	ErrorLog <%= node['stash']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-error.log" : node['stash']['apache2']['ssl']['error_log'] %>
 	LogLevel warn
+	ProxyRequests Off
+        ProxyPreserveHost On
 
 	<Proxy *>
 		Order Deny,Allow
