@@ -1,3 +1,9 @@
+## 3.6.0
+
+* Bugfix: [GH-16] Remove start action from stash service (database locking issues on initial installation)
+* Enhancement: Default to Stash 2.10.1
+* Enhancement: Default to Stash Backup Client 1.1.0
+
 ## 3.5.0
 
 * Default to Stash Backup Client 1.0.3
