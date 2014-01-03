@@ -47,6 +47,8 @@ when '2.9.1' then 'fe57c0a483ecd967307080b157c7af42260c59e48a919784b346eb496c283
 when '2.9.2' then 'd4c31a0523ab4df5d12a8dcd24778cfd9db343f668bee1f4a0b18381d173088c'
 when '2.9.3' then '6d866a2081f0a69fdd29dc059836f1d3d1bb51453bc7cbc6c9518ebc3227a389'
 when '2.9.4' then '3425e39eb5dbffe24cf44558eaca38d0884b8d07602c3225c9215007ae13bef3'
+when '2.10.0' then '3a3995dadb05d6a86d7dcc21bc86ca63a713d194f5319297e70760dc833279e8'
+when '2.10.1' then 'f26e738c3e8d58dd460fcc8fd626d1cca01572f98ec77d3624fba321a96ac74d'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -83,6 +85,7 @@ case node['stash']['backup_client']['version']
 when '1.0.0-beta-11' then 'b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced075c694bbafb2'
 when '1.0.0' then 'a3c063ac04c484d9a5d36de68a1162e9869f08c4703cc1241157738cf17dc92e'
 when '1.0.3' then '7a557242e76612757d0b623afa9dc757c12f51a706216be88d3355195ec0ca97'
+when '1.1.0' then 'd2276df535e0f8e909cd0c1c9700ca275be378145451f9d62a5980b62fdfab74'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
