@@ -1,6 +1,10 @@
+## 3.7.0
+
+* Enhancement: [#23][] Default Stash to 2.11.2
+
 ## 3.6.0
 
-* Bugfix: [GH-16] Remove start action from stash service (database locking issues on initial installation)
+* Bugfix: [#16][] Remove start action from stash service (database locking issues on initial installation)
 * Enhancement: Default to Stash 2.10.1
 * Enhancement: Default to Stash Backup Client 1.1.0
 
@@ -22,7 +26,7 @@
 
 ## 3.1.2
 
-* Bugfix: [GH-19] Add `node['database']['testInterval']` attribute (defaults to 2) to reduce remote idle connection disconnects
+* Bugfix: [#19][] Add `node['database']['testInterval']` attribute (defaults to 2) to reduce remote idle connection disconnects
 
 ## 3.1.1
 
@@ -361,3 +365,7 @@ To switch to new defaults:
 ## 0.1.0
 
 * Initial beta release with default and Apache recipes.
+
+[#16]: https://github.com/bflad/chef-stash/issues/16
+[#19]: https://github.com/bflad/chef-stash/issues/19
+[#23]: https://github.com/bflad/chef-stash/issues/23
