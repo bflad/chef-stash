@@ -15,10 +15,10 @@ recipe            'stash::linux_standalone', 'Installs/configures Stash via Linu
 recipe            'stash::service_init', 'Installs/configures Stash init service'
 recipe            'stash::tomcat_configuration', "Configures Stash's built-in Tomcat"
 
-%w{ amazon centos redhat scientific ubuntu }.each do |os|
+%w(amazon centos redhat scientific ubuntu).each do |os|
   supports os
 end
 
-%w{ apache2 ark cron database git java mysql mysql_connector perl postgresql }.each do |cb|
+%w(apache2 ark cron database git java mysql mysql_connector perl postgresql).each do |cb|
   depends cb
 end
