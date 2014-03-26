@@ -1,7 +1,7 @@
-# Chef module
-module Chef
-  # Chef::Recipe module
-  module Recipe
+# Chef class
+class Chef
+  # Chef::Recipe class
+  class Recipe
     # Chef::Recipe::Stash class
     class Stash
       def self.settings(node)
