@@ -16,4 +16,4 @@ include_recipe 'stash::tomcat_configuration'
 include_recipe 'stash::apache2'
 include_recipe 'stash::configuration'
 include_recipe "stash::service_#{node['stash']['service_type']}"
-include_recipe 'stash::backup_client'
+include_recipe 'stash::backup_client' if node['stash']['backup_client']['version']
