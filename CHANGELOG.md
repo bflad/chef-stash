@@ -1,3 +1,9 @@
+## 3.8.0
+
+* Enhancement: Default to Stash 2.12.0
+* Enhancement: Default to Stash Backup Client 1.2.0
+* Enhancement: Skip backup client installation in default recipe by setting version to nil
+
 ## 3.7.0
 
 * Enhancement: [#23][] Default Stash to 2.11.2
