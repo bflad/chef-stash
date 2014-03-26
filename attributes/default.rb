@@ -93,6 +93,7 @@ when '1.0.0-beta-11' then 'b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced07
 when '1.0.0' then 'a3c063ac04c484d9a5d36de68a1162e9869f08c4703cc1241157738cf17dc92e'
 when '1.0.3' then '7a557242e76612757d0b623afa9dc757c12f51a706216be88d3355195ec0ca97'
 when '1.1.0' then 'd2276df535e0f8e909cd0c1c9700ca275be378145451f9d62a5980b62fdfab74'
+when '1.2.0' then '5dee33dfdf78605caa0bee33caf5cff633613604ec3a30e93dead81c4401f9b9'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
