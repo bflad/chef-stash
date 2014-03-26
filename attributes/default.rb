@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '2.11.4'
+default['stash']['version']      = '2.12.0'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -84,7 +84,7 @@ default['stash']['backup_client']['install_path'] = node['stash']['install_path'
 default['stash']['backup_client']['password']     = 'changeit'
 default['stash']['backup_client']['url_base']     = 'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
 default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.1.0'
+default['stash']['backup_client']['version']      = '1.2.0'
 
 default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
 default['stash']['backup_client']['checksum'] =
