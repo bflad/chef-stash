@@ -1,6 +1,6 @@
 template '/etc/init.d/stash' do
   source 'stash.init.erb'
-  mode   '0755'
+  mode '0755'
   notifies :restart, 'service[stash]', :delayed
 end
 

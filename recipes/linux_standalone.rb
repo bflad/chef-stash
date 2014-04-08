@@ -10,11 +10,11 @@ end
 
 user node['stash']['user'] do
   comment 'Stash Service Account'
-  home    node['stash']['home_path']
-  shell   '/bin/bash'
+  home node['stash']['home_path']
+  shell '/bin/bash'
   supports :manage_home => true
-  system  true
-  action  :create
+  system true
+  action :create
 end
 
 execute 'Generating Self-Signed Java Keystore' do
@@ -41,13 +41,13 @@ directory node['stash']['install_path'] do
 end
 
 ark 'stash' do
-  url         node['stash']['url']
+  url node['stash']['url']
   prefix_root node['stash']['install_path']
   prefix_home node['stash']['install_path']
-  checksum    node['stash']['checksum']
-  version     node['stash']['version']
-  owner       node['stash']['user']
-  group       node['stash']['user']
+  checksum node['stash']['checksum']
+  version node['stash']['version']
+  owner node['stash']['user']
+  group node['stash']['user']
 end
 
 if settings['database']['type'] == 'mysql'

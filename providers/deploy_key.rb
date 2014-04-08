@@ -7,7 +7,7 @@ action :create do
     group 'root'
     mode 0755
     action :create
-    not_if { ::File.exists?(node['stash']['install_path']) }
+    not_if { ::File.exist?(node['stash']['install_path']) }
   end
 
   file key_path do
