@@ -1,3 +1,7 @@
+## 3.8.1
+
+* Enhancement: [#26][]: Default to Stash 2.12.1 and Stash Backup Client 1.2.1
+
 ## 3.8.0
 
 * Enhancement: Default to Stash 2.12.0
@@ -375,3 +379,4 @@ To switch to new defaults:
 [#16]: https://github.com/bflad/chef-stash/issues/16
 [#19]: https://github.com/bflad/chef-stash/issues/19
 [#23]: https://github.com/bflad/chef-stash/issues/23
+[#26]: https://github.com/bflad/chef-stash/issues/26
