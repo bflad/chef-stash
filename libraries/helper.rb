@@ -104,6 +104,6 @@ class Hash
   #   {1 => 2, 3 => 4}.diff(1 => 2) # => {3 => 4}
   def diff(other)
     d = dup.delete_if { |k, v| other[k] == v }
-    d.merge!(other.dup.delete_if { |k, v| key?(k) })
+    d.merge!(other.dup.delete_if { |k, _| key?(k) })
   end
 end
