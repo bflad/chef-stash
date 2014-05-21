@@ -75,11 +75,10 @@ module Stash
     end
 
     def check_for_errors(http_response, success_codes)
-      unless success_codes.include?(http_response.code)
-        Chef::Log.debug("http response code: #{http_response.code}")
-        Chef::Log.debug("http response body: #{http_response.read_body}")
-        Chef::Application.fatal!('error making stash request')
-      end
+      return if success_codes.include?(http_response.code)
+      Chef::Log.debug("http response code: #{http_response.code}")
+      Chef::Log.debug("http response body: #{http_response.read_body}")
+      Chef::Application.fatal!('error making stash request')
     end
 
     def install_chef_vault(source = 'http://rubygems.org', version = '1.2.0')
@@ -104,6 +103,6 @@ class Hash
   #   {1 => 2, 3 => 4}.diff(1 => 2) # => {3 => 4}
   def diff(other)
     d = dup.delete_if { |k, v| other[k] == v }
-    d.merge!(other.dup.delete_if { |k, v| key?(k) })
+    d.merge!(other.dup.delete_if { |k, _v| key?(k) })
   end
 end

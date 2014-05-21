@@ -72,9 +72,7 @@ def load_current_resource
   @current_resource.enabled = enabled?(server, user, hook_opts)
   @current_resource.configured = configured?(server, user, hook_opts)
 
-  if @current_resource.configured
-    @current_resource.settings hook_settings(server, hook_opts)
-  end
+  @current_resource.settings hook_settings(server, hook_opts) if @current_resource.configured
 end
 
 private
