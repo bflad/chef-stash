@@ -389,3 +389,4 @@ To switch to new defaults:
 [#23]: https://github.com/bflad/chef-stash/issues/23
 [#26]: https://github.com/bflad/chef-stash/issues/26
 [#27]: https://github.com/bflad/chef-stash/issues/27
+[#29]: https://github.com/bflad/chef-stash/issues/29
