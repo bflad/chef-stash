@@ -1,3 +1,7 @@
+## 3.8.3
+
+* Enhancement: [#29][]: Default to Stash 2.12.3
+
 ## 3.8.2
 
 * Enhancement: [#27][]: Default to Stash 2.12.2
