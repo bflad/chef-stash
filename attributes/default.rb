@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.0.1'
+default['stash']['version']      = '3.0.5'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -52,14 +52,24 @@ when '2.9.5' then 'b6989f6633e700130dc2468ab2f19e1a383ca36daae0489ab09e6c7c0ca18
 when '2.10.0' then '3a3995dadb05d6a86d7dcc21bc86ca63a713d194f5319297e70760dc833279e8'
 when '2.10.1' then 'f26e738c3e8d58dd460fcc8fd626d1cca01572f98ec77d3624fba321a96ac74d'
 when '2.10.2' then '9ed03a0556ae5a71033706af05bc913de1a0ec0eed3236d78e32145b9bcc51d2'
+when '2.10.3' then '4eb49ac7b23d51e6b9d306f7e3c731485586a6b6b86c12acd2f25c7e996c0471'
+when '2.10.4' then 'def076b8ec4a817f23c87e288503c3d3d3d55a65bd77caef2769bfb9bdda96d2'
+when '2.10.5' then 'a1d6f1ea39ed5eb16eecb235ceceee579970590ddfebd1bc6a1b98d62abe6993'
 when '2.11.2' then '873fbdfaee52af6f1899ffd216192edadc8bfc491a43915f8b7dd4a41d19ede6'
 when '2.11.3' then 'a6e0250ac6aed248320314e5755baee18a1f069d1035d36409793d8a6d3e96c4'
 when '2.11.4' then '9c228f969dafd86cfbd980af86364894490f8c168827c7e4f630168e0ac417ea'
+when '2.11.5' then '943f84547c375ca166a7563520aebe69be3b22f023b902b30d54ba8a20ae4302'
+when '2.11.6' then 'd39c9689a773f898b658a3401ac64c1dc476777066c696dc83f9b569ec5191ed'
+when '2.11.7' then '07113c2831843038799cf6597cb374022a47ae0a363ea424dde85d9f2ed98f04'
+when '2.11.8' then '4c7336cdd60c776d26afc6689f309660e3528bdbfa702d9e938edbc27156c96c'
 when '2.12.0' then '8284f664a19f264731b43dee06182858c57501154a77ea703c314a582f145bdc'
 when '2.12.1' then 'c79943d3c1d2b6277cf7b2b0a240ea4aa84eb6d7c90797efcf09169d73b2e784'
 when '2.12.2' then '039e4710a42a66c7b4d6bd11738c6fa31ef8e567ea8ff95ba2fe56d9fa5dc19e'
 when '2.12.3' then '2e31777487a5a2c857b8a4b8c93ab8f6683af7ec8c9ec9a2e75af2e155b6683b'
+when '2.12.4' then 'fc9c50f9aee43b677fe61921823137525675d66962583c53e4384400abee2a61'
 when '3.0.1' then '53312a7d26e68b50eb778b8847e04162074b645c2d4014bc404eba59ff90f624'
+when '3.0.4' then '2dc4db2a0fd306bad39d46b9e6a58d7c9d82c73711e002a93103f19e8133aa6a'
+when '3.0.5' then 'f06b4d545d0e7acae6255f3f4d8c9a02bbdfebf16da793eaef8e1b8eef9303b2'
 end
 
 default['stash']['apache2']['access_log']         = ''
