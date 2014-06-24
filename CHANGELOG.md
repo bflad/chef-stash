@@ -1,3 +1,7 @@
+## 3.9.1
+
+* Enhancement: Default to Stash 3.0.5
+
 ## 3.9.0
 
 * Enhancement: Default to Stash 3.0.1
