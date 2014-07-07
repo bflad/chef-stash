@@ -19,8 +19,12 @@
 	LogLevel warn
 
 	<Proxy *>
+    <% if node['apache'] && node['apache']['version'] == '2.4' %>
+		Require all granted
+    <% else %>
 		Order Deny,Allow
 		Allow from all
+    <% end %>
 	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
@@ -43,8 +47,12 @@
 	LogLevel warn
 
 	<Proxy *>
+    <% if node['apache'] && node['apache']['version'] == '2.4' %>
+		Require all granted
+    <% else %>
 		Order Deny,Allow
 		Allow from all
+    <% end %>
 	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
