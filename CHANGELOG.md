@@ -1,3 +1,7 @@
+## 3.10.1
+
+* Enhancement: [#33][]: Default to Stash 3.1.1
+
 ## 3.10.0
 
 * Enhancement: Default to Stash 3.1.0
@@ -402,3 +406,4 @@ To switch to new defaults:
 [#26]: https://github.com/bflad/chef-stash/issues/26
 [#27]: https://github.com/bflad/chef-stash/issues/27
 [#29]: https://github.com/bflad/chef-stash/issues/29
+[#33]: https://github.com/bflad/chef-stash/issues/33
