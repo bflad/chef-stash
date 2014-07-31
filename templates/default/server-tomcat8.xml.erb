@@ -24,16 +24,15 @@
      Documentation at /docs/config/server.html
  -->
 <Server port="8006" shutdown="SHUTDOWN">
-
+    <!-- Security listener. Documentation at /docs/config/listeners.html
+    <Listener className="org.apache.catalina.security.SecurityListener" />
+    -->
     <!--APR library loader. Documentation at /docs/apr.html -->
-    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on"/>
-    <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
-    <Listener className="org.apache.catalina.core.JasperListener"/>
+    <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
     <!-- Prevent memory leaks due to use of particular java/javax APIs-->
-    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
-    <!-- JMX Support for the Tomcat server. Documentation at /docs/non-existent.html -->
-    <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener"/>
-    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+    <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+    <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+    <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
     <!-- Global JNDI resources
          Documentation at /docs/jndi-resources-howto.html
@@ -46,7 +45,7 @@
                   type="org.apache.catalina.UserDatabase"
                   description="User database that can be updated and saved"
                   factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
-                  pathname="conf/tomcat-users.xml"/>
+                  pathname="conf/tomcat-users.xml" />
     </GlobalNamingResources>
 
     <!-- A "Service" is a collection of one or more "Connectors" that share
@@ -62,12 +61,16 @@
             maxThreads="150" minSpareThreads="4"/>
         -->
 
+
         <!-- A "Connector" represents an endpoint by which requests are received
              and responses are returned. Documentation at :
              Java HTTP Connector: /docs/config/http.html (blocking & non-blocking)
              Java AJP  Connector: /docs/config/ajp.html
              APR (HTTP/AJP) Connector: /docs/apr.html
              Define a non-SSL HTTP/1.1 Connector on port 7990
+
+             If you change this port, you have to update scripts.cfg as well
+             to have the same port configuration.
         -->
         <Connector port="<%= node['stash']['tomcat']['port'] %>" protocol="HTTP/1.1"
                    connectionTimeout="20000"
@@ -84,6 +87,7 @@
                    redirectPort="<%= node['stash']['tomcat']['ssl_port'] %>"
                    <% end -%>
                    />
+
         <!-- A "Connector" using the shared thread pool-->
         <!--
         <Connector executor="tomcatThreadPool"
@@ -95,7 +99,6 @@
              This connector uses the JSSE configuration, when using APR, the
              connector should be using the OpenSSL style configuration
              described in the APR documentation -->
-
         <Connector port="<%= node['stash']['tomcat']['ssl_port'] %>"
              maxHttpHeaderSize="8192"
              SSLEnabled="true"
@@ -116,7 +119,6 @@
              <%= "keystorePass=\"#{@tomcat['keystorePass']}\"" if @tomcat['keystorePass'] %>
              <%- end %>
         />
-
         <!--
         <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
                    maxThreads="150" scheme="https" secure="true"
@@ -135,34 +137,41 @@
         -->
         <Engine name="Catalina" defaultHost="localhost">
 
-            <!--For clustering, please take a look at documentation at:
-                /docs/cluster-howto.html  (simple how to)
-                /docs/config/cluster.html (reference documentation) -->
+            <!-- For clustering, please take a look at documentation at:
+                 /docs/cluster-howto.html  (simple how to)
+                 /docs/config/cluster.html (reference documentation) -->
             <!--
             <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
             -->
 
-            <!-- The request dumper valve dumps useful debugging information about
-                 the request and response data received and sent by Tomcat.
-                 Documentation at: /docs/config/valve.html -->
-            <!--
-            <Valve className="org.apache.catalina.valves.RequestDumperValve"/>
-            -->
+            <!-- Use the LockOutRealm to prevent attempts to guess user passwords
+                 via a brute-force attack -->
+            <Realm className="org.apache.catalina.realm.LockOutRealm">
+                <!-- This Realm uses the UserDatabase configured in the global JNDI
+                     resources under the key "UserDatabase".  Any edits
+                     that are performed against this UserDatabase are immediately
+                     available for use by the Realm.  -->
+                <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                       resourceName="UserDatabase"/>
+            </Realm>
 
-            <!-- This Realm uses the UserDatabase configured in the global JNDI
-                 resources under the key "UserDatabase".  Any edits
-                 that are performed against this UserDatabase are immediately
-                 available for use by the Realm.  -->
-            <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-                   resourceName="UserDatabase"/>
 
-            <!-- Define the default virtual host
-                 Note: XML Schema validation will not work with Xerces 2.2.
-            -->
             <Host name="localhost" appBase="webapps"
                   unpackWARs="true" autoDeploy="true"
                   xmlValidation="false" xmlNamespaceAware="false">
-                <Context path="" docBase="${catalina.home}/atlassian-stash" reloadable="false"
+
+
+         <!-- Before changing the context path for Stash, please read our documentation:
+      https://confluence.atlassian.com/x/5oCNEQ
+
+        You will have to update scripts.cfg AND
+        rename webapps/ROOT directory.
+
+          -->
+
+                <Context docBase="${catalina.home}/atlassian-stash"
+                         path=""
+                         reloadable="false"
                          useHttpOnly="true"/>
 
                 <!-- SingleSignOn valve, share authentication between web applications
@@ -172,12 +181,13 @@
                 -->
 
                 <!-- Access log processes all example.
-                     Documentation at: /docs/config/valve.html -->
+                     Documentation at: /docs/config/valve.html
+                     Note: The pattern used is equivalent to using pattern="common" -->
                 <!--
                 <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
-                       prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
+                       prefix="localhost_access_log." suffix=".txt"
+                       pattern="%h %l %u %t &quot;%r&quot; %s %b" />
                 -->
-
             </Host>
         </Engine>
     </Service>

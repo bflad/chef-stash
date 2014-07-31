@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.1.1'
+default['stash']['version']      = '3.3.0'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -70,8 +70,14 @@ when '2.12.4' then 'fc9c50f9aee43b677fe61921823137525675d66962583c53e4384400abee
 when '3.0.1' then '53312a7d26e68b50eb778b8847e04162074b645c2d4014bc404eba59ff90f624'
 when '3.0.4' then '2dc4db2a0fd306bad39d46b9e6a58d7c9d82c73711e002a93103f19e8133aa6a'
 when '3.0.5' then 'f06b4d545d0e7acae6255f3f4d8c9a02bbdfebf16da793eaef8e1b8eef9303b2'
+when '3.0.6' then '2b5cc70cba6e63aecd7591f02a1ed290825bf3916ffd867cc78b0fabb5badb48'
 when '3.1.0' then '9eb7ba9eec7b67cf14a3ae450c8ec3d8e9289a120672825ec8ba6a290b48c6a6'
 when '3.1.1' then '14710e220ca4258cd81c0bd205e5df668abd7b0ed56be9fd6e74e82a394f53b9'
+when '3.1.3' then 'b203d8d58bf95414077cac948066f5c84d600db258bb6168cc482b948f63529e'
+when '3.2.0' then '4e8c38b9450e718020d6f74df891987abe491529c66b3df19eff9a325856417e'
+when '3.2.2' then 'a4e4b299c08432d4852872d6f8b754636ae640d434e5d1544637a54e5f1a3d39'
+when '3.2.4' then 'd52b1b8ca50351bf9056d11bf584d6ca1e3ca70eddd936cb799543b487a6ba01'
+when '3.3.0' then '4cb441824c08f28550d5ee2f883016461a356f626e5f38c0a29d345f174d34fd'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -98,11 +104,24 @@ default['stash']['backup_client']['backup_path']  = '/tmp'
 default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
 default['stash']['backup_client']['password']     = 'changeit'
-default['stash']['backup_client']['url_base']     = 'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
 default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.2.1'
+default['stash']['backup_client']['version']      = '1.4.0'
+stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
-default['stash']['backup_client']['url']      = "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
+default['stash']['backup_client']['url_base']     =
+if stash_backup_client_version <= Chef::Version.new('1.2.1')
+  'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
+else
+  'https://maven.atlassian.com/public/com/atlassian/stash/backup/stash-backup-distribution/'
+end
+
+default['stash']['backup_client']['url']      =
+if stash_backup_client_version <= Chef::Version.new('1.2.1')
+  "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
+else
+  "#{node['stash']['backup_client']['url_base']}/#{node['stash']['backup_client']['version']}/stash-backup-distribution-#{node['stash']['backup_client']['version']}.zip"
+end
+
 default['stash']['backup_client']['checksum'] =
 case node['stash']['backup_client']['version']
 when '1.0.0-beta-11' then 'b1ec42ef96db0cbb3f5678c75da119019d8894c3b09ee886ced075c694bbafb2'
@@ -111,6 +130,9 @@ when '1.0.3' then '7a557242e76612757d0b623afa9dc757c12f51a706216be88d3355195ec0c
 when '1.1.0' then 'd2276df535e0f8e909cd0c1c9700ca275be378145451f9d62a5980b62fdfab74'
 when '1.2.0' then '5dee33dfdf78605caa0bee33caf5cff633613604ec3a30e93dead81c4401f9b9'
 when '1.2.1' then 'eb680d58838b6218cbcb32f4bbf8e9be46adf1df43801e5e83e420ae58bc0d07'
+when '1.3.0' then 'b9674f3235d4937d39186417594efdb3213b564d783aa09618a8086cc57f5170'
+when '1.3.1' then '625af0a8402e85d62768f99a409ce4e140ef3afc961514b549fb9f98877c39db'
+when '1.4.0' then 'c57a5fafb8aaaccea0bd57aae0bce24472ee6d172c0a558c11759b26b6c0196c'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
