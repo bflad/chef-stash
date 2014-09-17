@@ -7,7 +7,8 @@ if stash_version >= Chef::Version.new('3.2.0')
   config_path = 'shared/'
   directory("#{node['stash']['home_path']}/#{config_path}") do
     owner node['stash']['user']
-    mode '0644'
+    group node['stash']['user']
+    mode '0755'
     action :create
     recursive true
   end
