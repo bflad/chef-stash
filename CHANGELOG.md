@@ -1,6 +1,6 @@
 ## 3.12.0
 
-* Enhancement: [#38][]: Default to Stash 3.3.1 and git package for CentOS/RHEL 7
+* Enhancement: [#39][]: Default to Stash 3.3.1 and git package for CentOS/RHEL 7
 
 ## 3.11.0
 
@@ -420,4 +420,4 @@ To switch to new defaults:
 [#33]: https://github.com/bflad/chef-stash/issues/33
 [#36]: https://github.com/bflad/chef-stash/issues/36
 [#37]: https://github.com/bflad/chef-stash/issues/37
-[#38]: https://github.com/bflad/chef-stash/issues/38
+[#39]: https://github.com/bflad/chef-stash/issues/39
