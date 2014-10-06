@@ -11,6 +11,8 @@ end
 template "#{node['stash']['install_path']}/stash/conf/server.xml" do
   if stash_version.major == 1
     source 'server.xml.erb'
+  elsif stash_version >= Chef::Version.new('3.3.0')
+    source 'server-tomcat8.xml.erb'
   else
     source 'server-tomcat7.xml.erb'
   end
