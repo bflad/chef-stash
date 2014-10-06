@@ -8,9 +8,9 @@ Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/)
 
 ### Platforms
 
-* CentOS 6
-* RHEL 6
-* Ubuntu 12.04, 12.10, 13.04
+* CentOS 6, 7
+* RHEL 6, 7
+* Ubuntu 12.04, 14.04
 
 ### Chef
 
@@ -54,7 +54,7 @@ install_type | Stash install type - "standalone" only for now | String | standal
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
-version | Stash version to install | String | 3.3.0
+version | Stash version to install | String | 3.3.1
 
 ### Stash Backup Client Attributes
 

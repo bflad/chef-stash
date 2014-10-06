@@ -2,8 +2,7 @@ platform = 'windows' if node['platform_family'] == 'windows'
 platform ||= 'linux'
 settings = Stash.settings(node)
 
-case node['platform_family']
-when 'rhel'
+if node['platform_family'] == 'rhel' && node['platform_version'].to_f < 7
   include_recipe 'git::source'
 else
   include_recipe 'git'
