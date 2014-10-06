@@ -1,3 +1,7 @@
+## 3.11.0
+
+* Enhancement: [#37][]: Default to Stash 3.3.0 (Tomcat 8)
+
 ## 3.10.1
 
 * Enhancement: [#33][]: Default to Stash 3.1.1
@@ -407,3 +411,4 @@ To switch to new defaults:
 [#27]: https://github.com/bflad/chef-stash/issues/27
 [#29]: https://github.com/bflad/chef-stash/issues/29
 [#33]: https://github.com/bflad/chef-stash/issues/33
+[#37]: https://github.com/bflad/chef-stash/issues/37
