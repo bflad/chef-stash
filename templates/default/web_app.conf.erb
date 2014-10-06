@@ -22,8 +22,12 @@
     RequestHeader unset Authorization
 
 	<Proxy *>
+    <% if node['apache'] && node['apache']['version'] == '2.4' %>
+		Require all granted
+    <% else %>
 		Order Deny,Allow
 		Allow from all
+    <% end %>
 	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
@@ -48,9 +52,13 @@
     # Make sure we disable/prevent basic authentication attempts since Stash 2.1+ can't handle them
     RequestHeader unset Authorization
 
-    <Proxy *>
+	<Proxy *>
+    <% if node['apache'] && node['apache']['version'] == '2.4' %>
+		Require all granted
+    <% else %>
 		Order Deny,Allow
 		Allow from all
+    <% end %>
 	</Proxy>
 	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
