@@ -1,6 +1,7 @@
 ## 3.12.0
 
-* Enhancement: [#39][]: Default to Stash 3.3.1 and git package for CentOS/RHEL 7
+* Enhancement: Default to Stash 3.3.2
+* Enhancement: [#39][]: git package for CentOS/RHEL 7
 
 ## 3.11.0
 
