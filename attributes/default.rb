@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.3.1'
+default['stash']['version']      = '3.3.2'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -71,13 +71,20 @@ when '3.0.1' then '53312a7d26e68b50eb778b8847e04162074b645c2d4014bc404eba59ff90f
 when '3.0.4' then '2dc4db2a0fd306bad39d46b9e6a58d7c9d82c73711e002a93103f19e8133aa6a'
 when '3.0.5' then 'f06b4d545d0e7acae6255f3f4d8c9a02bbdfebf16da793eaef8e1b8eef9303b2'
 when '3.0.6' then '2b5cc70cba6e63aecd7591f02a1ed290825bf3916ffd867cc78b0fabb5badb48'
+when '3.0.7' then 'f6f324fe70800235ba165ceaff15e1ff06d25c335d18821bb0c20c46145f055d'
+when '3.0.8' then '501a02a3e9aa94eef161271cf478003c95fbee61c3ea609b72234970c09026d0'
 when '3.1.0' then '9eb7ba9eec7b67cf14a3ae450c8ec3d8e9289a120672825ec8ba6a290b48c6a6'
 when '3.1.1' then '14710e220ca4258cd81c0bd205e5df668abd7b0ed56be9fd6e74e82a394f53b9'
 when '3.1.3' then 'b203d8d58bf95414077cac948066f5c84d600db258bb6168cc482b948f63529e'
+when '3.1.4' then '378430ae2a6b0efdb808c28e7b009d55de88c4319cea0096fed03f38991dfae5'
+when '3.1.5' then '78d7e4aa92f419b5babc937a1d21c6983c3eabc4c95294bf0f7fbc678757c153'
 when '3.2.0' then '4e8c38b9450e718020d6f74df891987abe491529c66b3df19eff9a325856417e'
 when '3.2.2' then 'a4e4b299c08432d4852872d6f8b754636ae640d434e5d1544637a54e5f1a3d39'
 when '3.2.4' then 'd52b1b8ca50351bf9056d11bf584d6ca1e3ca70eddd936cb799543b487a6ba01'
+when '3.2.5' then '1b1a5074643a26369110a41b634b50194900715253b193ac79742a23f8081ff4'
 when '3.3.0' then '4cb441824c08f28550d5ee2f883016461a356f626e5f38c0a29d345f174d34fd'
+when '3.3.1' then 'cea015548d80ec10aaf405432de46bb5acade17ea024ce270fa2a4afd6e52cf9'
+when '3.3.2' then '08251e15d91374de5da46f9739a1747312dead1509a72268d49abca21607bbe9'
 end
 
 default['stash']['apache2']['access_log']         = ''
