@@ -21,14 +21,14 @@ class Chef
           end
         ensure
           settings ||= node['stash']
-          settings['database']['port'] ||= default_database_port settings['database']['type']
+          settings['database']['port'] ||= Stash.default_database_port(settings['database']['type'])
           settings['database']['testInterval'] ||= 2
         end
 
         settings
       end
 
-      def default_database_port(type)
+      def self.default_database_port(type)
         case type
         when 'mysql'
           3306
