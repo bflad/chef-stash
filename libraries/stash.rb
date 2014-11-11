@@ -20,7 +20,7 @@ class Chef
             end
           end
         ensure
-          settings ||= node['stash']
+          settings ||= node['stash'].to_hash
           settings['database']['port'] ||= Stash.default_database_port(settings['database']['type'])
           settings['database']['testInterval'] ||= 2
         end
