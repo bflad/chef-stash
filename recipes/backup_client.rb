@@ -2,6 +2,7 @@
 settings = Stash.settings(node)
 
 package 'unzip'
+package 'rsync'
 
 ark 'stash-backup-client' do
   url node['stash']['backup_client']['url']
