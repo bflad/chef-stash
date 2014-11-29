@@ -5,24 +5,24 @@ class Chef
     # Chef::Recipe::Stash class
     class Stash
       def self.settings(node)
+        settings = node['stash'].to_hash
+
         begin
           if Chef::Config[:solo]
             begin
-              settings = Chef::DataBagItem.load('stash', 'stash')['local']
+              settings.merge! Chef::DataBagItem.load('stash', 'stash')['local']
             rescue
               Chef::Log.info('No stash data bag found')
             end
           else
             begin
-              settings = Chef::EncryptedDataBagItem.load('stash', 'stash')[node.chef_environment]
+              settings.merge! Chef::EncryptedDataBagItem.load('stash', 'stash')[node.chef_environment]
             rescue
               Chef::Log.info('No stash encrypted data bag found')
             end
           end
         ensure
-          settings ||= node['stash'].to_hash
           settings['database']['port'] ||= Stash.default_database_port(settings['database']['type'])
-          settings['database']['testInterval'] ||= 2
         end
 
         settings
