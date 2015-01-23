@@ -143,7 +143,7 @@ keyAlias | Tomcat SSL keystore alias | String | tomcat
 keystoreFile | Tomcat SSL keystore file - will automatically generate self-signed keystore file if left as default | String | `#{node['stash']['home_path']}/.keystore`
 keystorePass | Tomcat SSL keystore passphrase | String | changeit
 port | Tomcat HTTP port | Fixnum | 7990
-ssl_port | Tomcat HTTPS port | Fixnum | 8443
+ssl_port | Tomcat HTTPS port - HTTPS will be disabled, if set to a "false" value (e.g. -1) | Fixnum | 8443
 
 ## Recipes
 
