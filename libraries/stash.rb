@@ -8,27 +8,27 @@ class Chef
         begin
           if Chef::Config[:solo]
             begin
-              settings = Chef::DataBagItem.load('stash', 'stash')['local']
+              databag_item = Chef::DataBagItem.load('stash', 'stash')['local']
             rescue
               Chef::Log.info('No stash data bag found')
             end
           else
             begin
-              settings = Chef::EncryptedDataBagItem.load('stash', 'stash')[node.chef_environment]
+              databag_item = Chef::EncryptedDataBagItem.load('stash', 'stash')[node.chef_environment]
             rescue
               Chef::Log.info('No stash encrypted data bag found')
             end
           end
         ensure
-          settings ||= node['stash']
-          settings['database']['port'] ||= default_database_port settings['database']['type']
-          settings['database']['testInterval'] ||= 2
+          databag_item ||= {}
+          settings = Chef::Mixin::DeepMerge.deep_merge(databag_item, node['stash'].to_hash)
+          settings['database']['port'] ||= Stash.default_database_port(settings['database']['type'])
         end
 
         settings
       end
 
-      def default_database_port(type)
+      def self.default_database_port(type)
         case type
         when 'mysql'
           3306
