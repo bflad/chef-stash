@@ -54,7 +54,7 @@ install_type | Stash install type - "standalone" only for now | String | standal
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
-version | Stash version to install | String | 3.3.2
+version | Stash version to install | String | 3.6.0
 
 ### Stash Backup Client Attributes
 
@@ -69,7 +69,7 @@ install_path | location to install Stash Backup Client | String | /opt/atlassian
 password | Stash administrative user password | String | changeit
 url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
 user | Stash administrative user | String | admin
-version | Stash Backup Client version to install | String | 1.5.0
+version | Stash Backup Client version to install | String | 1.6.0
 
 ### Stash Backup Client Cron Attributes
 
