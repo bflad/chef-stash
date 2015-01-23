@@ -1,3 +1,10 @@
+## 3.13.0
+
+* Bugfix: [#43][]: Fix for "sh: 'rsync' no such file or directory" on RHEL-like systems (install rsync package in backup_client recipe)
+* Bugfix: [#45][]: Fixed HTTP authentication (disables apache auth_basic)
+* Enhancement: [#44][]: Settings attributes now correctly deep merge and override via data bags
+* Enhancement: [#41][] / [#47][]: Default to Stash 3.6.0, Stash Backup Client 1.6.0
+
 ## 3.12.1
 
 * Enhancement: Default to Stash 3.3.2
@@ -427,3 +434,8 @@ To switch to new defaults:
 [#36]: https://github.com/bflad/chef-stash/issues/36
 [#37]: https://github.com/bflad/chef-stash/issues/37
 [#39]: https://github.com/bflad/chef-stash/issues/39
+[#41]: https://github.com/bflad/chef-stash/issues/41
+[#43]: https://github.com/bflad/chef-stash/issues/43
+[#44]: https://github.com/bflad/chef-stash/issues/44
+[#45]: https://github.com/bflad/chef-stash/issues/45
+[#47]: https://github.com/bflad/chef-stash/issues/47
