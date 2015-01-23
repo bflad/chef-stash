@@ -4280,6 +4280,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <%- if node['stash']['tomcat']['ssl_port'] %>
     <!-- Require HTTPS for login -->
       <security-constraint>
          <web-resource-collection>
@@ -4290,4 +4291,5 @@
               <transport-guarantee>CONFIDENTIAL</transport-guarantee>
          </user-data-constraint>
      </security-constraint>
+    <%- end %>
 </web-app>
