@@ -56,6 +56,7 @@ action :disable do
   end
 end
 
+# rubocop:disable Metrics/AbcSize
 def load_current_resource
   server = @new_resource.server
   user = @new_resource.user
@@ -74,6 +75,7 @@ def load_current_resource
 
   @current_resource.settings hook_settings(server, hook_opts) if @current_resource.configured
 end
+# rubocop:enable Metrics/AbcSize
 
 private
 

@@ -14,5 +14,4 @@ describe_recipe 'stash::apache2' do
   it 'enables apache' do
     apache_service.must_be_enabled
   end
-
 end
