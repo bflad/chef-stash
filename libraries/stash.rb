@@ -4,6 +4,7 @@ class Chef
   class Recipe
     # Chef::Recipe::Stash class
     class Stash
+      # rubocop:disable Metrics/AbcSize
       def self.settings(node)
         begin
           if Chef::Config[:solo]
@@ -27,6 +28,7 @@ class Chef
 
         settings
       end
+      # rubocop:enable Metrics/AbcSize
 
       def self.default_database_port(type)
         case type
