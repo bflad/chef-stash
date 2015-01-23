@@ -13,13 +13,10 @@
 	<% end -%>
 	<% end -%>
 	DocumentRoot <%= node['stash']['install_path'] %>
-	
+
 	CustomLog <%= node['stash']['apache2']['access_log'].empty? ? node['apache']['log_dir']+"/stash-access.log" : node['stash']['apache2']['access_log'] %> combined
 	ErrorLog <%= node['stash']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/stash-error.log" : node['stash']['apache2']['error_log'] %>
 	LogLevel warn
-
-    # Make sure we disable/prevent basic authentication attempts since Stash 2.1+ can't handle them
-    RequestHeader unset Authorization
 
 	<Proxy *>
     <% if node['apache'] && node['apache']['version'] == '2.4' %>
@@ -48,9 +45,6 @@
 	CustomLog <%= node['stash']['apache2']['ssl']['access_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-access.log" : node['stash']['apache2']['ssl']['access_log'] %> combined
 	ErrorLog <%= node['stash']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-error.log" : node['stash']['apache2']['ssl']['error_log'] %>
 	LogLevel warn
-
-    # Make sure we disable/prevent basic authentication attempts since Stash 2.1+ can't handle them
-    RequestHeader unset Authorization
 
 	<Proxy *>
     <% if node['apache'] && node['apache']['version'] == '2.4' %>
