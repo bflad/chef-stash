@@ -30,6 +30,7 @@
 	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
 </VirtualHost>
 
+<%- if node['stash']['apache2']['ssl']['port'] %>
 <VirtualHost *:<%= node['stash']['apache2']['ssl']['port'] %>>
 	<% unless node['stash']['apache2']['virtual_host_name'].empty? -%>
 	ServerName <%= node['stash']['apache2']['virtual_host_name'] %>
@@ -64,3 +65,4 @@
 	SSLCertificateChainFile <%= node['stash']['apache2']['ssl']['chain_file'] %>
 	<% end -%>
 </VirtualHost>
+<% end -%>
