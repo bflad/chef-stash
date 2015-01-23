@@ -21,8 +21,9 @@ template "#{node['stash']['home_path']}/#{config_path}stash-config.properties" d
   owner node['stash']['user']
   mode '0644'
   variables(
-      :database => settings['database'],
-      :properties   => settings['properties']
+      :database   => settings['database'],
+      :plugin     => settings['plugin'],
+      :properties => settings['properties']
   )
   notifies :restart, 'service[stash]', :delayed
 end
