@@ -2,6 +2,7 @@
 
 * Enhancement: [#49][]: Update default database to postgresql
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
+* Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
 ## 3.14.0
 
@@ -453,3 +454,4 @@ To switch to new defaults:
 [#49]: https://github.com/bflad/chef-stash/issues/49
 [#55]: https://github.com/bflad/chef-stash/issues/55
 [#58]: https://github.com/bflad/chef-stash/issues/58
+[#61]: https://github.com/bflad/chef-stash/issues/61
