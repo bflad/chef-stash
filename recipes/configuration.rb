@@ -22,6 +22,7 @@ template "#{node['stash']['home_path']}/#{config_path}stash-config.properties" d
   mode '0644'
   variables(
       :database   => settings['database'],
+      # DEPRECATED: use properties instead
       :plugin     => settings['plugin'],
       :properties => settings['properties']
   )

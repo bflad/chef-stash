@@ -109,13 +109,15 @@ maximum_permgen | JVM maximum PermGen memory | String | 256m
 java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
 support_args | additional JAVA_OPTS recommended by Atlassian support for Stash JVM during startup | String | ""
 
-### Stash Plugin Attributes
+### Stash Property Attributes
 
-All of these `node['stash']['plugin']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+_The usage of `node['stash']['plugin']` for properties is deprecated in 3.x of the cookbook and may change or be removed in 4.x_
+
+All of these `node['stash']['properties']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-`key` | A key/value pair to be inserted into stash-config.properties as plugin.`key`=`value` | - | -
+`key` | A key/value pair to be inserted into stash-config.properties as `key`=`value` | Hash | {}
 
 ### Stash SSH Attributes ###
 
