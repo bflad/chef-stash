@@ -175,6 +175,7 @@ default['stash']['jvm']['java_opts']       = ''
 default['stash']['jvm']['support_args']    = ''
 
 default['stash']['plugin'] = {}
+default['stash']['properties'] = {}
 
 default['stash']['ssh']['hostname'] = node['fqdn']
 default['stash']['ssh']['port']     = '7999'

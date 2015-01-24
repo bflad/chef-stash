@@ -27,3 +27,9 @@ jdbc.password=<%= @database['password'] %>
 plugin.<%= key %>=<%= value %>
 <% end -%>
 <% end -%>
+
+<% if @properties -%>
+<% @properties.each do |key, value| -%>
+<%= key %>=<%= value %>
+<% end -%>
+<% end -%>
