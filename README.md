@@ -85,6 +85,8 @@ weekday | Day of week | String | *
 
 ### Stash Database Attributes
 
+_The default database will be changing to postgresql when cookbook 4.x is released._
+
 All of these `node['stash']['database']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
 Attribute | Description | Type | Default

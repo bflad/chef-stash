@@ -1,3 +1,13 @@
+## 4.0.0 (When Released)
+
+* Enhancement: [#49][]: Update default database to postgresql
+* Enhancement: [#58][]: Update mysql dependency to ~> 6.0
+
+## 3.14.0
+
+* Bugfix: [#55][]: Lock mysql dependency to ~> 5.0
+* Enhancement: [#46][]: Ability to set all property values instead of only the plugins
+
 ## 3.13.0
 
 * Bugfix: [#43][]: Fix for "sh: 'rsync' no such file or directory" on RHEL-like systems (install rsync package in backup_client recipe)
@@ -438,4 +448,8 @@ To switch to new defaults:
 [#43]: https://github.com/bflad/chef-stash/issues/43
 [#44]: https://github.com/bflad/chef-stash/issues/44
 [#45]: https://github.com/bflad/chef-stash/issues/45
+[#46]: https://github.com/bflad/chef-stash/issues/46
 [#47]: https://github.com/bflad/chef-stash/issues/47
+[#49]: https://github.com/bflad/chef-stash/issues/49
+[#55]: https://github.com/bflad/chef-stash/issues/55
+[#58]: https://github.com/bflad/chef-stash/issues/58
