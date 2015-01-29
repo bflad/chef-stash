@@ -240,7 +240,7 @@ For example:
       key "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIB..."
     end
 
-* In this example, now you can either directly use the ssh_wrapper available at `#{node['stash']['install_path']}/deployment_user_ssh_wrapper.sh` or use the `stash_deploy` LWRP. 
+* In this example, now you can either directly use the ssh_wrapper available at `#{node['stash']['install_path']}/deployment_user_ssh_wrapper.sh` or use the `stash_deploy` LWRP.
 
 Such as:
 
@@ -294,5 +294,8 @@ Please use standard Github issues/pull requests and if possible, in combination 
 Please see license information in: [LICENSE](LICENSE)
 
 * Brian Flad (<bflad417@gmail.com>)
-* Kevin Moser
-* @ramonskie
+* Kevin Moser (@moserke)
+* Ramon Makkelie (@ramonskie)
+* Martin (@martianus)
+* Mikhail Zholobov (@legal90)
+* Lincoln Lee (@linc01n)
