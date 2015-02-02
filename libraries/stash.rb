@@ -44,6 +44,22 @@ class Chef
           nil
         end
       end
+
+      def self.check_for_old_attributes!(node)
+        backup_attrs = %w(backup_path baseurl password user cron)
+        backup_attrs.each do |attr|
+          unless node['stash']['backup_client'][attr].nil?
+            node.default['stash']['backup_client'][attr] = node['stash']['backup'][attr]
+            Chef::Log.warn "node['stash']['backup_client']['#{attr}'] has been changed to node['stash']['backup']['#{attr}']"
+          end
+        end
+        Chef::Log.warn <<-EOH
+This renaming introduces the common approach for both of backup strategies:
+'backup_client' and 'backup_diy'. Attributes metioned above will be gracefully
+converted for you, but this warning and conversion will be removed in the next
+major release of the 'stash' cookbook.
+EOH
+      end
     end
   end
 end
