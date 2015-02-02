@@ -1,3 +1,4 @@
+Stash.check_for_old_attributes!(node)
 
 settings = Stash.settings(node)
 
@@ -18,7 +19,7 @@ template "#{node['stash']['home_path']}/backup-config.properties" do
   source 'backup-config.properties.erb'
   owner node['stash']['user']
   mode '0644'
-  variables :backup_client => settings['backup_client']
+  variables :backup => settings['backup']
 end
 
 link "#{node['stash']['backup_client']['install_path']}/stash-backup-client/backup-config.properties" do

@@ -128,11 +128,18 @@ else
   default['stash']['apache2']['ssl']['key_file']         = '/etc/ssl/private/ssl-cert-snakeoil.key'
 end
 
-default['stash']['backup_client']['backup_path']  = '/tmp'
-default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
+default['stash']['backup']['backup_path']  = '/tmp'
+default['stash']['backup']['baseurl']      = "https://#{node['fqdn']}/"
+default['stash']['backup']['password']     = 'changeit'
+default['stash']['backup']['user']         = 'admin'
+
+default['stash']['backup']['cron']['day'] = '*'
+default['stash']['backup']['cron']['hour'] = '0'
+default['stash']['backup']['cron']['minute'] = '0'
+default['stash']['backup']['cron']['month'] = '*'
+default['stash']['backup']['cron']['weekday'] = '*'
+
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['password']     = 'changeit'
-default['stash']['backup_client']['user']         = 'admin'
 default['stash']['backup_client']['version']      = '1.7.0'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
@@ -165,12 +172,6 @@ when '1.5.0' then '6f7180a507a0e4c147e2c6a1fa82daf273e038243acefaa39fa7363472164
 when '1.6.0' then '6605a8fbeab3f60567832f2bdba790583646b7ba637eee5b1da8148b5ecacf97'
 when '1.7.0' then '5f2c14e58c98ba90b0de5e6083b6d1892802f2d68b845b594e62d691bf386d0c'
 end
-
-default['stash']['backup_client']['cron']['day'] = '*'
-default['stash']['backup_client']['cron']['hour'] = '0'
-default['stash']['backup_client']['cron']['minute'] = '0'
-default['stash']['backup_client']['cron']['month'] = '*'
-default['stash']['backup_client']['cron']['weekday'] = '*'
 
 default['stash']['database']['host']     = 'localhost'
 default['stash']['database']['name']     = 'stash'
