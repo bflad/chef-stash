@@ -142,6 +142,7 @@ default['stash']['backup']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup']['password']     = 'changeit'
 default['stash']['backup']['user']         = 'admin'
 
+default['stash']['backup']['cron']['enable'] = false
 default['stash']['backup']['cron']['day'] = '*'
 default['stash']['backup']['cron']['hour'] = '0'
 default['stash']['backup']['cron']['minute'] = '0'
