@@ -4,6 +4,10 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.14.1
+
+* Bugfix: [#69][]: Lock database dependency to = 2.3.1
+
 ## 3.14.0
 
 * Bugfix: [#55][]: Lock mysql dependency to ~> 5.0
@@ -98,7 +102,7 @@
 
 ## 3.1.1
 
-* Stash database connection fix for localhost MySQL setup with bind_address set to 0.0.0.0 
+* Stash database connection fix for localhost MySQL setup with bind_address set to 0.0.0.0
 
 ## 3.1.0
 
