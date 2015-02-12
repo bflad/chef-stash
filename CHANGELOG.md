@@ -4,6 +4,10 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.14.2
+
+* Enhancement: Deafult to Stash 3.6.1
+
 ## 3.14.1
 
 * Bugfix: [#69][]: Lock database dependency to = 2.3.1
