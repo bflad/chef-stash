@@ -128,6 +128,8 @@ else
   default['stash']['apache2']['ssl']['key_file']         = '/etc/ssl/private/ssl-cert-snakeoil.key'
 end
 
+default['stash']['backup']['strategy']  = 'backup_client'
+
 default['stash']['backup']['backup_path']  = '/tmp'
 default['stash']['backup']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup']['password']     = 'changeit'
@@ -172,6 +174,21 @@ when '1.5.0' then '6f7180a507a0e4c147e2c6a1fa82daf273e038243acefaa39fa7363472164
 when '1.6.0' then '6605a8fbeab3f60567832f2bdba790583646b7ba637eee5b1da8148b5ecacf97'
 when '1.7.0' then '5f2c14e58c98ba90b0de5e6083b6d1892802f2d68b845b594e62d691bf386d0c'
 end
+
+default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
+default['stash']['backup_diy']['repo_url']  = 'https://bitbucket.org/atlassianlabs/atlassian-stash-diy-backup.git'
+default['stash']['backup_diy']['revision'] = 'master'
+
+default['stash']['backup_diy']['backup_home_type'] = 'rsync'
+default['stash']['backup_diy']['backup_archive_type'] = 'tar'
+default['stash']['backup_diy']['exclude_repos'] = []
+default['stash']['backup_diy']['gpg_recipient'] = ''
+default['stash']['backup_diy']['temp_path'] = '/tmp/stash-backup-temp'
+default['stash']['backup_diy']['verbose'] = true
+
+default['stash']['backup_diy']['hipchat_url'] = 'https://api.hipchat.com'
+default['stash']['backup_diy']['hipchat_room'] = ''
+default['stash']['backup_diy']['hipchat_token'] = ''
 
 default['stash']['database']['host']     = 'localhost'
 default['stash']['database']['name']     = 'stash'
