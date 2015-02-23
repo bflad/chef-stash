@@ -33,10 +33,11 @@ template "#{node['stash']['backup_diy']['install_path']}/stash.diy-backup.vars.s
   )
 end
 
-directory node.set['stash']['backup']['backup_path'] do
+directory node['stash']['backup']['backup_path'] do
   owner node['stash']['user']
   mode '0750'
   action :create
+  not_if { ::Dir.exist?(node['stash']['backup']['backup_path']) }
 end
 
 cron_d 'atlassian-stash-diy-backup' do
