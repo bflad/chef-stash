@@ -26,6 +26,13 @@ link "#{node['stash']['backup_client']['install_path']}/stash-backup-client/back
   to "#{node['stash']['home_path']}/backup-config.properties"
 end
 
+directory node['stash']['backup']['backup_path'] do
+  owner node['stash']['user']
+  mode '0750'
+  action :create
+  not_if { ::Dir.exist?(node['stash']['backup']['backup_path']) }
+end
+
 cron_d 'atlassian-stash-backup-client' do
   hour settings['backup']['cron']['hour']
   minute settings['backup']['cron']['minute']
