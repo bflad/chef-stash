@@ -27,7 +27,7 @@ STASH_BACKUP_PASS=<%= @backup['password'] %>
 # The name of the database used by this instance.
 STASH_DB=<%= @database['name'] %>
 # The path to stash home folder (with trailing /)
-STASH_HOME=<%= node['stash']['home_path'] %>
+STASH_HOME=<%= File.join(node['stash']['home_path'], "/") %>
 
 # OS level user and group information (typically: 'stash' for both)
 STASH_UID=<%= node['stash']['user'] %>
