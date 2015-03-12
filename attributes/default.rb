@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.7.0'
+default['stash']['version']      = '3.7.1'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -105,6 +105,7 @@ when '3.5.1' then '0afcf5cb9dedf0a91864c47067cdbcd2bfcbe5d0c1d3cd187d05c658a6b4a
 when '3.6.0' then 'e047b2f9a8438a1be066080ea5210177b891fc952b776b5509e555427e0cbe91'
 when '3.6.1' then '0b53ae801738fd0fe043dcf5206da1e057895d3dc7712d0bd74c51d0e043e379'
 when '3.7.0' then '6e58a82c79478b8fcb16447b17c352faccb76704759d0dd29f5835ccfef88f05'
+when '3.7.1' then 'a217e71fed08113fadf8402f5bd9a0ce3257042bc2cbeb35af8276fff31498ac'
 end
 
 default['stash']['apache2']['access_log']         = ''
