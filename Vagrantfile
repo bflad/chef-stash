@@ -52,7 +52,7 @@ Vagrant.configure('2') do |config|
   end
 
   config.vm.define :ubuntu1410 do |ubuntu1410|
-    ubuntu1410.vm.box      = 'chef/ubuntu-14.04'
+    ubuntu1410.vm.box      = 'chef/ubuntu-14.10'
     ubuntu1410.vm.hostname = "#{cookbook}-ubuntu-1410"
   end
 
