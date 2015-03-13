@@ -4,9 +4,14 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.14.3
+
+* Enhancement: [#77][]: Default to Stash 3.7.1
+* Enhancement: [#75][]: Default to Stash Backup Client 1.7.0
+
 ## 3.14.2
 
-* Enhancement: Deafult to Stash 3.6.1
+* Enhancement: [#73][]: Default to Stash 3.6.1
 
 ## 3.14.1
 
@@ -464,3 +469,6 @@ To switch to new defaults:
 [#58]: https://github.com/bflad/chef-stash/issues/58
 [#61]: https://github.com/bflad/chef-stash/issues/61
 [#69]: https://github.com/bflad/chef-stash/issues/69
+[#73]: https://github.com/bflad/chef-stash/issues/73
+[#75]: https://github.com/bflad/chef-stash/issues/75
+[#77]: https://github.com/bflad/chef-stash/issues/77
