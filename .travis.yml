@@ -1,5 +1,7 @@
 language: ruby
 bundler_args: --without integration
+cache: bundler
+sudo: false
 rvm:
   - 2.0.0
 before_script:
