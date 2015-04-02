@@ -56,27 +56,57 @@ url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
 version | Stash version to install | String | 3.7.1
 
-### Stash Backup Client Attributes
+### Stash Backup Attributes (Shared)
 
-These attributes are under the `node['stash']['backup_client']` namespace. Some of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+These attributes are under the `node['stash']['backup']` namespace. Some of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
 backup_path | Path for backups | String | /tmp
 baseurl | Stash base URL | String | `https://#{node['fqdn']}/`
-checksum | SHA256 checksum for Stash Backup Client install | String | auto-detected (see attributes/default.rb)
-install_path | location to install Stash Backup Client | String | /opt/atlassian-stash-backup-client
 password | Stash administrative user password | String | changeit
-url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
+strategy | [Stash backup strategy](https://confluence.atlassian.com/display/STASH/Data+recovery+and+backups#Datarecoveryandbackups-TwowaystobackupStash): 'backup_client' or 'backup_diy' | String | backup_client
 user | Stash administrative user | String | admin
-version | Stash Backup Client version to install | String | 1.7.0
 
-### Stash Backup Client Cron Attributes
+### Stash Backup Client Attributes
+Documentation: [Using the Stash Backup Client](https://confluence.atlassian.com/display/STASH/Using+the+Stash+Backup+Client)
 
-These attributes are under the `node['stash']['backup_client']['cron']` namespace. All of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+These attributes are under the `node['stash']['backup_client']` namespace. Some of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
+checksum | SHA256 checksum for Stash Backup Client install | String | auto-detected (see attributes/default.rb)
+install_path | location to install Stash Backup Client | String | /opt/atlassian/stash-backup-client
+url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
+version | Stash Backup Client version to install | String | 1.7.0
+
+### Stash DIY Backup Attributes
+Documentation: [Using Stash DIY Backup](https://confluence.atlassian.com/display/STASH/Using+Stash+DIY+Backup)
+
+These attributes are under the `node['stash']['backup_diy']` namespace. Some of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+backup_archive_type | The way how to backup the stash home | String | tar
+backup_home_type | The way how to backup the stash home | String | rsync
+exclude_repos | List of repo IDs which should be excluded from the backup | List | []
+gpg_recipient | GPG recipient name (only if `['backup_archive_type]'` is `'tar-gpg'`) | String | ""
+install_path | location to place Stash DIY Backup scripts | String | /opt/atlassian/stash-diy-backup
+hipchat_room | HipChat room where notifications should be sent | String | ""
+hipchat_token | Authorization token for the HipChat server | String | ""
+hipchat_url | URL to the HipChat server for sending notifications | String | 'https://api.hipchat.com'
+repo_url | Git repository URL where Stash DIY Backup scripts are stored | String | https://bitbucket.org/atlassianlabs/atlassian-stash-diy-backup.git
+revision | Git revision (or a branch, or a tag) wich should be checked out | String | master
+temp_path | A temporary path where backup essentials should be placed before packing to the archive | String | /tmp/stash-backup-temp
+verbose | Should the script output be verbose or not | Boolean | true
+
+### Stash Backup Cron Attributes
+
+These attributes are under the `node['stash']['backup']['cron']` namespace. All of these attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists.
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+enable | Configure cron job to backup Stash periodically | Boolean | false
 day | Day of month | String | *
 hour | Hour of day | String | 0
 minute | Minute of hour | String | 0
