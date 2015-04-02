@@ -35,7 +35,11 @@ STASH_GID=<%= node['stash']['user'] %>
 
 # The path to working folder for the backup
 STASH_BACKUP_ROOT=<%= @backup_diy['temp_path'] %>
+<% if @database['type'] == 'postgresql' %>
 STASH_BACKUP_DB=${STASH_BACKUP_ROOT}/stash-db/
+<% else %>
+STASH_BACKUP_DB=${STASH_BACKUP_ROOT}/stash-db.sql
+<% end %>
 STASH_BACKUP_HOME=${STASH_BACKUP_ROOT}/stash-home/
 
 # The path to where the backup archives are stored
