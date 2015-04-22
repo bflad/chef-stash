@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.7.1'
+default['stash']['version']      = '3.8.0'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -106,6 +106,8 @@ when '3.6.0' then 'e047b2f9a8438a1be066080ea5210177b891fc952b776b5509e555427e0cb
 when '3.6.1' then '0b53ae801738fd0fe043dcf5206da1e057895d3dc7712d0bd74c51d0e043e379'
 when '3.7.0' then '6e58a82c79478b8fcb16447b17c352faccb76704759d0dd29f5835ccfef88f05'
 when '3.7.1' then 'a217e71fed08113fadf8402f5bd9a0ce3257042bc2cbeb35af8276fff31498ac'
+when '3.7.2' then '604982b3fa6e058b17545ef9da8bfa7ec8ecb1aabee25d1ff27dabb43bfd12cc'
+when '3.8.0' then '5512d68e18a85610e65ee1ad7e8df635bdd3cf299494636ede9694c3d41187b4'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -133,7 +135,7 @@ default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
 default['stash']['backup_client']['password']     = 'changeit'
 default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.7.0'
+default['stash']['backup_client']['version']      = '1.8.2'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base']     =
@@ -164,6 +166,8 @@ when '1.4.0' then 'c57a5fafb8aaaccea0bd57aae0bce24472ee6d172c0a558c11759b26b6c01
 when '1.5.0' then '6f7180a507a0e4c147e2c6a1fa82daf273e038243acefaa39fa7363472164765'
 when '1.6.0' then '6605a8fbeab3f60567832f2bdba790583646b7ba637eee5b1da8148b5ecacf97'
 when '1.7.0' then '5f2c14e58c98ba90b0de5e6083b6d1892802f2d68b845b594e62d691bf386d0c'
+when '1.8.0' then '0997e056a5befeed5f85b1e4cbe72115d7bd20f2ba30e7b7a105bcc1d3912e76'
+when '1.8.2' then 'ff41c353f73fe90cb0e67860cff7b021833e23df6c49232d1b102a0eae575127'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
