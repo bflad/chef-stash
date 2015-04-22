@@ -4,9 +4,13 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.15.0
+
+* Enhancement: [#82][]: Default to Stash 3.8.0 and Stash Backup Client 1.8.2
+
 ## 3.14.4
 
-* Bugfix :[#79][]: Fix stash service in CentOS 7
+* Bugfix: [#79][]: Fix stash service in CentOS 7
 
 ## 3.14.3
 
@@ -477,3 +481,4 @@ To switch to new defaults:
 [#75]: https://github.com/bflad/chef-stash/issues/75
 [#77]: https://github.com/bflad/chef-stash/issues/77
 [#79]: https://github.com/bflad/chef-stash/issues/79
+[#82]: https://github.com/bflad/chef-stash/issues/82
