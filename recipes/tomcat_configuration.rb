@@ -2,7 +2,11 @@ settings = Stash.settings(node)
 stash_version = Chef::Version.new(node['stash']['version'])
 
 template "#{node['stash']['install_path']}/stash/bin/setenv.sh" do
-  source 'setenv.sh.erb'
+  if stash_version < Chef::Version.new('3.8.0')
+    source 'setenv.sh.erb'
+  else
+    source 'setenv_after_3_8.sh.erb'
+  end
   owner node['stash']['user']
   mode '0755'
   notifies :restart, 'service[stash]', :delayed
