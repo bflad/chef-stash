@@ -13,7 +13,7 @@ action :create do
   }
 
   unless @current_resource.exists
-    converge_by("Creating #{ @new_resource }") do
+    converge_by("Creating #{@new_resource}") do
       create(server, user, repo_opts)
     end
     new_resource.updated_by_last_action(true)
@@ -29,7 +29,7 @@ action :delete do
   }
 
   if @current_resource.exists
-    converge_by("Deleting #{ @new_resource }") do
+    converge_by("Deleting #{@new_resource}") do
       delete(server, user, repo_opts)
     end
     new_resource.updated_by_last_action(true)
