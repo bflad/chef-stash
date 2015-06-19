@@ -4,6 +4,21 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.16.0
+
+### 3.16.0 Major Changes
+
+* In default recipe run `stash::configuration` before `stash::tomcat_configuration`
+* For stash version 3.8+, move `server.xml` from `#{install_path}/config` to `#{home_path}/shared`
+* Increase default `maximum_permgen` from `256m` to `384m` [#84][]
+
+### 3.16.0 Minor Changes
+
+* Enhancement: [#87][]: Add support of Stash versions 3.8.1, 3.9.1, 3.9.2, 3.10.0
+* Bugfix: [#89][]: Use proper setenv.sh format for v3.8+
+* Bugfix: [#90][]: Do a apt-get update before running package install for debian-based vagrant
+
+
 ## 3.15.0
 
 * Enhancement: [#82][]: Default to Stash 3.8.0 and Stash Backup Client 1.8.2
@@ -482,3 +497,7 @@ To switch to new defaults:
 [#77]: https://github.com/bflad/chef-stash/issues/77
 [#79]: https://github.com/bflad/chef-stash/issues/79
 [#82]: https://github.com/bflad/chef-stash/issues/82
+[#84]: https://github.com/bflad/chef-stash/issues/84
+[#87]: https://github.com/bflad/chef-stash/issues/87
+[#89]: https://github.com/bflad/chef-stash/issues/89
+[#90]: https://github.com/bflad/chef-stash/issues/90
