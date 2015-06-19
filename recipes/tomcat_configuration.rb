@@ -5,7 +5,7 @@ template "#{node['stash']['install_path']}/stash/bin/setenv.sh" do
   if stash_version < Chef::Version.new('3.8.0')
     source 'setenv.sh.erb'
   else
-    source 'setenv_after_3_8.sh.erb'
+    source '3.8+/setenv.sh.erb'
   end
   owner node['stash']['user']
   mode '0755'
