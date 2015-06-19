@@ -191,7 +191,7 @@ default['stash']['database']['user']     = 'stash'
 
 default['stash']['jvm']['minimum_memory']  = '512m'
 default['stash']['jvm']['maximum_memory']  = '768m'
-default['stash']['jvm']['maximum_permgen'] = '256m'
+default['stash']['jvm']['maximum_permgen'] = '384m'
 default['stash']['jvm']['java_opts']       = ''
 default['stash']['jvm']['support_args']    = ''
 

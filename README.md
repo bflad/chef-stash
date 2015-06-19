@@ -107,7 +107,7 @@ Attribute | Description | Type | Default
 ----------|-------------|------|--------
 minimum_memory | JVM minimum memory | String | 512m
 maximum_memory | JVM maximum memory | String | 768m
-maximum_permgen | JVM maximum PermGen memory | String | 256m
+maximum_permgen | JVM maximum PermGen memory | String | 384m
 java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
 support_args | additional JAVA_OPTS recommended by Atlassian support for Stash JVM during startup | String | ""
 
@@ -298,4 +298,6 @@ Please see license information in: [LICENSE](LICENSE)
 * Ramon Makkelie (@ramonskie)
 * Martin (@martianus)
 * Mikhail Zholobov (@legal90)
+* Claudio Rivabene (@crivabene)
+* Patrick Connolly (@patcon)
 * Lincoln Lee (@linc01n)
