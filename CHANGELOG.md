@@ -4,6 +4,10 @@
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
 
+## 3.16.1
+
+* Bugfix: [#93][]: Set umask to 0027 for more secure file creation
+
 ## 3.16.0
 
 ### 3.16.0 Major Changes
@@ -501,3 +505,4 @@ To switch to new defaults:
 [#87]: https://github.com/bflad/chef-stash/issues/87
 [#89]: https://github.com/bflad/chef-stash/issues/89
 [#90]: https://github.com/bflad/chef-stash/issues/90
+[#93]: https://github.com/bflad/chef-stash/issues/93
