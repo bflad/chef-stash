@@ -59,36 +59,42 @@ def load_current_resource
   @current_resource.exists = exists?(server, login_user, repo_opts)
 
   # Load in existing permissions if the repo already exists
-  if @current_resource.exists
-    groups = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/groups"), login_user)
-    groups.each do |group|
-      Chef::Log.debug("Group name: #{group['group']['name']} permission: #{group['permission']}")
-      case group['permission']
+  get_group_permissions(server, login_user, repo_opts) if @current_resource.exists
+  get_user_permissions(server, login_user, repo_opts) if @current_resource.exists
+end
 
-      when 'REPO_ADMIN'
-        @current_resource.admin_groups.push(group['group']['name'])
-      when 'REPO_WRITE'
-        @current_resource.write_groups.push(group['group']['name'])
-      when 'REPO_READ'
-        @current_resource.read_groups.push(group['group']['name'])
-      end
-    end
-    users = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/users"), login_user)
-    users.each do |user|
-      case user['permission']
+private
 
-      when 'REPO_ADMIN'
-        @current_resource.admin_users.push(user['user']['name'])
-      when 'REPO_WRITE'
-        @current_resource.user_users.push(user['user']['name'])
-      when 'REPO_READ'
-        @current_resource.read_users.push(user['user']['name'])
-      end
+def get_group_permissions(server, login_user, repo_opts)
+  groups = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/groups"), login_user)
+  groups.each do |group|
+    Chef::Log.debug("Group name: #{group['group']['name']} permission: #{group['permission']}")
+    case group['permission']
+
+    when 'REPO_ADMIN'
+      @current_resource.admin_groups.push(group['group']['name'])
+    when 'REPO_WRITE'
+      @current_resource.write_groups.push(group['group']['name'])
+    when 'REPO_READ'
+      @current_resource.read_groups.push(group['group']['name'])
     end
   end
 end
 
-private
+def get_user_permissions(server, login_user, repo_opts)
+  users = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/users"), login_user)
+  users.each do |user|
+    case user['permission']
+
+    when 'REPO_ADMIN'
+      @current_resource.admin_users.push(user['user']['name'])
+    when 'REPO_WRITE'
+      @current_resource.user_users.push(user['user']['name'])
+    when 'REPO_READ'
+      @current_resource.read_users.push(user['user']['name'])
+    end
+  end
+end
 
 def project_repos_uri(repo_opts)
   "projects/#{repo_opts['project']}/repos"
