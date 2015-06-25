@@ -94,10 +94,14 @@ module Stash
       Chef::Application.fatal!('error making stash request')
     end
 
-    def install_chef_vault(source = 'http://rubygems.org', version = '1.2.0')
+    def install_chef_vault(source, version = '1.2.0')
       gem_installer = Chef::Resource::ChefGem.new('chef-vault', run_context)
       gem_installer.version version
-      gem_installer.options "--clear-sources --source #{source}"
+
+      # Only override defaults gem source if one is passed
+      if source
+        gem_installer.options "--clear-sources --source #{source}"
+      end
       gem_installer.action :install
       gem_installer.after_created
 
