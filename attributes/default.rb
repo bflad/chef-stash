@@ -6,7 +6,7 @@ default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
 default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
 default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.8.0'
+default['stash']['version']      = '3.10.0'
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -108,6 +108,10 @@ when '3.7.0' then '6e58a82c79478b8fcb16447b17c352faccb76704759d0dd29f5835ccfef88
 when '3.7.1' then 'a217e71fed08113fadf8402f5bd9a0ce3257042bc2cbeb35af8276fff31498ac'
 when '3.7.2' then '604982b3fa6e058b17545ef9da8bfa7ec8ecb1aabee25d1ff27dabb43bfd12cc'
 when '3.8.0' then '5512d68e18a85610e65ee1ad7e8df635bdd3cf299494636ede9694c3d41187b4'
+when '3.8.1' then 'c998165b7a95bca83d2f043a3e99aa4594b10f1cfe99a83bd4311421c5de5063'
+when '3.9.1' then 'c7f5e4976953957c06fe03aef20d497e395c29d19bfe2c3478b0c38cf8b14299'
+when '3.9.2' then '6ff2b5092453cb0beac1dcde16c0440bb1ee058ffe23e7d9fdf3ac815cf9280a'
+when '3.10.0' then 'ab7fecb10e6650fb5b94a20b22463771d7ab0f69a0971272d1a066dd2430f048'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -135,7 +139,7 @@ default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
 default['stash']['backup_client']['password']     = 'changeit'
 default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.8.2'
+default['stash']['backup_client']['version']      = '1.9.1'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base']     =
@@ -168,6 +172,8 @@ when '1.6.0' then '6605a8fbeab3f60567832f2bdba790583646b7ba637eee5b1da8148b5ecac
 when '1.7.0' then '5f2c14e58c98ba90b0de5e6083b6d1892802f2d68b845b594e62d691bf386d0c'
 when '1.8.0' then '0997e056a5befeed5f85b1e4cbe72115d7bd20f2ba30e7b7a105bcc1d3912e76'
 when '1.8.2' then 'ff41c353f73fe90cb0e67860cff7b021833e23df6c49232d1b102a0eae575127'
+when '1.9.0' then '620776f107a9c10f57f59e52be795621f0f0b8277805e28fff7dc664bbb48fb3'
+when '1.9.1' then '3cdad3393611d2c8d151c7d265ebd04764cbaba4a4d745a8b534dd9b8cf77d7b'
 end
 
 default['stash']['backup_client']['cron']['day'] = '*'
@@ -185,7 +191,7 @@ default['stash']['database']['user']     = 'stash'
 
 default['stash']['jvm']['minimum_memory']  = '512m'
 default['stash']['jvm']['maximum_memory']  = '768m'
-default['stash']['jvm']['maximum_permgen'] = '256m'
+default['stash']['jvm']['maximum_permgen'] = '384m'
 default['stash']['jvm']['java_opts']       = ''
 default['stash']['jvm']['support_args']    = ''
 

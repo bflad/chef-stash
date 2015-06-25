@@ -80,6 +80,7 @@ Vagrant.configure('2') do |config|
       }
     }
     chef.run_list = [
+      'recipe[apt]',
       'recipe[java]',
       "recipe[#{cookbook}]",
       'recipe[stash::backup_client_cron]'

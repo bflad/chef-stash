@@ -14,7 +14,7 @@ action :enable do
   }
 
   unless @current_resource.enabled
-    converge_by("Enable #{ @new_resource }") do
+    converge_by("Enable #{@new_resource}") do
       enable(server, user, hook_opts)
     end
     new_resource.updated_by_last_action(true)
@@ -32,7 +32,7 @@ action :configure do
   settings = @new_resource.settings
 
   unless @current_resource.configured && settings.diff(@current_resource.settings).empty?
-    converge_by("Configure #{ @new_resource }") do
+    converge_by("Configure #{@new_resource}") do
       configure(server, user, hook_opts, settings)
     end
     new_resource.updated_by_last_action(true)
@@ -49,7 +49,7 @@ action :disable do
   }
 
   if @current_resource.enabled
-    converge_by("Disable #{ @new_resource }") do
+    converge_by("Disable #{@new_resource}") do
       disable(server, user, hook_opts)
     end
     new_resource.updated_by_last_action(true)

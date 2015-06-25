@@ -54,7 +54,7 @@ install_type | Stash install type - "standalone" only for now | String | standal
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
-version | Stash version to install | String | 3.8.0
+version | Stash version to install | String | 3.10.0
 
 ### Stash Backup Client Attributes
 
@@ -69,7 +69,7 @@ install_path | location to install Stash Backup Client | String | /opt/atlassian
 password | Stash administrative user password | String | changeit
 url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
 user | Stash administrative user | String | admin
-version | Stash Backup Client version to install | String | 1.8.2
+version | Stash Backup Client version to install | String | 1.9.1
 
 ### Stash Backup Client Cron Attributes
 
@@ -107,7 +107,7 @@ Attribute | Description | Type | Default
 ----------|-------------|------|--------
 minimum_memory | JVM minimum memory | String | 512m
 maximum_memory | JVM maximum memory | String | 768m
-maximum_permgen | JVM maximum PermGen memory | String | 256m
+maximum_permgen | JVM maximum PermGen memory | String | 384m
 java_opts | additional JAVA_OPTS to be passed to Stash JVM during startup | String | ""
 support_args | additional JAVA_OPTS recommended by Atlassian support for Stash JVM during startup | String | ""
 
@@ -298,4 +298,6 @@ Please see license information in: [LICENSE](LICENSE)
 * Ramon Makkelie (@ramonskie)
 * Martin (@martianus)
 * Mikhail Zholobov (@legal90)
+* Claudio Rivabene (@crivabene)
+* Patrick Connolly (@patcon)
 * Lincoln Lee (@linc01n)
