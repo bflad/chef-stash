@@ -61,6 +61,19 @@ module Stash
       response
     end
 
+    def stash_get_paged(uri, user, success_codes = ['200'])
+      last_page = false
+      result = Array.new
+      while !last_page do
+        response = stash_get(uri,user,success_codes)
+        Chef::Log.info("Stash API response: #{response.body}")
+        data = JSON.parse(response.body)
+        last_page = data['isLastPage']
+        result += data['values']
+      end
+      result
+    end
+
     def stash_delete(uri, user, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true

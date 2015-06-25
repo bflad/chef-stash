@@ -16,8 +16,17 @@ action :create do
     converge_by("Creating #{ @new_resource }") do
       create(server, user, repo_opts)
     end
-    new_resource.updated_by_last_action(true)
   end
+  update_perms(server, user, repo_opts, "group", "REPO_ADMIN", @current_resource.admin_groups, @new_resource.admin_groups)
+  update_perms(server, user, repo_opts, "group", "REPO_WRITE", @current_resource.write_groups, @new_resource.write_groups)
+  update_perms(server, user, repo_opts, "group", "REPO_READ", @current_resource.read_groups, @new_resource.read_groups)
+  update_perms(server, user, repo_opts, "user", "REPO_ADMIN", @current_resource.admin_users, @new_resource.admin_users)
+  update_perms(server, user, repo_opts, "user", "REPO_WRITE", @current_resource.write_users, @new_resource.write_users)
+  update_perms(server, user, repo_opts, "user", "REPO_READ", @current_resource.read_users, @new_resource.read_users)
+
+#TODO: fix this to reflect if change actually happened
+  new_resource.updated_by_last_action(true)
+
 end
 
 action :delete do
@@ -49,6 +58,36 @@ def load_current_resource
 
   @current_resource = Chef::Resource::StashRepo.new(repo_opts['repo'])
   @current_resource.exists = exists?(server, user, repo_opts)
+
+  # Load in existing permissions if the repo already exists
+  if @current_resource.exists
+    groups = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/groups"),user)
+    groups.each do |group|
+      Chef::Log.debug("Group name: #{group['group']['name']} permission: #{group['permission']}")
+      case group['permission']
+
+      when 'REPO_ADMIN'
+        @current_resource.admin_groups.push(group['group']['name'])
+      when 'REPO_WRITE'
+        @current_resource.write_groups.push(group['group']['name'])
+      when 'REPO_READ'
+        @current_resource.read_groups.push(group['group']['name'])
+      end
+    end
+    users = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/users"), user)
+    users.each do |user|
+      case user['permission']
+
+      when 'REPO_ADMIN'
+        @current_resource.admin_users.push(user['user']['name'])
+      when 'REPO_WRITE'
+        @current_resource.user_users.push(group['user']['name'])
+      when 'REPO_READ'
+        @current_resource.read_users.push(group['user']['name'])
+      end
+    end
+  end
+
 end
 
 private
@@ -81,4 +120,25 @@ def delete(server, user, repo_opts)
   Chef::Log.debug("Deleting #{repo_opts['repo']} in #{repo_opts['project']}...")
   uri = stash_uri(server, repo_uri(repo_opts))
   stash_delete(uri, user, ['202'])
+end
+
+def update_perms(server, user, repo_opts, type, permission, current_list, new_list)
+  to_add = new_list - current_list
+  to_remove = current_list - new_list
+  base_uri = "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/#{type}s"
+  to_add.each do |item|
+    converge_by("add #{permission} to #{type} #{item} on repo #{repo_opts['repo']} in project #{repo_opts['project']}") do
+      uri = stash_uri(server, "#{base_uri}?permission=#{permission}&name=#{item}")
+      Chef::Log.debug "Stash Request: PUT |#{uri.request_uri}|"
+      stash_put(uri, user, nil, ['204'])
+    end
+  end
+
+  to_remove.each do |item|
+    converge_by("remove #{permission} from #{type} #{item} on repo #{repo_opts['repo']} in project #{repo_opts['project']}") do
+      uri = stash_uri(server, "#{base_uri}?name=#{item}")
+      Chef::Log.debug "Stash Request: DELETE |#{uri.request_uri}|"
+      stash_delete(uri, user, ['204'])
+    end
+  end
 end
