@@ -63,9 +63,9 @@ module Stash
 
     def stash_get_paged(uri, user, success_codes = ['200'])
       last_page = false
-      result = Array.new
-      while !last_page do
-        response = stash_get(uri,user,success_codes)
+      result = []
+      until last_page
+        response = stash_get(uri, user, success_codes)
         Chef::Log.info("Stash API response: #{response.body}")
         data = JSON.parse(response.body)
         last_page = data['isLastPage']
@@ -99,9 +99,7 @@ module Stash
       gem_installer.version version
 
       # Only override defaults gem source if one is passed
-      if source
-        gem_installer.options "--clear-sources --source #{source}"
-      end
+      gem_installer.options "--clear-sources --source #{source}" if source
       gem_installer.action :install
       gem_installer.after_created
 

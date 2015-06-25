@@ -16,16 +16,15 @@ attribute :write_users, :kind_of => Array
 attribute :admin_users, :kind_of => Array
 attr_accessor :exists
 
-def initialize(name, run_context=nil)
-	super
+def initialize(name, run_context = nil)
+  super
 
-	@admin_groups = Array.new
-	@write_groups = Array.new
-	@read_groups = Array.new
-	@admin_users = Array.new
-	@write_users = Array.new
-	@read_users = Array.new
+  @admin_groups = []
+  @write_groups = []
+  @read_groups = []
+  @admin_users = []
+  @write_users = []
+  @read_users = []
 
-	@action = :create
-
+  @action = :create
 end

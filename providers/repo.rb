@@ -17,16 +17,15 @@ action :create do
       create(server, user, repo_opts)
     end
   end
-  update_perms(server, user, repo_opts, "group", "REPO_ADMIN", @current_resource.admin_groups, @new_resource.admin_groups)
-  update_perms(server, user, repo_opts, "group", "REPO_WRITE", @current_resource.write_groups, @new_resource.write_groups)
-  update_perms(server, user, repo_opts, "group", "REPO_READ", @current_resource.read_groups, @new_resource.read_groups)
-  update_perms(server, user, repo_opts, "user", "REPO_ADMIN", @current_resource.admin_users, @new_resource.admin_users)
-  update_perms(server, user, repo_opts, "user", "REPO_WRITE", @current_resource.write_users, @new_resource.write_users)
-  update_perms(server, user, repo_opts, "user", "REPO_READ", @current_resource.read_users, @new_resource.read_users)
+  update_perms(server, user, repo_opts, 'group', 'REPO_ADMIN', @current_resource.admin_groups, @new_resource.admin_groups)
+  update_perms(server, user, repo_opts, 'group', 'REPO_WRITE', @current_resource.write_groups, @new_resource.write_groups)
+  update_perms(server, user, repo_opts, 'group', 'REPO_READ', @current_resource.read_groups, @new_resource.read_groups)
+  update_perms(server, user, repo_opts, 'user', 'REPO_ADMIN', @current_resource.admin_users, @new_resource.admin_users)
+  update_perms(server, user, repo_opts, 'user', 'REPO_WRITE', @current_resource.write_users, @new_resource.write_users)
+  update_perms(server, user, repo_opts, 'user', 'REPO_READ', @current_resource.read_users, @new_resource.read_users)
 
-#TODO: fix this to reflect if change actually happened
+  # TODO: fix this to reflect if change actually happened
   new_resource.updated_by_last_action(true)
-
 end
 
 action :delete do
@@ -47,7 +46,7 @@ end
 
 def load_current_resource
   server = @new_resource.server
-  user = @new_resource.user
+  login_user = @new_resource.user
   repo_opts = {
     'project' => @new_resource.project,
     'repo' => @new_resource.repo
@@ -57,11 +56,11 @@ def load_current_resource
   install_chef_vault(@new_resource.chef_vault_source, @new_resource.chef_vault_version)
 
   @current_resource = Chef::Resource::StashRepo.new(repo_opts['repo'])
-  @current_resource.exists = exists?(server, user, repo_opts)
+  @current_resource.exists = exists?(server, login_user, repo_opts)
 
   # Load in existing permissions if the repo already exists
   if @current_resource.exists
-    groups = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/groups"),user)
+    groups = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/groups"), login_user)
     groups.each do |group|
       Chef::Log.debug("Group name: #{group['group']['name']} permission: #{group['permission']}")
       case group['permission']
@@ -74,20 +73,19 @@ def load_current_resource
         @current_resource.read_groups.push(group['group']['name'])
       end
     end
-    users = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/users"), user)
+    users = stash_get_paged(stash_uri(server, "projects/#{repo_opts['project']}/repos/#{repo_opts['repo']}/permissions/users"), login_user)
     users.each do |user|
       case user['permission']
 
       when 'REPO_ADMIN'
         @current_resource.admin_users.push(user['user']['name'])
       when 'REPO_WRITE'
-        @current_resource.user_users.push(group['user']['name'])
+        @current_resource.user_users.push(user['user']['name'])
       when 'REPO_READ'
-        @current_resource.read_users.push(group['user']['name'])
+        @current_resource.read_users.push(user['user']['name'])
       end
     end
   end
-
 end
 
 private
