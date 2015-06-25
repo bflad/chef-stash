@@ -36,8 +36,10 @@ end
 template "#{node['stash']['install_path']}/stash/conf/web.xml" do
   if stash_version.major == 1
     source 'web.xml.erb'
-  else
+  elsif stash_version < Chef::Version.new('3.8.0')
     source 'web-tomcat7.xml.erb'
+  else
+    source '3.8+/web.xml'
   end
   owner node['stash']['user']
   mode '0644'
