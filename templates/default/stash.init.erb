@@ -64,9 +64,9 @@ case "$1" in
   status)
     <% case node['platform_family'] -%>
     <% when 'rhel' -%>
-    status -p $BASE/work/catalina.pid $APP
+    status -p /var/run/stash/catalina.pid $APP
     <% else -%>
-    status_of_proc -p $BASE/work/catalina.pid $JAVA_HOME/bin/java $APP
+    status_of_proc -p /var/run/stash/catalina.pid $JAVA_HOME/bin/java $APP
     <% end -%>
     RETVAL=$?
     ;;
@@ -75,5 +75,5 @@ case "$1" in
     RETVAL=2
     ;;
 esac
- 
+
 exit $RETVAL

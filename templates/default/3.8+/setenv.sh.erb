@@ -288,9 +288,9 @@ fi
 # set the location of the pid file
 if [ -z "$CATALINA_PID" ] ; then
     if [ -n "$CATALINA_BASE" ] ; then
-        CATALINA_PID="$CATALINA_BASE"/work/catalina.pid
+        CATALINA_PID=/var/run/stash/catalina.pid
     elif [ -n "$CATALINA_HOME" ] ; then
-        CATALINA_PID="$CATALINA_HOME"/work/catalina.pid
+        CATALINA_PID=/var/run/stash/catalina.pid
     fi
 fi
 export CATALINA_PID

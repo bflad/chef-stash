@@ -45,3 +45,10 @@ template "#{node['stash']['install_path']}/stash/conf/web.xml" do
   mode '0644'
   notifies :restart, 'service[stash]', :delayed
 end
+
+directory '/var/run/stash' do
+  owner 'stash'
+  group 'stash'
+  mode '0755'
+  action :create
+end
