@@ -8,7 +8,11 @@ database_connection = {
 case settings['database']['type']
 when 'mysql'
   include_recipe 'mysql::server'
-  include_recipe 'database::mysql'
+
+  mysql2_chef_gem 'default' do
+    action :install
+  end
+
   database_connection.merge!(:username => 'root', :password => node['mysql']['server_root_password'])
 
   mysql_database settings['database']['name'] do
