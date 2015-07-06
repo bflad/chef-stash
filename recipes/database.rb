@@ -8,6 +8,7 @@ database_connection = {
 case settings['database']['type']
 when 'mysql'
   mysql2_chef_gem 'default' do
+    client_version settings['database']['version']
     action :install
   end
 
