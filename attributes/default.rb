@@ -183,12 +183,13 @@ default['stash']['backup_client']['cron']['minute'] = '0'
 default['stash']['backup_client']['cron']['month'] = '*'
 default['stash']['backup_client']['cron']['weekday'] = '*'
 
+default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['version']  = '5.6'
+
 default['stash']['database']['host']     = 'localhost'
 default['stash']['database']['name']     = 'stash'
 default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['testInterval'] = 2
-default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['user']     = 'stash'
 
 default['stash']['jvm']['minimum_memory']  = '512m'
