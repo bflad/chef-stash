@@ -14,7 +14,8 @@ when 'mysql'
   mysql_service 'default' do
     version settings['database']['version']
     bind_address settings['database']['host']
-    port '3306'
+    # See: https://github.com/chef-cookbooks/mysql/pull/361
+    port settings['database']['port'].to_s
     data_dir node['mysql']['data_dir'] if node['mysql']['data_dir']
     initial_root_password node['mysql']['server_root_password']
     action [:create, :start]

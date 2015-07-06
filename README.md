@@ -94,7 +94,7 @@ Attribute | Description | Type | Default
 host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server) | String | localhost
 name | Stash database name | String | stash
 password | Stash database user password | String | changeit
-port | Stash database port | Fixnum | 3306
+port | Stash database port | String | 3306
 testInterval | Stash database pool idle test interval in minutes | Fixnum | 2
 type | Stash database type - "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver" | String | mysql
 user | Stash database user | String | stash
