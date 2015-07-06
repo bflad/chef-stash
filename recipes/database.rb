@@ -33,7 +33,7 @@ when 'mysql'
   # See this MySQL bug: http://bugs.mysql.com/bug.php?id=31061
   mysql_database_user '' do
     connection database_connection
-    host 'localhost'
+    host '127.0.0.1'
     action :drop
   end
 
