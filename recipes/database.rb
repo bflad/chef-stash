@@ -7,10 +7,17 @@ database_connection = {
 
 case settings['database']['type']
 when 'mysql'
-  include_recipe 'mysql::server'
-
   mysql2_chef_gem 'default' do
     action :install
+  end
+
+  mysql_service 'default' do
+    version settings['database']['version']
+    bind_address settings['database']['host']
+    port '3306'
+    data_dir node['mysql']['data_dir'] if node['mysql']['data_dir']
+    initial_root_password node['mysql']['server_root_password']
+    action [:create, :start]
   end
 
   database_connection.merge!(:username => 'root', :password => node['mysql']['server_root_password'])

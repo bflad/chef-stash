@@ -183,6 +183,7 @@ default['stash']['backup_client']['cron']['minute'] = '0'
 default['stash']['backup_client']['cron']['month'] = '*'
 default['stash']['backup_client']['cron']['weekday'] = '*'
 
+default['stash']['database']['version']  = '5.6'
 default['stash']['database']['host']     = 'localhost'
 default['stash']['database']['name']     = 'stash'
 default['stash']['database']['password'] = 'changeit'
