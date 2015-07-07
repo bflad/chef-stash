@@ -11,19 +11,41 @@ platforms:
 - name: centos-6
   driver_config:
     box: chef/centos-6.6
+  run_list:
+  - recipe[yum]
 - name: centos-7
   driver_config:
     box: chef/centos-7.0
+  run_list:
+  - recipe[yum]
 - name: ubuntu-12.04
   driver_config:
     box: chef/ubuntu-12.04
+  run_list:
+  - recipe[apt]
 - name: ubuntu-14.04
   driver_config:
     box: chef/ubuntu-14.04
+  run_list:
+  - recipe[apt]
+
+default_attributes: &DEFAULT_ATTRIBUTES
+  java:
+    install_flavor: oracle
+    java_home: /usr/lib/jvm/java-7-oracle
+    jdk_version: 7
+    oracle:
+      accept_oracle_download_terms: true
 
 suites:
-- name: default
+- name: default # mysql
   run_list:
-  - recipe[minitest-handler]
-  - recipe[stash_test]
-  attributes: {}
+  - recipe[test-helper]
+  - recipe[java]
+  - recipe[stash]
+  attributes:
+    <<: *DEFAULT_ATTRIBUTES
+    mysql:
+      server_root_password: iloverandompasswordsbutthiswilldo
+      server_repl_password: iloverandompasswordsbutthiswilldo
+      server_debian_password: iloverandompasswordsbutthiswilldo
