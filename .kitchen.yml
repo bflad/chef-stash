@@ -29,8 +29,3 @@ suites:
   - recipe[minitest-handler]
   - recipe[stash_test]
   attributes: {}
-- name: apache2
-  run_list:
-  - recipe[minitest-handler]
-  - recipe[stash_test::apache2]
-  attributes: {}
