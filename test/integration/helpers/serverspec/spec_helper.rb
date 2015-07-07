@@ -26,7 +26,7 @@ shared_examples_for 'database' do
   # Other DBs should not be available
   possible_bins.each do |uninstalled_bin|
     describe command("command -v #{uninstalled_bin}") do
-      its(:exit_status) { should eq 1 }
+      its(:exit_status) { should_not eq 0 }
     end
   end
 end
