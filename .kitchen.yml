@@ -38,7 +38,7 @@ default_attributes: &DEFAULT_ATTRIBUTES
       accept_oracle_download_terms: true
 
 suites:
-- name: default # mysql
+- name: mysql # default
   run_list:
   - recipe[test-helper]
   - recipe[java]
