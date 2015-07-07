@@ -49,3 +49,16 @@ suites:
       server_root_password: iloverandompasswordsbutthiswilldo
       server_repl_password: iloverandompasswordsbutthiswilldo
       server_debian_password: iloverandompasswordsbutthiswilldo
+- name: postgresql
+  run_list:
+  - recipe[test-helper]
+  - recipe[java]
+  - recipe[stash]
+  attributes:
+    <<: *DEFAULT_ATTRIBUTES
+    stash:
+      database:
+        type: postgresql
+    postgresql:
+      password:
+        postgres: iloverandompasswordsbutthiswilldo

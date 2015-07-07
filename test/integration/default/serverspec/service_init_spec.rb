@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 # Default tests are in spec_helper.
-describe 'postgresql' do
+describe 'mysql' do
   it_behaves_like 'stash'
 end
 
