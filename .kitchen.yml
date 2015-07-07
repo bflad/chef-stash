@@ -38,7 +38,7 @@ default_attributes: &DEFAULT_ATTRIBUTES
       accept_oracle_download_terms: true
 
 suites:
-- name: default # mysql
+- name: mysql # default
   run_list:
   - recipe[test-helper]
   - recipe[java]
@@ -49,3 +49,16 @@ suites:
       server_root_password: iloverandompasswordsbutthiswilldo
       server_repl_password: iloverandompasswordsbutthiswilldo
       server_debian_password: iloverandompasswordsbutthiswilldo
+- name: postgresql
+  run_list:
+  - recipe[test-helper]
+  - recipe[java]
+  - recipe[stash]
+  attributes:
+    <<: *DEFAULT_ATTRIBUTES
+    stash:
+      database:
+        type: postgresql
+    postgresql:
+      password:
+        postgres: iloverandompasswordsbutthiswilldo
