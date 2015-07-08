@@ -1,5 +1,7 @@
 # chef-stash  [![Build Status](https://secure.travis-ci.org/bflad/chef-stash.png?branch=master)](http://travis-ci.org/bflad/chef-stash)
 
+##![](https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png) We are preparing for 4.0.0 release which makes the git repo not stable for now. Please use cookbook from [Supermarket](https://supermarket.chef.io/cookbooks/stash/) for the time being.
+
 ## Description
 
 Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/) server and [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client). Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
