@@ -183,12 +183,17 @@ default['stash']['backup_client']['cron']['minute'] = '0'
 default['stash']['backup_client']['cron']['month'] = '*'
 default['stash']['backup_client']['cron']['weekday'] = '*'
 
-default['stash']['database']['host']     = 'localhost'
+default['stash']['database']['type']     = 'mysql'
+default['stash']['database']['version']  = '5.6'
+
+default['stash']['database']['host']     = '127.0.0.1'
 default['stash']['database']['name']     = 'stash'
 default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['testInterval'] = 2
-default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['user']     = 'stash'
+
+# See `libraries/stash.rb` for code to set actual default port
+default['stash']['database']['port']     =  nil
 
 default['stash']['jvm']['minimum_memory']  = '512m'
 default['stash']['jvm']['maximum_memory']  = '768m'

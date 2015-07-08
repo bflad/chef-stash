@@ -7,8 +7,21 @@ database_connection = {
 
 case settings['database']['type']
 when 'mysql'
-  include_recipe 'mysql::server'
-  include_recipe 'database::mysql'
+  mysql2_chef_gem 'default' do
+    client_version settings['database']['version']
+    action :install
+  end
+
+  mysql_service 'default' do
+    version settings['database']['version']
+    bind_address settings['database']['host']
+    # See: https://github.com/chef-cookbooks/mysql/pull/361
+    port settings['database']['port'].to_s
+    data_dir node['mysql']['data_dir'] if node['mysql']['data_dir']
+    initial_root_password node['mysql']['server_root_password']
+    action [:create, :start]
+  end
+
   database_connection.merge!(:username => 'root', :password => node['mysql']['server_root_password'])
 
   mysql_database settings['database']['name'] do
@@ -21,7 +34,7 @@ when 'mysql'
   # See this MySQL bug: http://bugs.mysql.com/bug.php?id=31061
   mysql_database_user '' do
     connection database_connection
-    host 'localhost'
+    host '127.0.0.1'
     action :drop
   end
 

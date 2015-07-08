@@ -9,7 +9,7 @@ else
 end
 include_recipe 'perl'
 
-include_recipe 'stash::database' if settings['database']['host'] == 'localhost'
+include_recipe 'stash::database' if settings['database']['host'] == '127.0.0.1'
 include_recipe "stash::#{platform}_#{node['stash']['install_type']}"
 include_recipe 'stash::configuration'
 include_recipe 'stash::tomcat_configuration'

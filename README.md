@@ -1,5 +1,7 @@
 # chef-stash  [![Build Status](https://secure.travis-ci.org/bflad/chef-stash.png?branch=master)](http://travis-ci.org/bflad/chef-stash)
 
+##![](https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png) We are preparing for 4.0.0 release which makes the git repo not stable for now. Please use cookbook from [Supermarket](https://supermarket.chef.io/cookbooks/stash/) for the time being.
+
 ## Description
 
 Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/) server and [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client). Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
@@ -91,10 +93,10 @@ All of these `node['stash']['database']` attributes are overridden by `stash/sta
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server) | String | localhost
+host | FQDN or "127.0.0.1" (127.0.0.1 automatically installs `['database']['type']` server) | String | 127.0.0.1
 name | Stash database name | String | stash
 password | Stash database user password | String | changeit
-port | Stash database port | Fixnum | 3306
+port | Stash database port | String | 3306
 testInterval | Stash database pool idle test interval in minutes | Fixnum | 2
 type | Stash database type - "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver" | String | mysql
 user | Stash database user | String | stash
@@ -172,7 +174,7 @@ For securely overriding attributes on Hosted Chef, create a `stash/stash` encryp
 
 _required:_
 * `['database']['type']` "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver"
-* `['database']['host']` FQDN or "localhost" (localhost automatically
+* `['database']['host']` FQDN or "127.0.0.1" (127.0.0.1 automatically
   installs `['database']['type']` server)
 * `['database']['name']` Name of Stash database
 * `['database']['user']` Stash database username
@@ -195,7 +197,7 @@ Repeat for other Chef environments as necessary. Example:
       "development": {
         "database": {
           "type": "postgresql",
-          "host": "localhost",
+          "host": "127.0.0.1",
           "name": "stash",
           "user": "stash",
           "password": "stash_db_password",
