@@ -135,8 +135,20 @@ else
   default['stash']['apache2']['ssl']['key_file']         = '/etc/ssl/private/ssl-cert-snakeoil.key'
 end
 
-default['stash']['backup_client']['backup_path']  = '/tmp'
-default['stash']['backup_client']['baseurl']      = "https://#{node['fqdn']}/"
+default['stash']['backup']['strategy']  = 'backup_client'
+
+default['stash']['backup']['backup_path']  = '/tmp'
+default['stash']['backup']['baseurl']      = "https://#{node['fqdn']}/"
+default['stash']['backup']['password']     = 'changeit'
+default['stash']['backup']['user']         = 'admin'
+
+default['stash']['backup']['cron']['enable'] = false
+default['stash']['backup']['cron']['day'] = '*'
+default['stash']['backup']['cron']['hour'] = '0'
+default['stash']['backup']['cron']['minute'] = '0'
+default['stash']['backup']['cron']['month'] = '*'
+default['stash']['backup']['cron']['weekday'] = '*'
+
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
 default['stash']['backup_client']['password']     = 'changeit'
 default['stash']['backup_client']['user']         = 'admin'
@@ -177,11 +189,20 @@ when '1.9.0' then '620776f107a9c10f57f59e52be795621f0f0b8277805e28fff7dc664bbb48
 when '1.9.1' then '3cdad3393611d2c8d151c7d265ebd04764cbaba4a4d745a8b534dd9b8cf77d7b'
 end
 
-default['stash']['backup_client']['cron']['day'] = '*'
-default['stash']['backup_client']['cron']['hour'] = '0'
-default['stash']['backup_client']['cron']['minute'] = '0'
-default['stash']['backup_client']['cron']['month'] = '*'
-default['stash']['backup_client']['cron']['weekday'] = '*'
+default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
+default['stash']['backup_diy']['repo_url']  = 'https://bitbucket.org/atlassianlabs/atlassian-stash-diy-backup.git'
+default['stash']['backup_diy']['revision'] = 'master'
+
+default['stash']['backup_diy']['backup_home_type'] = 'rsync'
+default['stash']['backup_diy']['backup_archive_type'] = 'tar'
+default['stash']['backup_diy']['exclude_repos'] = []
+default['stash']['backup_diy']['gpg_recipient'] = ''
+default['stash']['backup_diy']['temp_path'] = '/tmp/stash-backup-temp'
+default['stash']['backup_diy']['verbose'] = true
+
+default['stash']['backup_diy']['hipchat_url'] = 'https://api.hipchat.com'
+default['stash']['backup_diy']['hipchat_room'] = ''
+default['stash']['backup_diy']['hipchat_token'] = ''
 
 default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['version']  = '5.6'
