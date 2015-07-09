@@ -205,7 +205,9 @@ default['stash']['backup_diy']['hipchat_room'] = ''
 default['stash']['backup_diy']['hipchat_token'] = ''
 
 default['stash']['database']['type']     = 'mysql'
-default['stash']['database']['version']  = '5.5'
+# When not set, the defaults from mysql cookbook are used.
+# See: https://github.com/chef-cookbooks/mysql/blob/v6.0.26/libraries/helpers.rb#L414-L432
+default['stash']['database']['version']  = nil
 
 default['stash']['database']['host']     = '127.0.0.1'
 default['stash']['database']['name']     = 'stash'

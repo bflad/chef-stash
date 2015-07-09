@@ -8,12 +8,12 @@ database_connection = {
 case settings['database']['type']
 when 'mysql'
   mysql2_chef_gem 'default' do
-    client_version settings['database']['version']
+    client_version settings['database']['version'] if settings['database']['version']
     action :install
   end
 
   mysql_service 'default' do
-    version settings['database']['version']
+    version settings['database']['version'] if settings['database']['version']
     bind_address settings['database']['host']
     # See: https://github.com/chef-cookbooks/mysql/pull/361
     port settings['database']['port'].to_s
