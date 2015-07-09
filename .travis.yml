@@ -1,10 +1,44 @@
 language: ruby
-bundler_args: --without integration
+
 cache: bundler
-sudo: false
+
 rvm:
-  - 2.0.0
+- 2.0.0
+
+env:
+  global:
+    # Uses public key of private keypair set up in `before_install` task.
+  - DIGITALOCEAN_SSH_KEY_IDS="970381"
+    # DIGITALOCEAN_ACCESS_TOKEN
+  - secure: "LYbpXAi9+TuzF4kuMiJTXKbgqnPGkokdX0dm+REduODCzORbPlmcfhdJNSpbYOE+PAM9uqjtAlHiuZQ5dvHdP7HgELcFFOhFEvjCWGypxBBMCNbBp6BCMX2wkUPgATqdkyEMsznCQEDbtK61OuJAMT082X7DQVo1qwWnsEmx8cAsIy9hw1c6yXGMDM8nv3ymSwu9FyQ6Vje8d0ZzLy06OkRs8T60LekzZBBus5wESRf0E8wy4I51qLZbndkCgLA/WyAKpK5rczJP3Ve5DNbMBJHyyYILYN7vKyb0JlOdI97juqa6bJYcsBA2EmpYISfWEzTW4hd5hPModqzjHxHPGada4y7rE7w6FEAXO4N/flxJe/tFe2/fHs8sLO3b8awh3YWVJ0FMP/gl8biXAc42DSiF9flMRc9eM0bqDqijOmK+LLL3FoIP7nRnvF2evcZ6bdLkNH9MnkomCliAovPfaDfD4UQXkRN5Nl5HwcIhCvve3j6Uq7o633r409R6Qc5k1ri63FIya/Iyddo4jHYperSv6/ISgwdfGGeRBpP7cZJ/ZA+tCRdQFjELwjG91Pen4im59qjc2IkVV+XrKhde7Hpl4PgiRDeWW230v8obS4Y31iL/usMm1c1UIgW2azrS7TaFdMJBmLOaO68eRJpyyqz5pGZ5tSgWMNaogD/Am5M="
+
+before_install:
+  # Decrypt pre-generated private key
+  # See: http://docs.travis-ci.com/user/encrypting-files/
+- openssl aes-256-cbc -K $encrypted_370ffe2e34a2_key -iv $encrypted_370ffe2e34a2_iv -in test/support/travis_id_rsa.key.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+  # Re-generate public key from private
+- ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
+
 before_script:
-  - bundle exec berks install
+- cp .kitchen.travis.yml .kitchen.local.yml
+
 script:
-  - bundle exec rake travis
+- bundle exec rake style:ruby
+- bundle exec rake style:chef
+- bundle exec kitchen create
+- bundle exec kitchen converge
+- bundle exec kitchen verify
+
+after_failure:
+- cat .kitchen/logs/*.log
+
+after_script:
+- bundle exec kitchen destroy
+
+branches:
+  only:
+  - master
+
+notifications:
+  email: false
