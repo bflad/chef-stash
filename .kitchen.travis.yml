@@ -1,0 +1,17 @@
+driver:
+  name: digitalocean
+  private_networking: false
+
+platforms:
+- name: centos-6
+  driver_config:
+    image: centos-6-5-x64
+- name: centos-7
+  driver_config:
+    image: centos-7-0-x64
+- name: ubuntu-12.04
+  driver_config:
+    image: ubuntu-12-04-x64
+- name: ubuntu-14.04
+  driver_config:
+    image: ubuntu-14-04-x64
