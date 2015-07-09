@@ -205,7 +205,7 @@ default['stash']['backup_diy']['hipchat_room'] = ''
 default['stash']['backup_diy']['hipchat_token'] = ''
 
 default['stash']['database']['type']     = 'mysql'
-default['stash']['database']['version']  = '5.6'
+default['stash']['database']['version']  = '5.5'
 
 default['stash']['database']['host']     = '127.0.0.1'
 default['stash']['database']['name']     = 'stash'
