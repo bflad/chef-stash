@@ -39,7 +39,7 @@ after_script:
 
 branches:
   only:
-  - master
+  - feature/108-test-kitchen-cloud
 
 notifications:
   email: false
