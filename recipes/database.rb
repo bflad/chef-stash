@@ -17,12 +17,11 @@ when 'mysql'
     bind_address settings['database']['host']
     # See: https://github.com/chef-cookbooks/mysql/pull/361
     port settings['database']['port'].to_s
-    data_dir node['mysql']['data_dir'] if node['mysql']['data_dir']
-    initial_root_password node['mysql']['server_root_password']
+    initial_root_password settings['database']['password']
     action [:create, :start]
   end
 
-  database_connection.merge!(:username => 'root', :password => node['mysql']['server_root_password'])
+  database_connection.merge!(:username => 'root', :password => settings['database']['password'])
 
   mysql_database settings['database']['name'] do
     connection database_connection

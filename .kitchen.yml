@@ -45,10 +45,9 @@ suites:
   - recipe[stash]
   attributes:
     <<: *DEFAULT_ATTRIBUTES
-    mysql:
-      server_root_password: iloverandompasswordsbutthiswilldo
-      server_repl_password: iloverandompasswordsbutthiswilldo
-      server_debian_password: iloverandompasswordsbutthiswilldo
+    stash:
+      database:
+        password: iloverandompasswordsbutthiswilldo
 - name: postgresql
   run_list:
   - recipe[test-helper]
