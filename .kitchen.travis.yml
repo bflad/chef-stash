@@ -1,13 +1,12 @@
 driver:
   name: digitalocean
   private_networking: false
-  size: 512mb
+  size: 1024mb
 
 cloud_attributes: &CLOUD_ATTRIBUTES
   stash:
     jvm:
-      maximum_memory: 512m
-      maximum_permgen: 512m
+      maximum_memory: 1024m
 
 platforms:
 - name: centos-6
