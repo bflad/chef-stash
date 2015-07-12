@@ -13,6 +13,7 @@ group :test do
 end
 
 group :integration do
+  gem 'kitchen-digitalocean'
   gem 'busser-serverspec', '~> 0.2.6'
   gem 'kitchen-vagrant', '~> 0.15'
   gem 'test-kitchen', '~> 1.3'

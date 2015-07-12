@@ -9,6 +9,9 @@ else
 end
 include_recipe 'perl'
 
+include_recipe 'chef-sugar::default'
+require 'chef/sugar/core_extensions'
+
 include_recipe 'stash::database' if settings['database']['host'] == '127.0.0.1'
 include_recipe "stash::#{platform}_#{node['stash']['install_type']}"
 include_recipe 'stash::configuration'

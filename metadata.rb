@@ -23,6 +23,7 @@ supports 'ubuntu'
 
 depends 'apache2'
 depends 'ark'
+depends 'chef-sugar', '> 1.3.0'
 depends 'cron'
 depends 'database'
 depends 'git'
