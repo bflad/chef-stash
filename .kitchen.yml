@@ -9,18 +9,30 @@ driver_config:
 
 provisioner:
   name: chef_zero
+  attributes:
+    apt:
+      compile_time_update: true
+    java:
+      install_flavor: oracle
+      java_home: /usr/lib/jvm/java-7-oracle
+      jdk_version: 7
+      oracle:
+        accept_oracle_download_terms: true
 
 platforms:
+
 - name: centos-6
   driver_config:
     box: chef/centos-6.6
   run_list:
   - recipe[yum]
+
 - name: centos-7
   driver_config:
     box: chef/centos-7.0
   run_list:
   - recipe[yum]
+
 - name: ubuntu-12.04
   driver_config:
     box: chef/ubuntu-12.04
@@ -32,16 +44,6 @@ platforms:
   run_list:
   - recipe[apt]
 
-default_attributes: &DEFAULT_ATTRIBUTES
-  apt:
-    compile_time_update: true
-  java:
-    install_flavor: oracle
-    java_home: /usr/lib/jvm/java-7-oracle
-    jdk_version: 7
-    oracle:
-      accept_oracle_download_terms: true
-
 suites:
 - name: mysql # default
   run_list:
@@ -49,17 +51,16 @@ suites:
   - recipe[java]
   - recipe[stash]
   attributes:
-    <<: *DEFAULT_ATTRIBUTES
     stash:
       database:
         password: iloverandompasswordsbutthiswilldo
+
 - name: postgresql
   run_list:
   - recipe[test-helper]
   - recipe[java]
   - recipe[stash]
   attributes:
-    <<: *DEFAULT_ATTRIBUTES
     stash:
       database:
         type: postgresql
