@@ -29,9 +29,6 @@ script:
 - bundle exec rake style:chef
 - '[ "${TRAVIS_SECURE_ENV_VARS}" = "true" ] && bundle exec kitchen test --parallel'
 
-after_failure:
-# - cat .kitchen/logs/*.log
-
 after_script:
 - bundle exec kitchen list
 - bundle exec kitchen destroy
