@@ -11,6 +11,7 @@ provisioner:
   name: chef_zero
   attributes:
     apt:
+      # Some other cookbook's compile_time nonsense requires this... :/
       compile_time_update: true
     java:
       install_flavor: oracle
