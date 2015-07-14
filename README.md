@@ -1,4 +1,4 @@
-# chef-stash  [![Build Status](https://secure.travis-ci.org/bflad/chef-stash.png?branch=master)](http://travis-ci.org/bflad/chef-stash)
+# chef-stash  [![Build Status](https://secure.travis-ci.org/patcon/chef-stash.png?branch=feature/108-test-kitchen-cloud)](http://travis-ci.org/patcon/chef-stash)
 
 ##![](https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png) We are preparing for 4.0.0 release which makes the git repo not stable for now. Please use cookbook from [Supermarket](https://supermarket.chef.io/cookbooks/stash/) for the time being.
 
