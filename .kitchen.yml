@@ -7,6 +7,9 @@ driver_config:
   customize:
     memory: 1024
 
+provisioner:
+  name: chef_zero
+
 platforms:
 - name: centos-6
   driver_config:
