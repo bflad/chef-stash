@@ -1,5 +1,3 @@
-set['build_essential']['compiletime'] = true
-
 default['stash']['home_path']    = '/var/atlassian/application-data/stash'
 default['stash']['install_path'] = '/opt/atlassian'
 default['stash']['install_type'] = 'standalone'
