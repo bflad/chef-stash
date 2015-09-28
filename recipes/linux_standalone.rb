@@ -40,7 +40,7 @@ directory node['stash']['install_path'] do
   recursive true
 end
 
-ark 'stash' do
+ark node['stash']['product'] do
   url node['stash']['url']
   prefix_root node['stash']['install_path']
   prefix_home node['stash']['install_path']

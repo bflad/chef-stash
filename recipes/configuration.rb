@@ -4,8 +4,12 @@ stash_version = Chef::Version.new(node['stash']['version'])
 # Config path changed to shared/ from 3.2.0
 # https://confluence.atlassian.com/display/STASHKB/Upgrading+your+Stash+home+directory+for+Stash+3.2+manually
 if stash_version >= Chef::Version.new('3.2.0')
-  config_path = 'shared/'
-  directory("#{node['stash']['home_path']}/#{config_path}") do
+  if node['stash']['product'] == 'stash'
+    config_path = 'shared/stash-config.properties'
+  else
+    config_path = 'shared/bitbucket.properties'
+  end
+  directory("#{node['stash']['home_path']}/shared") do
     owner node['stash']['user']
     group node['stash']['user']
     mode '0755'
@@ -13,10 +17,10 @@ if stash_version >= Chef::Version.new('3.2.0')
     recursive true
   end
 else
-  config_path = '/'
+  config_path = '/stash-config.properties'
 end
 
-template "#{node['stash']['home_path']}/#{config_path}stash-config.properties" do
+template "#{node['stash']['home_path']}/#{config_path}" do
   source 'stash-config.properties.erb'
   owner node['stash']['user']
   mode '0644'
@@ -26,5 +30,5 @@ template "#{node['stash']['home_path']}/#{config_path}stash-config.properties" d
     :plugin     => settings['plugin'],
     :properties => settings['properties']
   )
-  notifies :restart, 'service[stash]', :delayed
+  notifies :restart, "service[#{node['stash']['product']}]", :delayed
 end
