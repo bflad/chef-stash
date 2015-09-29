@@ -154,8 +154,6 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['password']     = 'changeit'
-default['stash']['backup_client']['user']         = 'admin'
 default['stash']['backup_client']['version']      = '2.0.0'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
