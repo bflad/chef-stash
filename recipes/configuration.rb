@@ -8,7 +8,13 @@ if stash_version >= Chef::Version.new('3.2.0')
     config_path = 'shared/stash-config.properties'
   else
     config_path = 'shared/bitbucket.properties'
+
+    # delete old config file from stash, when both configs exist, bitbucket will not start
+    file "#{node['stash']['home_path']}/shared/stash-config.properties" do
+      action :delete
+    end
   end
+
   directory("#{node['stash']['home_path']}/shared") do
     owner node['stash']['user']
     group node['stash']['user']
