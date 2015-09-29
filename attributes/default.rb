@@ -1,4 +1,4 @@
-set['build_essential']['compiletime'] = true
+set['build-essential']['compile_time'] = true
 
 default['stash']['version']      = '4.0.1'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
