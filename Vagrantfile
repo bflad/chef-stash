@@ -67,8 +67,8 @@ Vagrant.configure('2') do |config|
     chef.json = {
       'java' => {
         'install_flavor' => 'oracle',
-        'java_home' => '/usr/lib/jvm/java-7-oracle',
-        'jdk_version' => '7',
+        'java_home' => '/usr/lib/jvm/java-8-oracle',
+        'jdk_version' => '8',
         'oracle' => {
           'accept_oracle_download_terms' => true
         }
