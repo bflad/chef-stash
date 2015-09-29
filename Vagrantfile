@@ -7,12 +7,12 @@ Vagrant.configure('2') do |config|
   config.omnibus.chef_version = :latest
 
   config.vm.define :centos6 do |centos6|
-    centos6.vm.box      = 'chef/centos-6.6'
+    centos6.vm.box      = 'chef/centos-6.7'
     centos6.vm.hostname = "#{cookbook}-centos-6"
   end
 
   config.vm.define :centos7 do |centos7|
-    centos7.vm.box      = 'chef/centos-7.0'
+    centos7.vm.box      = 'chef/centos-7.1'
     centos7.vm.hostname = "#{cookbook}-centos-7"
   end
 

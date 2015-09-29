@@ -6,7 +6,7 @@ describe 'postgresql' do
 end
 
 # Insert suite-specific tests below this line.
-describe service('stash') do
+describe service('bitbucket') do
   it { should be_enabled }
   it { should be_running }
 end
