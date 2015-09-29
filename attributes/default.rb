@@ -136,12 +136,12 @@ else
   default['stash']['apache2']['ssl']['key_file']         = '/etc/ssl/private/ssl-cert-snakeoil.key'
 end
 
-default['stash']['backup']['strategy']  = 'backup_client'
+default['stash']['backup']['strategy'] = 'backup_client'
 
-default['stash']['backup']['backup_path']  = '/tmp'
-default['stash']['backup']['baseurl']      = "https://#{node['fqdn']}/"
-default['stash']['backup']['password']     = 'changeit'
-default['stash']['backup']['user']         = 'admin'
+default['stash']['backup']['backup_path'] = '/tmp'
+default['stash']['backup']['baseurl']     = "https://#{node['fqdn']}/"
+default['stash']['backup']['password']    = 'changeit'
+default['stash']['backup']['user']        = 'admin'
 
 default['stash']['backup']['cron']['enable'] = false
 default['stash']['backup']['cron']['day'] = '*'
@@ -156,14 +156,14 @@ default['stash']['backup_client']['user']         = 'admin'
 default['stash']['backup_client']['version']      = '1.9.1'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
-default['stash']['backup_client']['url_base']     =
+default['stash']['backup_client']['url_base'] =
 if stash_backup_client_version <= Chef::Version.new('1.2.1')
   'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
 else
   'https://maven.atlassian.com/public/com/atlassian/stash/backup/stash-backup-distribution/'
 end
 
-default['stash']['backup_client']['url']      =
+default['stash']['backup_client']['url'] =
 if stash_backup_client_version <= Chef::Version.new('1.2.1')
   "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
 else
@@ -191,7 +191,7 @@ when '1.9.1' then '3cdad3393611d2c8d151c7d265ebd04764cbaba4a4d745a8b534dd9b8cf77
 end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
-default['stash']['backup_diy']['repo_url']  = 'https://bitbucket.org/atlassianlabs/atlassian-stash-diy-backup.git'
+default['stash']['backup_diy']['repo_url'] = 'https://bitbucket.org/atlassianlabs/atlassian-stash-diy-backup.git'
 default['stash']['backup_diy']['revision'] = 'master'
 
 default['stash']['backup_diy']['backup_home_type'] = 'rsync'
@@ -217,7 +217,7 @@ default['stash']['database']['testInterval'] = 2
 default['stash']['database']['user']     = 'stash'
 
 # See `libraries/stash.rb` for code to set actual default port
-default['stash']['database']['port']     =  nil
+default['stash']['database']['port']     = nil
 
 default['stash']['jvm']['minimum_memory']  = '512m'
 default['stash']['jvm']['maximum_memory']  = '768m'
