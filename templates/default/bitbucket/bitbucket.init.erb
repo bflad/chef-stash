@@ -19,6 +19,11 @@ BASE=<%= node['stash']['install_path'] %>/bitbucket
 
 PIDFILE=/var/run/bitbucket/catalina.pid
 
+if [ ! -d /var/run/bitbucket ]; then
+    mkdir -p /var/run/bitbucket
+    chown <%= node['stash']['user'] %>:<%= node['stash']['user'] %> /var/run/bitbucket
+fi
+
 start() {
     ./start-bitbucket.sh
 }
