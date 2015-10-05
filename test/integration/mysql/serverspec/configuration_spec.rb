@@ -6,7 +6,7 @@ describe 'mysql' do
 end
 
 # Insert suite-specific tests below this line.
-describe file("#{$node['stash']['home_path']}/shared/stash-config.properties") do
+describe file("#{$node['stash']['home_path']}/shared/bitbucket.properties") do
   it { should be_file }
   it { should exist }
 end

@@ -1,12 +1,14 @@
-set['build_essential']['compiletime'] = true
+set['build-essential']['compile_time'] = true
 
-default['stash']['home_path']    = '/var/atlassian/application-data/stash'
+default['stash']['version']      = '4.0.1'
+default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
+
+default['stash']['home_path']    = "/var/atlassian/application-data/#{node['stash']['product']}"
 default['stash']['install_path'] = '/opt/atlassian'
 default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
-default['stash']['url_base']     = 'http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash'
-default['stash']['user']         = 'stash'
-default['stash']['version']      = '3.11.1'
+default['stash']['url_base']     = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-#{node['stash']['product']}"
+default['stash']['user']         = node['stash']['product']
 
 default['stash']['url']      = "#{node['stash']['url_base']}-#{node['stash']['version']}.tar.gz"
 default['stash']['checksum'] =
@@ -114,6 +116,7 @@ when '3.9.2' then '6ff2b5092453cb0beac1dcde16c0440bb1ee058ffe23e7d9fdf3ac815cf92
 when '3.10.0' then 'ab7fecb10e6650fb5b94a20b22463771d7ab0f69a0971272d1a066dd2430f048'
 when '3.10.2' then '2597e9954397af5016c30c9f90befd09c6da71c4e7745813c77e60329427989e'
 when '3.11.1' then '7db6327554e3481a8b351188991f5858d01aeebce3f9bc290da5ad9d0fbfe1e7'
+when '4.0.1' then 'f59462077fa4ccc522b7bbf1ad6ebef4753cd0e41abf54bc0491d07eea40593d'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -151,23 +154,25 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['password']     = 'changeit'
-default['stash']['backup_client']['user']         = 'admin'
-default['stash']['backup_client']['version']      = '1.9.1'
+default['stash']['backup_client']['version']      = '2.0.0'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base'] =
 if stash_backup_client_version <= Chef::Version.new('1.2.1')
   'http://downloads.atlassian.com/software/stash/downloads/stash-backup-client'
-else
+elsif stash_backup_client_version < Chef::Version.new('2.0.0')
   'https://maven.atlassian.com/public/com/atlassian/stash/backup/stash-backup-distribution/'
+else
+  'https://maven.atlassian.com/repository/public/com/atlassian/bitbucket/server/backup/bitbucket-backup-distribution/'
 end
 
 default['stash']['backup_client']['url'] =
 if stash_backup_client_version <= Chef::Version.new('1.2.1')
   "#{node['stash']['backup_client']['url_base']}-#{node['stash']['backup_client']['version']}.zip"
-else
+elsif stash_backup_client_version < Chef::Version.new('2.0.0')
   "#{node['stash']['backup_client']['url_base']}/#{node['stash']['backup_client']['version']}/stash-backup-distribution-#{node['stash']['backup_client']['version']}.zip"
+else
+  "#{node['stash']['backup_client']['url_base']}/#{node['stash']['backup_client']['version']}/bitbucket-backup-distribution-#{node['stash']['backup_client']['version']}.zip"
 end
 
 default['stash']['backup_client']['checksum'] =
@@ -188,6 +193,7 @@ when '1.8.0' then '0997e056a5befeed5f85b1e4cbe72115d7bd20f2ba30e7b7a105bcc1d3912
 when '1.8.2' then 'ff41c353f73fe90cb0e67860cff7b021833e23df6c49232d1b102a0eae575127'
 when '1.9.0' then '620776f107a9c10f57f59e52be795621f0f0b8277805e28fff7dc664bbb48fb3'
 when '1.9.1' then '3cdad3393611d2c8d151c7d265ebd04764cbaba4a4d745a8b534dd9b8cf77d7b'
+when '2.0.0' then '2d9113ef6e173a65587b373ecc247b58ea8fab5ea826541b1d309ad0402a67be'
 end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
@@ -211,10 +217,10 @@ default['stash']['database']['type']     = 'mysql'
 default['stash']['database']['version']  = nil
 
 default['stash']['database']['host']     = '127.0.0.1'
-default['stash']['database']['name']     = 'stash'
+default['stash']['database']['name']     = node['stash']['product']
 default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['testInterval'] = 2
-default['stash']['database']['user']     = 'stash'
+default['stash']['database']['user']     = node['stash']['product']
 
 # See `libraries/stash.rb` for code to set actual default port
 default['stash']['database']['port']     = nil

@@ -22,8 +22,8 @@ jdbc.url=jdbc:sqlserver://<%= @database['host'] %>:<%= @database['port'] %>;data
 jdbc.user=<%= @database['user'] %>
 jdbc.password=<%= @database['password'] %>
 
+<% if @plugin && !@plugin.empty? -%>
 # DEPRECATED: use properties instead
-<% if @plugin -%>
 <% @plugin.each do |key, value| -%>
 plugin.<%= key %>=<%= value %>
 <% end -%>

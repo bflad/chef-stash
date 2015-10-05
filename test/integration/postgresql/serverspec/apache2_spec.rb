@@ -6,11 +6,6 @@ describe 'postgresql' do
 end
 
 # Insert suite-specific tests below this line.
-describe file("#{$node['stash']['home_path']}/shared/stash-config.properties") do
-  it { should be_file }
-  it { should exist }
-end
-
 describe file("#{$node['apache']['dir']}/sites-available/#{$node['stash']['apache2']['virtual_host_name']}.conf") do
   it { should be_file }
   it { should exist }
