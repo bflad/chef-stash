@@ -29,11 +29,11 @@ link "#{backup_client_install_path}/backup-config.properties" do
 end
 
 directory node['stash']['backup']['backup_path'] do
-  owner     node['stash']['user']
-  mode      '0750'
+  owner node['stash']['user']
+  mode '0750'
   recursive true
-  action    :create
-  not_if    { ::Dir.exist?(node['stash']['backup']['backup_path']) }
+  action :create
+  not_if { ::Dir.exist?(node['stash']['backup']['backup_path']) }
 end
 
 cron_d "atlassian-#{node['stash']['product']}-backup-client" do
