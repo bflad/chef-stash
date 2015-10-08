@@ -31,6 +31,7 @@ end
 directory node['stash']['backup']['backup_path'] do
   owner node['stash']['user']
   mode '0750'
+  recursive true
   action :create
   not_if { ::Dir.exist?(node['stash']['backup']['backup_path']) }
 end
