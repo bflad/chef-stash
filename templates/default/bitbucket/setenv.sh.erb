@@ -12,7 +12,7 @@ if [ "x${BITBUCKET_HOME}" = "x" ]; then
 fi
 
 if [ "x${JAVA_HOME}" = "x" ]; then
-    export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_51/jre
+    export JAVA_HOME="<%= node['java']['java_home'] %>"
 fi
 
 #
