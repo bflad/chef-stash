@@ -7,24 +7,13 @@ class Chef
       # rubocop:disable Metrics/AbcSize
       def self.settings(node)
         begin
-          if Chef::Config[:solo]
-            begin
-              databag_item = Chef::DataBagItem.load(
-                node['stash']['data_bag_name'],
-                node['stash']['data_bag_item']
-              )['stash']
-            rescue
-              Chef::Log.info('No stash data bag found')
-            end
-          else
-            begin
-              databag_item = Chef::EncryptedDataBagItem.load(
-                node['stash']['data_bag_name'],
-                node['stash']['data_bag_item']
-              )['stash']
-            rescue
-              Chef::Log.info('No stash encrypted data bag found')
-            end
+          begin
+            databag_item = data_bag_item(
+              node['stash']['data_bag_name'],
+              node['stash']['data_bag_item']
+            )['stash']
+          rescue
+            Chef::Log.info('No stash data bag found')
           end
         ensure
           databag_item ||= {}
