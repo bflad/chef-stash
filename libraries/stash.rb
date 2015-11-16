@@ -4,40 +4,25 @@ class Chef
   class Recipe
     # Chef::Recipe::Stash class
     class Stash
-      # rubocop:disable Metrics/AbcSize
+      # Merges Stash settings from data bag and node attributes.
+      # Data dag settings always has a higher priority.
+      #
+      # @return [Hash] Settings hash
       def self.settings(node)
-        begin
-          begin
-            databag_item = data_bag_item(
-              node['stash']['data_bag_name'],
-              node['stash']['data_bag_item']
-            )['stash']
-          rescue
-            Chef::Log.info('No stash data bag found')
+        @settings_from_data_bag ||= Stash.settings_from_data_bag(node)
+        settings = Chef::Mixin::DeepMerge.deep_merge(
+          @settings_from_data_bag,
+          node['stash'].to_hash)
+
+        settings['database']['port'] ||=
+          case settings['database']['type']
+          when 'mysql' then 3306
+          when 'postgresql' then 5432
+          when 'sqlserver' then 1433
+          else fatal "Unsupported database type: #{settings['database']['type']}"
           end
-        ensure
-          databag_item ||= {}
-          settings = Chef::Mixin::DeepMerge.deep_merge(databag_item, node['stash'].to_hash)
-          settings['database']['port'] ||= Stash.default_database_port(settings['database']['type'])
-        end
 
         settings
-      end
-      # rubocop:enable Metrics/AbcSize
-
-      def self.default_database_port(type)
-        case type
-        when 'mysql'
-          3306
-        when 'postgresql'
-          5432
-        when 'sqlserver'
-          1433
-        else
-          Chef::Log.warn("Unsupported database type (#{type}) in Stash cookbook.")
-          Chef::Log.warn('Please add to Stash cookbook or hard set Stash database port.')
-          nil
-        end
       end
 
       def self.check_for_old_attributes!(node)
@@ -56,6 +41,22 @@ This renaming introduces the common approach for both of backup strategies:
 converted for you, but this warning and conversion will be removed in the next
 major release of the 'stash' cookbook.
 EOH
+      end
+
+      private
+
+      # Fetches Stash settings from the data bag
+      #
+      # @return [Hash] Settings hash
+      def self.settings_from_data_bag(node)
+        begin
+          item = data_bag_item(node['stash']['data_bag_name'],
+                               node['stash']['data_bag_item'])['stash']
+          return item if item.is_a?(Hash)
+        rescue
+          Chef::Log.info('No stash data bag found')
+        end
+        {}
       end
     end
   end
