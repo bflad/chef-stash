@@ -9,13 +9,19 @@ class Chef
         begin
           if Chef::Config[:solo]
             begin
-              databag_item = Chef::DataBagItem.load('stash', 'stash')['local']
+              databag_item = Chef::DataBagItem.load(
+                node['stash']['data_bag_name'],
+                node['stash']['data_bag_item']
+              )['local']
             rescue
               Chef::Log.info('No stash data bag found')
             end
           else
             begin
-              databag_item = Chef::EncryptedDataBagItem.load('stash', 'stash')[node.chef_environment]
+              databag_item = Chef::EncryptedDataBagItem.load(
+                node['stash']['data_bag_name'],
+                node['stash']['data_bag_item']
+              )[node.chef_environment]
             rescue
               Chef::Log.info('No stash encrypted data bag found')
             end

@@ -141,6 +141,10 @@ default['stash']['checksum'] =
   when '4.3.0' then 'e07fa072b4c3010c62f334ba69927ba698a7bf7631a6fbd934da09ea1428adb8'
   end
 
+# Data bag where credentials and other sensitive data could be stored (optional)
+default['stash']['data_bag_name'] = 'stash'
+default['stash']['data_bag_item'] = 'stash'
+
 default['stash']['apache2']['access_log']         = ''
 default['stash']['apache2']['error_log']          = ''
 default['stash']['apache2']['port']               = 80
