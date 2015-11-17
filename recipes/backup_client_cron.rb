@@ -1,4 +1,4 @@
-Stash.check_for_old_attributes!(node)
+handle_old_stash_attributes!
 
 Chef::Log.warn <<-EOH
 Recipe 'stash::backup_client_cron' is deprecated. Please, set attrite
@@ -7,7 +7,7 @@ Stash backup periodically. This recipe will be removed in the next major release
 of the 'stash' cookbook.
 EOH
 
-settings = Stash.settings(node)
+settings = settings = merge_stash_settings
 
 cron_d 'atlassian-stash-backup-client' do
   hour settings['backup']['cron']['hour']

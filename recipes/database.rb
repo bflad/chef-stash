@@ -1,4 +1,4 @@
-settings = Stash.settings(node)
+settings = merge_stash_settings
 
 database_connection = {
   :host => settings['database']['host'],

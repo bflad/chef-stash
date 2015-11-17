@@ -1,6 +1,6 @@
-Stash.check_for_old_attributes!(node)
+handle_old_stash_attributes!
 
-settings = Stash.settings(node)
+settings = merge_stash_settings
 
 include_recipe 'yum-epel' if node['platform_family'] == 'rhel'
 
