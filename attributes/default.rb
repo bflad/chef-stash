@@ -1,6 +1,6 @@
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.1.0'
+default['stash']['version']      = '4.1.3'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 if Dir.exist?('/var/atlassian/application-data/stash')
@@ -126,6 +126,7 @@ when '4.0.2' then '40dbb55194f9227d931a411c0785e73d38506070f9063d69e19201eb3e0ad
 when '4.0.3' then '458addf0648186c90f7ffb026eb9464182e03c44a03c5658fe0cb44d2495df09'
 when '4.0.4' then 'd56ce5db0829b2a013c648c1fb354021166e3babeb84a449a988a42f6fbbe830'
 when '4.1.0' then '0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46'
+when '4.1.3' then '2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307'
 end
 
 default['stash']['apache2']['access_log']         = ''
@@ -163,7 +164,7 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['version']      = '2.0.0'
+default['stash']['backup_client']['version']      = '2.0.1'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base'] =
@@ -203,6 +204,7 @@ when '1.8.2' then 'ff41c353f73fe90cb0e67860cff7b021833e23df6c49232d1b102a0eae575
 when '1.9.0' then '620776f107a9c10f57f59e52be795621f0f0b8277805e28fff7dc664bbb48fb3'
 when '1.9.1' then '3cdad3393611d2c8d151c7d265ebd04764cbaba4a4d745a8b534dd9b8cf77d7b'
 when '2.0.0' then '2d9113ef6e173a65587b373ecc247b58ea8fab5ea826541b1d309ad0402a67be'
+when '2.0.1' then '0568b27367a367aebc45cade27bcca693b034a0b18dfd82789c0a6767324b19d'
 end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
@@ -220,9 +222,9 @@ default['stash']['backup_diy']['hipchat_url'] = 'https://api.hipchat.com'
 default['stash']['backup_diy']['hipchat_room'] = ''
 default['stash']['backup_diy']['hipchat_token'] = ''
 
-default['stash']['database']['type']     = 'mysql'
-# When not set, the defaults from mysql cookbook are used.
-# See: https://github.com/chef-cookbooks/mysql/blob/v6.0.26/libraries/helpers.rb#L414-L432
+default['stash']['database']['type']     = 'postgresql'
+# When not set, the defaults from postgresql cookbook are used.
+# See: https://github.com/hw-cookbooks/postgresql/blob/v3.4.24/attributes/default.rb#L71-L228
 default['stash']['database']['version']  = nil
 
 default['stash']['database']['host']     = '127.0.0.1'

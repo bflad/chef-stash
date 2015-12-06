@@ -50,13 +50,13 @@ These attributes are under the `node['stash']` namespace.
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
 checksum | SHA256 checksum for Stash install | String | auto-detected (see attributes/default.rb)
-home_path | home data directory for Stash user | String | /var/atlassian/application-data/stash
+home_path | home data directory for Stash user | String | /var/atlassian/application-data/bitbucket (if upgrading from 3.x cookbook it will be /var/atlassian/application-data/stash)
 install_path | location to install Stash | String | /opt/atlassian
 install_type | Stash install type - "standalone" only for now | String | standalone
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
-version | Stash version to install | String | 4.1.0
+version | Stash version to install | String | 4.1.3
 
 ### Stash Backup Attributes (Shared)
 
@@ -80,7 +80,7 @@ Attribute | Description | Type | Default
 checksum | SHA256 checksum for Stash Backup Client install | String | auto-detected (see attributes/default.rb)
 install_path | location to install Stash Backup Client | String | /opt/atlassian/stash-backup-client
 url_base | URL base for Stash Backup Client install | String | http://downloads.atlassian.com/software/stash/downloads/stash-backup-distribution
-version | Stash Backup Client version to install | String | 1.9.1
+version | Stash Backup Client version to install | String | 2.0.1
 
 ### Stash DIY Backup Attributes
 Documentation: [Using Stash DIY Backup](https://confluence.atlassian.com/display/STASH/Using+Stash+DIY+Backup)
@@ -128,7 +128,7 @@ name | Stash database name | String | stash
 password | Stash database user password | String | changeit
 port | Stash database port | String | 3306
 testInterval | Stash database pool idle test interval in minutes | Fixnum | 2
-type | Stash database type - "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver" | String | mysql
+type | Stash database type - "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver" | String | postgresql
 user | Stash database user | String | stash
 
 ### Stash JVM Attributes
