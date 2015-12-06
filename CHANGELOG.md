@@ -1,8 +1,26 @@
-## 4.0.0 (When Released)
+## 4.0.0
 
 * Enhancement: [#49][]: Update default database to postgresql
 * Enhancement: [#58][]: Update mysql dependency to ~> 6.0
 * Enhancement: [#61][]: Fix deprecation warning from Berkshelf
+* Enhancement: [#98][]: Upgrade web.xml to latest version
+* Enhancement: [#101][]: Add and default to Stash 3.10.2
+* Enhancement: [#102][]: Move pid to /var/run/stash/catalina.pid
+* Enhancement: [#104][]: Removed redundant stash_test::apache2 integration tests
+* Enhancement: [#105][]: Migrate to serverspec tests
+* Enhancement: [#107][]: Add postgresql test suite
+* Enhancement: [#112][]: Switch to using MySQL 5.5 by default
+* Bugfix: [#113][]: Switch to using MySQL 5.5 by default
+* Enhancement: [#114][]: Add and default to Stash 3.11.1
+* Bugfix: [#115][]: fix rubocop offenses from master
+* Enhancement: [#116][]: Add Bitbucket Server 4.0 Support
+* Bugfix: [#118][]: Create backup folder recusively
+* Enhancement: [#119][]: Upgrade bitbucket to 4.0.2
+* Enhancement: [#121][]: Add recursive folder creation to DIY backup
+* Enhancement: [#122][]: Upgrade bitbucket to 4.0.3
+* Enhancement: [#124][]: Upgrade bitbucket to 4.1.0
+* Bugfix: [#125][]: Fix hard-coded JAVA_HOME ENV
+* Enhancement: [#127][]: Set home path to 3.x default when it exists
 
 ## 3.16.1
 
@@ -506,3 +524,21 @@ To switch to new defaults:
 [#89]: https://github.com/bflad/chef-stash/issues/89
 [#90]: https://github.com/bflad/chef-stash/issues/90
 [#93]: https://github.com/bflad/chef-stash/issues/93
+[#98]: https://github.com/bflad/chef-stash/issues/98
+[#101]: https://github.com/bflad/chef-stash/issues/101
+[#102]: https://github.com/bflad/chef-stash/issues/102
+[#104]: https://github.com/bflad/chef-stash/issues/104
+[#105]: https://github.com/bflad/chef-stash/issues/105
+[#107]: https://github.com/bflad/chef-stash/issues/107
+[#112]: https://github.com/bflad/chef-stash/issues/112
+[#113]: https://github.com/bflad/chef-stash/issues/113
+[#114]: https://github.com/bflad/chef-stash/issues/114
+[#115]: https://github.com/bflad/chef-stash/issues/115
+[#116]: https://github.com/bflad/chef-stash/issues/116
+[#118]: https://github.com/bflad/chef-stash/issues/118
+[#119]: https://github.com/bflad/chef-stash/issues/119
+[#121]: https://github.com/bflad/chef-stash/issues/121
+[#122]: https://github.com/bflad/chef-stash/issues/122
+[#124]: https://github.com/bflad/chef-stash/issues/124
+[#125]: https://github.com/bflad/chef-stash/issues/125
+[#127]: https://github.com/bflad/chef-stash/issues/127
