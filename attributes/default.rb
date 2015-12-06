@@ -3,7 +3,12 @@ set['build-essential']['compile_time'] = true
 default['stash']['version']      = '4.1.0'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
-default['stash']['home_path']    = "/var/atlassian/application-data/#{node['stash']['product']}"
+if Dir.exist?('/var/atlassian/application-data/stash')
+  default['stash']['home_path']    = '/var/atlassian/application-data/stash'
+else
+  default['stash']['home_path']    = "/var/atlassian/application-data/#{node['stash']['product']}"
+end
+
 default['stash']['install_path'] = '/opt/atlassian'
 default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'

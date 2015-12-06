@@ -22,6 +22,12 @@ if stash_version >= Chef::Version.new('3.2.0')
     action :create
     recursive true
   end
+
+  bash 'update home path permission' do
+    code <<-EOH
+      chown -R #{node['stash']['user']}:#{node['stash']['user']} #{node['stash']['home_path']}
+    EOH
+  end
 else
   config_path = '/stash-config.properties'
 end
