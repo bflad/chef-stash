@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/) server and [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client). Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
+Installs/Configures [Atlassian Stash](https://www.atlassian.com/software/stash/) / [Atlassian Bitbucket](https://www.atlassian.com/software/bitbucket/) server and [Atlassian Stash Backup Client](https://marketplace.atlassian.com/plugins/com.atlassian.stash.backup.client). Provides LWRPs for code deployment via Stash as well as for hook and repository management. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about Stash releases (versions and checksums) that are tested and supported by cookbook versions.
 
 ## Requirements
 
