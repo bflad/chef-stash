@@ -1,6 +1,6 @@
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.1.3'
+default['stash']['version']      = '4.2.0'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 if Dir.exist?('/var/atlassian/application-data/stash')
@@ -114,19 +114,30 @@ when '3.6.1' then '0b53ae801738fd0fe043dcf5206da1e057895d3dc7712d0bd74c51d0e043e
 when '3.7.0' then '6e58a82c79478b8fcb16447b17c352faccb76704759d0dd29f5835ccfef88f05'
 when '3.7.1' then 'a217e71fed08113fadf8402f5bd9a0ce3257042bc2cbeb35af8276fff31498ac'
 when '3.7.2' then '604982b3fa6e058b17545ef9da8bfa7ec8ecb1aabee25d1ff27dabb43bfd12cc'
+when '3.7.3' then '5707e52e7668188756d42a987c5742458bdbc135abfaa4ef46d3693291378f95'
+when '3.7.4' then '2b5bdb3235c2f9144adc76b6a38e7f2a96fc6222bd73c7329cc3c713e3d9b834'
 when '3.8.0' then '5512d68e18a85610e65ee1ad7e8df635bdd3cf299494636ede9694c3d41187b4'
 when '3.8.1' then 'c998165b7a95bca83d2f043a3e99aa4594b10f1cfe99a83bd4311421c5de5063'
 when '3.9.1' then 'c7f5e4976953957c06fe03aef20d497e395c29d19bfe2c3478b0c38cf8b14299'
 when '3.9.2' then '6ff2b5092453cb0beac1dcde16c0440bb1ee058ffe23e7d9fdf3ac815cf9280a'
 when '3.10.0' then 'ab7fecb10e6650fb5b94a20b22463771d7ab0f69a0971272d1a066dd2430f048'
 when '3.10.2' then '2597e9954397af5016c30c9f90befd09c6da71c4e7745813c77e60329427989e'
+when '3.10.3' then 'a06235ab33646d8588573a81f05345eab1cc4c107080153b7e9ab413da3ae4da'
+when '3.10.4' then '7a8ad1fa2a1d340c85f8d938a7b367fe3d93bd806d475aa7ff8ea88366e3221b'
+when '3.11.0' then '39cdc0b62c28d432a2b04d684dac297c7d3b0714ccb84d86e98773e68f314b18'
 when '3.11.1' then '7db6327554e3481a8b351188991f5858d01aeebce3f9bc290da5ad9d0fbfe1e7'
+when '3.11.2' then 'd071980bf8508cf2e3b92d2ce72d695cbbe37d94bfb94b8ed725e7c7c452090f'
+when '3.11.3' then '8da5704cdee1c75aece718322c8365bf1f34ccdfd82becba7b38246ce56bc9a6'
+when '3.11.4' then 'ec2e2ec8cfdcd5f79d90146548d26ea969d4e035a4db21bc30371fb48c910c75'
+when '3.11.6' then 'ad5a16eee58a0e171878fd8649e58b12b3f45126b5663ef9f508d29a6b3b3384'
 when '4.0.1' then 'f59462077fa4ccc522b7bbf1ad6ebef4753cd0e41abf54bc0491d07eea40593d'
 when '4.0.2' then '40dbb55194f9227d931a411c0785e73d38506070f9063d69e19201eb3e0ad2de'
 when '4.0.3' then '458addf0648186c90f7ffb026eb9464182e03c44a03c5658fe0cb44d2495df09'
 when '4.0.4' then 'd56ce5db0829b2a013c648c1fb354021166e3babeb84a449a988a42f6fbbe830'
+when '4.0.6' then '8e9aa2f08da294d1b4ed607a9ccc5df5617f1228482dc09113caedc6f1a83f59'
 when '4.1.0' then '0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46'
 when '4.1.3' then '2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307'
+when '4.2.0' then '0632382b092105bbc99e580ef1a92e076eed94ac277ad4804e474bf70fa6722c'
 end
 
 default['stash']['apache2']['access_log']         = ''
