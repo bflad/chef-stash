@@ -2,7 +2,7 @@
 module Stash
   # Helper module
   module Helper
-    REST_BASE = 'rest/api/1.0'
+    REST_BASE = 'rest/api/1.0'.freeze
 
     def stash_uri(host, rest_endpoint)
       URI.parse(stash_url(host, rest_endpoint))
