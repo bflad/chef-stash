@@ -1,7 +1,15 @@
 # Change Log
 
-## [4.0.1](https://github.com/bflad/chef-stash/tree/4.0.1) (2016-01-01)
+## [4.1.0](https://github.com/bflad/chef-stash/tree/4.1.0)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.0.1...4.1.0)
+
+**Merged pull requests:**
+
+- Prepare for 4.1.0 cookbook release [\#133](https://github.com/bflad/chef-stash/pull/133) ([linc01n](https://github.com/linc01n))
+- Upgrade bitbucket to 4.3.0 and backup client to 2.0.2 [\#132](https://github.com/bflad/chef-stash/pull/132) ([linc01n](https://github.com/linc01n))
+
+## [4.0.1](https://github.com/bflad/chef-stash/tree/4.0.1) (2016-01-01)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.0.0...4.0.1)
 
 **Merged pull requests:**
@@ -127,7 +135,7 @@
 [Full Changelog](https://github.com/bflad/chef-stash/compare/3.14.0...3.14.1)
 
 **Fixed bugs:**
-''
+
 - Missing mysql-chef\_gem cookbook [\#69](https://github.com/bflad/chef-stash/issues/69)
 
 **Merged pull requests:**
