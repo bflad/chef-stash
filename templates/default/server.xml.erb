@@ -74,15 +74,11 @@
                    useBodyEncodingForURI="true"
                    compression="on"
                    compressableMimeType="text/html,text/xml,text/plain,text/css,application/json,application/javascript,application/x-javascript"
-                   <% if node['stash']['apache2'] -%>
-                   redirectPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    secure="true"
                    scheme="https"
                    proxyName="<%= node['stash']['apache2']['virtual_host_alias'] %>"
                    proxyPort="<%= node['stash']['apache2']['ssl']['port'] %>"
-                   <% else -%>
-                   redirectPort="<%= node['stash']['tomcat']['ssl_port'] %>"
-                   <% end -%>
+                   redirectPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    />
         <!-- A "Connector" using the shared thread pool-->
         <!--
@@ -95,28 +91,6 @@
              This connector uses the JSSE configuration, when using APR, the
              connector should be using the OpenSSL style configuration
              described in the APR documentation -->
-
-        <Connector port="<%= node['stash']['tomcat']['ssl_port'] %>"
-             maxHttpHeaderSize="8192"
-             SSLEnabled="true"
-             maxThreads="150"
-             minSpareThreads="25"
-             maxSpareThreads="75"
-             enableLookups="false"
-             disableUploadTimeout="true"
-             useBodyEncodingForURI="true"
-             acceptCount="100"
-             scheme="https"
-             secure="true"
-             clientAuth="false"
-             sslProtocol="TLS"
-             <%- if @tomcat %>
-             <%= "keyAlias=\"#{@tomcat['keyAlias']}\"" if @tomcat['keyAlias'] %>
-             <%= "keystoreFile=\"#{@tomcat['keystoreFile']}\"" if @tomcat['keystoreFile'] %>
-             <%= "keystorePass=\"#{@tomcat['keystorePass']}\"" if @tomcat['keystorePass'] %>
-             <%- end %>
-        />
-
         <!--
         <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
                    maxThreads="150" scheme="https" secure="true"

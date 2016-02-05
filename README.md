@@ -165,15 +165,9 @@ uri | Stash SSH URI | String | `ssh://git@#{node['stash']['ssh']['hostname']}:#{
 
 These attributes are under the `node['stash']['tomcat']` namespace.
 
-Any `node['stash']['tomcat']['key*']` attributes are overridden by `stash/stash` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
-
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-keyAlias | Tomcat SSL keystore alias | String | tomcat
-keystoreFile | Tomcat SSL keystore file - will automatically generate self-signed keystore file if left as default | String | `#{node['stash']['home_path']}/.keystore`
-keystorePass | Tomcat SSL keystore passphrase | String | changeit
 port | Tomcat HTTP port | Fixnum | 7990
-ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 ## Recipes
 
@@ -214,9 +208,6 @@ _optional:_
 * `['database']['port']` Database port, standard database port for
   `['database']['type']`
 * `['plugin']['KEY']` plugin.`KEY`=`VALUE` to be inserted in stash-config.properties
-* `['tomcat']['keyAlias']` Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
-* `['tomcat']['keystoreFile']` Tomcat HTTPS Java Keystore keystoreFile, self-signed certificate
-* `['tomcat']['keystorePass']` Tomcat HTTPS Java Keystore keystorePass, self-signed certificate
 
 Repeat for other Chef environments as necessary. Example:
 
@@ -229,11 +220,6 @@ Repeat for other Chef environments as necessary. Example:
           "name": "stash",
           "user": "stash",
           "password": "stash_db_password",
-        },
-        "tomcat": {
-          "keyAlias": "not_tomcat",
-          "keystoreFile": "/etc/pki/java/wildcard_cert.jks",
-          "keystorePass": "not_changeit"
         }
       }
     }
