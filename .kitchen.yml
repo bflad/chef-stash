@@ -12,22 +12,22 @@ driver_config:
 platforms:
 - name: centos-6.7
   driver_config:
-    box: chef/centos-6.7
+    box: bento/centos-6.7
   run_list:
   - recipe[yum]
 - name: centos-7.1
   driver_config:
-    box: chef/centos-7.1
+    box: bento/centos-7.1
   run_list:
   - recipe[yum]
 - name: ubuntu-12.04
   driver_config:
-    box: chef/ubuntu-12.04
+    box: bento/ubuntu-12.04
   run_list:
   - recipe[apt]
 - name: ubuntu-14.04
   driver_config:
-    box: chef/ubuntu-14.04
+    box: bento/ubuntu-14.04
   run_list:
   - recipe[apt]
 
