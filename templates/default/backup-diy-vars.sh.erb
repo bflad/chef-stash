@@ -5,10 +5,12 @@
 #  Local modifications will be overwritten by Chef.
 #
 
-# Which database backup script to use (ex: mssql, postgresql, mysql)
+CURL_OPTIONS="-L -s -f"
+
+# Which database backup script to use (ex: mssql, postgresql, mysql, ebs-collocated, rds)
 BACKUP_DATABASE_TYPE=<%= @database['type'] %>
 
-# Which filesystem backup script to use (ex: rsync)
+# Which filesystem backup script to use (ex: rsync, ebs-home)
 BACKUP_HOME_TYPE=<%= @backup_diy['backup_home_type'] %>
 
 # Which archive backup script to use (ex: tar, tar-gpg)
@@ -17,8 +19,11 @@ BACKUP_ARCHIVE_TYPE=<%= @backup_diy['backup_archive_type'] %>
 # Used by the scripts for verbose logging. If not true only errors will be shown.
 STASH_VERBOSE_BACKUP=<%= @backup_diy['verbose'] ? 'TRUE' : 'FALSE' %>
 
-# The base url used to access this stash instance
+# The base url used to access this stash instance. It cannot end on a '/'
 STASH_URL=<%= @backup['baseurl'] %>
+
+# Used in AWS backup / restore to tag snapshots. It cannot contain spaces and it must be under 100 characters long
+INSTANCE_NAME=stash
 
 # The username and password for the user used to make backups (and have this permission)
 STASH_BACKUP_USER=<%= @backup['user'] %>
