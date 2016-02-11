@@ -266,6 +266,8 @@ default['stash']['properties'] = {}
 default['stash']['ssh']['hostname'] = node['fqdn']
 default['stash']['ssh']['port']     = '7999'
 
+default['stash']['ssl'] = true
+
 default['stash']['tomcat']['keyAlias']     = 'tomcat'
 default['stash']['tomcat']['keystoreFile'] = "#{node['stash']['home_path']}/.keystore"
 default['stash']['tomcat']['keystorePass'] = 'changeit'
