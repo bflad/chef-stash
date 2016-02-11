@@ -1,6 +1,6 @@
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.3.0'
+default['stash']['version']      = '4.3.2'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -138,7 +138,12 @@ default['stash']['checksum'] =
   when '4.1.0' then '0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46'
   when '4.1.3' then '2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307'
   when '4.2.0' then '0632382b092105bbc99e580ef1a92e076eed94ac277ad4804e474bf70fa6722c'
+  when '4.2.1' then 'a76098de1a205d9f26be3af568b28aed907f7be0dd7434affb0fb6a1347df20e'
+  when '4.2.2' then '5ae639699fd9a7310de27ccf53284b49c83c4d9f8de78c425172b494c768eaaa'
+  when '4.2.3' then '8d606f2f97f98ee53920e72c16ad716cf32c67b66b44ab88f334b4b300ec9708'
   when '4.3.0' then 'e07fa072b4c3010c62f334ba69927ba698a7bf7631a6fbd934da09ea1428adb8'
+  when '4.3.1' then 'ca7d3ff8b356240de475891ad47671763de709063759ef99fc9ebff03ed36bc4'
+  when '4.3.2' then '7d29f1dc5960547528856d54a2d498be5e3220d741a8500e6160f08bc4dec2b3'
   end
 
 default['stash']['apache2']['access_log']         = ''
