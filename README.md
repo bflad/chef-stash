@@ -198,45 +198,40 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 ### Stash Server Data Bag
 
-For securely overriding attributes on Hosted Chef, create a `stash/stash` encrypted data bag with the model below. Chef Solo can override the same attributes with a `stash/stash` unencrypted data bag of the same information.
+For security purposes it is recommended to use data bag for storing secrets
+like passwords and database credentials.
 
-_required:_
-* `['database']['type']` "hsqldb" (not recommended), "mysql", "postgresql", or "sqlserver"
-* `['database']['host']` FQDN or "127.0.0.1" (127.0.0.1 automatically
-  installs `['database']['type']` server)
-* `['database']['name']` Name of Stash database
-* `['database']['user']` Stash database username
-* `['database']['password']` Stash database username password
+You can override any attributes from the `['stash']` namespace using the
+`stash/stash` data bag. It could be either encrypted or not
+encrypted by your choice.
 
-_optional:_
-* `['backup_client']['user']` Stash administrative username for backup client
-* `['backup_client']['password']` Stash administrative password for backup client
-* `['database']['port']` Database port, standard database port for
-  `['database']['type']`
-* `['plugin']['KEY']` plugin.`KEY`=`VALUE` to be inserted in stash-config.properties
-* `['tomcat']['keyAlias']` Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
-* `['tomcat']['keystoreFile']` Tomcat HTTPS Java Keystore keystoreFile, self-signed certificate
-* `['tomcat']['keystorePass']` Tomcat HTTPS Java Keystore keystorePass, self-signed certificate
-
-Repeat for other Chef environments as necessary. Example:
-
-    {
-      "id": "stash"
-      "development": {
-        "database": {
-          "type": "postgresql",
-          "host": "127.0.0.1",
-          "name": "stash",
-          "user": "stash",
-          "password": "stash_db_password",
-        },
-        "tomcat": {
-          "keyAlias": "not_tomcat",
-          "keystoreFile": "/etc/pki/java/wildcard_cert.jks",
-          "keystorePass": "not_changeit"
-        }
-      }
+Example:
+```json
+{
+  "id": "stash",
+  "stash": {
+    "database": {
+      "type": "postgresql",
+      "host": "127.0.0.1",
+      "name": "stash",
+      "user": "stash",
+      "password": "stash_db_password",
+    },
+    "tomcat": {
+      "keyAlias": "not_tomcat",
+      "keystoreFile": "/etc/pki/java/wildcard_cert.jks",
+      "keystorePass": "not_changeit"
     }
+  }
+}
+```
+_(Note - `"stash"` nesting level is required!)_
+
+These credentials will be used for your stash installation instead of
+appropriate attribute values.
+
+Data bag's and item's names are optional and can be changed by overriding
+attributes `['stash']['data_bag_name']` and `['stash']['data_bag_item']`
 
 ### Stash Server Default Installation
 
