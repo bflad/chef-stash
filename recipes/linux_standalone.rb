@@ -29,7 +29,7 @@ execute 'Generating Self-Signed Java Keystore' do
     chown #{node['stash']['user']}:#{node['stash']['user']} #{settings['tomcat']['keystoreFile']}
   COMMAND
   creates settings['tomcat']['keystoreFile']
-  only_if { settings['tomcat']['keystoreFile'] == "#{node['stash']['home_path']}/.keystore" }
+  only_if { settings['tomcat']['keystoreFile'] == "#{node['stash']['home_path']}/.keystore" && settings['tomcat']['ssl_port'] }
 end
 
 directory node['stash']['install_path'] do
