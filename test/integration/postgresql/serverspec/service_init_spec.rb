@@ -14,7 +14,3 @@ end
 describe port($node['stash']['tomcat']['port']) do
   it { should be_listening }
 end
-
-describe port($node['stash']['tomcat']['ssl_port']) do
-  it { should be_listening }
-end

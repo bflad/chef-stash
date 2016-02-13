@@ -1,4 +1,3 @@
-settings = Stash.settings(node)
 stash_version = Chef::Version.new(node['stash']['version'])
 server_xml_path = "#{node['stash']['install_path']}/stash/conf/server.xml"
 
@@ -33,7 +32,6 @@ template server_xml_path do
   end
   owner node['stash']['user']
   mode '0640'
-  variables :tomcat => settings['tomcat']
   notifies :restart, "service[#{node['stash']['product']}]", :delayed
 end
 
