@@ -1,4 +1,4 @@
-settings = Stash.settings(node)
+settings = merge_stash_settings
 stash_version = Chef::Version.new(node['stash']['version'])
 
 # Config path changed to shared/ from 3.2.0

@@ -1,4 +1,4 @@
-settings = Stash.settings(node)
+settings = merge_stash_settings
 
 directory File.dirname(node['stash']['home_path']) do
   owner 'root'
