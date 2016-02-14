@@ -1,7 +1,27 @@
 # Change Log
 
-## [4.1.0](https://github.com/bflad/chef-stash/tree/4.1.0)
+## [4.2.0](https://github.com/bflad/chef-stash/tree/4.2.0) (2016-02-15)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.1.0...4.2.0)
+
+**Implemented enhancements:**
+
+- Update the template for DIY backup [\#138](https://github.com/bflad/chef-stash/pull/138) ([legal90](https://github.com/legal90))
+
+**Closed issues:**
+
+- Support for Stash DIY backup - maybe? [\#63](https://github.com/bflad/chef-stash/issues/63)
+- Discussion: change default database to PostgreSQL? [\#49](https://github.com/bflad/chef-stash/issues/49)
+
+**Merged pull requests:**
+
+- Set database type when running mysql suite [\#139](https://github.com/bflad/chef-stash/pull/139) ([linc01n](https://github.com/linc01n))
+- Redirect HTTP to HTTPS [\#137](https://github.com/bflad/chef-stash/pull/137) ([legal90](https://github.com/legal90))
+- Disable https on the Tomcat side [\#136](https://github.com/bflad/chef-stash/pull/136) ([legal90](https://github.com/legal90))
+- Add newer Bitbucket Server versions [\#135](https://github.com/bflad/chef-stash/pull/135) ([legal90](https://github.com/legal90))
+- .kitchen.yml: Rename Vagrant boxes "chef" -\> "bento" [\#134](https://github.com/bflad/chef-stash/pull/134) ([legal90](https://github.com/legal90))
+
+## [4.1.0](https://github.com/bflad/chef-stash/tree/4.1.0) (2016-01-20)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.0.1...4.1.0)
 
 **Merged pull requests:**
