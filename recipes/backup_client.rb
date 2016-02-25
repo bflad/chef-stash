@@ -42,7 +42,7 @@ cron_d "atlassian-#{node['stash']['product']}-backup-client" do
   day settings['backup']['cron']['day']
   month settings['backup']['cron']['month']
   weekday settings['backup']['cron']['weekday']
-  command "java -jar #{backup_client_install_path}/#{node['stash']['product']}-backup-client.jar"
+  command "cd #{backup_client_install_path} && java -jar #{backup_client_install_path}/#{node['stash']['product']}-backup-client.jar"
   user node['stash']['user']
   action(settings['backup']['cron']['enable'] ? :create : :delete)
 end
