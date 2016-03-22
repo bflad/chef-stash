@@ -1,6 +1,6 @@
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.3.2'
+default['stash']['version']      = '4.4.1'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -135,8 +135,13 @@ default['stash']['checksum'] =
   when '4.0.3' then '458addf0648186c90f7ffb026eb9464182e03c44a03c5658fe0cb44d2495df09'
   when '4.0.4' then 'd56ce5db0829b2a013c648c1fb354021166e3babeb84a449a988a42f6fbbe830'
   when '4.0.6' then '8e9aa2f08da294d1b4ed607a9ccc5df5617f1228482dc09113caedc6f1a83f59'
+  when '4.0.7' then 'e6c09cec093483f1a789536c4b95f0b88bcd63afddf44b419c8447aca475d1da'
+  when '4.0.8' then '8b1f2bde0f61091f6517131eb63fd1484b9cd2f60f77978f4078c198622321e5'
   when '4.1.0' then '0b1e41ab64c25d446d1cda54392abb9120c4b92413c1d79f6642869cbdcd5a46'
   when '4.1.3' then '2cdbab5394a3d82a854f33806d12b40f909ad172ef95064e9f0fce786fc65307'
+  when '4.1.4' then '72cdb8edabccc85e782b556ade584df08cca4e49bc8493f14c05a590f56de5e7'
+  when '4.1.5' then '2aec5ee2860adc5e8764d3c5912c2c324fcf948f890260cf88ecaa153b3b713a'
+  when '4.1.6' then '6097a4a3a004dad905f1c5f85bf3fe344b20b09ddaca425bb5aedd472c999776'
   when '4.2.0' then '0632382b092105bbc99e580ef1a92e076eed94ac277ad4804e474bf70fa6722c'
   when '4.2.1' then 'a76098de1a205d9f26be3af568b28aed907f7be0dd7434affb0fb6a1347df20e'
   when '4.2.2' then '5ae639699fd9a7310de27ccf53284b49c83c4d9f8de78c425172b494c768eaaa'
@@ -144,6 +149,8 @@ default['stash']['checksum'] =
   when '4.3.0' then 'e07fa072b4c3010c62f334ba69927ba698a7bf7631a6fbd934da09ea1428adb8'
   when '4.3.1' then 'ca7d3ff8b356240de475891ad47671763de709063759ef99fc9ebff03ed36bc4'
   when '4.3.2' then '7d29f1dc5960547528856d54a2d498be5e3220d741a8500e6160f08bc4dec2b3'
+  when '4.4.0' then 'ef7993ce088659dfeff974fdadcc3ff891451905e1cf0fac6de0a5979aaa76b7'
+  when '4.4.1' then '91866f21cf13a9eb9f490b85b7e878d5283038f4824c66e97bdd92867c363c22'
   end
 
 # Data bag where credentials and other sensitive data could be stored (optional)
@@ -185,7 +192,7 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['version']      = '2.0.2'
+default['stash']['backup_client']['version']      = '3.0.0'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base'] =
@@ -227,6 +234,7 @@ default['stash']['backup_client']['checksum'] =
   when '2.0.0' then '2d9113ef6e173a65587b373ecc247b58ea8fab5ea826541b1d309ad0402a67be'
   when '2.0.1' then '0568b27367a367aebc45cade27bcca693b034a0b18dfd82789c0a6767324b19d'
   when '2.0.2' then 'c008bfdac59b45d8ce98ec0625e69316b3a5c51ccefa18363322df687d2c78c4'
+  when '3.0.0' then '1a4dcea8fa5df919b9c92341b1a3b92aed5892022e0f94733540d1ebb88653df'
   end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
