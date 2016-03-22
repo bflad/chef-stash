@@ -1,7 +1,20 @@
 # Change Log
 
-## [4.2.0](https://github.com/bflad/chef-stash/tree/4.2.0) (2016-02-15)
+## [4.3.0](https://github.com/bflad/chef-stash/tree/4.3.0) (2016-02-22)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.2.0...4.3.0)
+
+**Fixed bugs:**
+
+- Cannot use bitbucket backup client as the config namespace is wrong [\#143](https://github.com/bflad/chef-stash/issues/143)
+
+**Merged pull requests:**
+
+- Update bitbucket to 4.4.1 and backup client to 3.0.0 [\#146](https://github.com/bflad/chef-stash/pull/146) ([linc01n](https://github.com/linc01n))
+- Go to the directory contains backup.properties [\#145](https://github.com/bflad/chef-stash/pull/145) ([linc01n](https://github.com/linc01n))
+- Rename properties for bitbucket backup client [\#144](https://github.com/bflad/chef-stash/pull/144) ([linc01n](https://github.com/linc01n))
+
+## [4.2.0](https://github.com/bflad/chef-stash/tree/4.2.0) (2016-02-14)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.1.0...4.2.0)
 
 **Implemented enhancements:**
@@ -15,6 +28,7 @@
 
 **Merged pull requests:**
 
+- Prepare for 4.2.0 cookbook release [\#140](https://github.com/bflad/chef-stash/pull/140) ([linc01n](https://github.com/linc01n))
 - Set database type when running mysql suite [\#139](https://github.com/bflad/chef-stash/pull/139) ([linc01n](https://github.com/linc01n))
 - Redirect HTTP to HTTPS [\#137](https://github.com/bflad/chef-stash/pull/137) ([legal90](https://github.com/legal90))
 - Disable https on the Tomcat side [\#136](https://github.com/bflad/chef-stash/pull/136) ([legal90](https://github.com/legal90))
