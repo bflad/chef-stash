@@ -21,7 +21,7 @@ supports 'redhat'
 supports 'scientific'
 supports 'ubuntu'
 
-depends 'apache2'
+depends 'apache2', '>= 3.2.0'
 depends 'ark'
 depends 'cron'
 depends 'database'
