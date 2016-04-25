@@ -1,6 +1,6 @@
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.4.1'
+default['stash']['version']      = '4.5.2'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -149,8 +149,12 @@ default['stash']['checksum'] =
   when '4.3.0' then 'e07fa072b4c3010c62f334ba69927ba698a7bf7631a6fbd934da09ea1428adb8'
   when '4.3.1' then 'ca7d3ff8b356240de475891ad47671763de709063759ef99fc9ebff03ed36bc4'
   when '4.3.2' then '7d29f1dc5960547528856d54a2d498be5e3220d741a8500e6160f08bc4dec2b3'
+  when '4.3.3' then '565442dcd850cb5295a2abd37cac4f379ffec5d49f702eda62a8f509159853e1'
   when '4.4.0' then 'ef7993ce088659dfeff974fdadcc3ff891451905e1cf0fac6de0a5979aaa76b7'
   when '4.4.1' then '91866f21cf13a9eb9f490b85b7e878d5283038f4824c66e97bdd92867c363c22'
+  when '4.4.2' then '050e31d88da4cfd6715834fc5a48ec8977f461f0fac7899c602a75e251952be4'
+  when '4.5.1' then 'eb93ede7c4bcaded79540f555062d9f1e79ab0da1615feca1e679cd7094eecd5'
+  when '4.5.2' then 'cb3ee49ec20cd2f496dfbf0b8542a24c8db720226e3d80510b9fb4921968f89d'
   end
 
 # Data bag where credentials and other sensitive data could be stored (optional)
@@ -192,7 +196,7 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['version']      = '3.0.0'
+default['stash']['backup_client']['version']      = '3.1.0'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base'] =
@@ -235,6 +239,7 @@ default['stash']['backup_client']['checksum'] =
   when '2.0.1' then '0568b27367a367aebc45cade27bcca693b034a0b18dfd82789c0a6767324b19d'
   when '2.0.2' then 'c008bfdac59b45d8ce98ec0625e69316b3a5c51ccefa18363322df687d2c78c4'
   when '3.0.0' then '1a4dcea8fa5df919b9c92341b1a3b92aed5892022e0f94733540d1ebb88653df'
+  when '3.1.0' then '7d586c65f6f0173c064e5d6508c380192c4a9ac3fc2314fbc3fce2e8f6b10daf'
   end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
