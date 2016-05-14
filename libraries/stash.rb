@@ -9,7 +9,8 @@ module Stash
       @settings_from_data_bag ||= settings_from_data_bag
       settings = Chef::Mixin::DeepMerge.deep_merge(
         @settings_from_data_bag,
-        node['stash'].to_hash)
+        node['stash'].to_hash
+      )
 
       settings['database']['port'] ||=
         case settings['database']['type']
