@@ -1,7 +1,18 @@
 # Change Log
 
-## [4.4.0](https://github.com/bflad/chef-stash/tree/4.4.0) (2016-04-25)
+## [4.5.0](https://github.com/bflad/chef-stash/tree/4.5.0) (2016-05-14)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.4.0...4.5.0)
+
+**Closed issues:**
+
+- Support Bitbucket 4.6 [\#153](https://github.com/bflad/chef-stash/issues/153)
+
+**Merged pull requests:**
+
+- Update bitbucket to 4.6.0 and backup client to 3.2.0 [\#154](https://github.com/bflad/chef-stash/pull/154) ([linc01n](https://github.com/linc01n))
+
+## [4.4.0](https://github.com/bflad/chef-stash/tree/4.4.0) (2016-04-25)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.3.0...4.4.0)
 
 **Implemented enhancements:**
@@ -10,6 +21,7 @@
 
 **Merged pull requests:**
 
+- Prepare for 4.4.0 cookbook release [\#152](https://github.com/bflad/chef-stash/pull/152) ([linc01n](https://github.com/linc01n))
 - Update bitbucket to 4.5.2 and backup client to 3.1.0 [\#151](https://github.com/bflad/chef-stash/pull/151) ([linc01n](https://github.com/linc01n))
 - Fix travis ruby version [\#149](https://github.com/bflad/chef-stash/pull/149) ([linc01n](https://github.com/linc01n))
 - Fix apache listen ports attribute [\#148](https://github.com/bflad/chef-stash/pull/148) ([legal90](https://github.com/legal90))
