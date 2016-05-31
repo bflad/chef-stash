@@ -57,7 +57,19 @@ directory "/var/run/#{node['stash']['product']}" do
   action :create
 end
 
-template "#{node['stash']['install_path']}/bitbucket/bin/user.sh" do
+user_sh = 'user.sh'
+if stash_version >= Chef::Version.new('4.6.0')
+  user_sh = 'set-bitbucket-user.sh'
+
+  template "#{node['stash']['install_path']}/bitbucket/bin/set-bitbucket-home.sh" do
+    source 'bitbucket/set-bitbucket-home.sh.erb'
+    owner node['stash']['user']
+    mode '0755'
+    notifies :restart, "service[#{node['stash']['product']}]", :delayed
+  end
+end
+
+template "#{node['stash']['install_path']}/bitbucket/bin/#{user_sh}" do
   source 'bitbucket/user.sh.erb'
   owner node['stash']['user']
   mode '0755'
