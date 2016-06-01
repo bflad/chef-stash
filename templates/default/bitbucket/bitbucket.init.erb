@@ -25,11 +25,11 @@ if [ ! -d /var/run/bitbucket ]; then
 fi
 
 start() {
-    ./start-bitbucket.sh
+    $BASE/bin/start-bitbucket.sh
 }
 
 stop() {
-    ./stop-bitbucket.sh
+    $BASE/bin/stop-bitbucket.sh
 }
 
 status() {
