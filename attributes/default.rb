@@ -270,6 +270,8 @@ default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['testInterval'] = 2
 default['stash']['database']['user']     = node['stash']['product']
 
+default['stash']['database']['query_string'] = ''
+
 # See `libraries/stash.rb` for code to set actual default port
 default['stash']['database']['port']     = nil
 
