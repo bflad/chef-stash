@@ -1,7 +1,20 @@
 # Change Log
 
-## [4.5.0](https://github.com/bflad/chef-stash/tree/4.5.0) (2016-05-14)
+## [4.5.1](https://github.com/bflad/chef-stash/tree/4.5.1) (2016-06-10)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.5.0...4.5.1)
+
+**Fixed bugs:**
+
+- Code search is not working in 4.6.0 [\#156](https://github.com/bflad/chef-stash/issues/156)
+
+**Merged pull requests:**
+
+- Update bitbucket to 4.6.2 [\#162](https://github.com/bflad/chef-stash/pull/162) ([linc01n](https://github.com/linc01n))
+- Run start-bitbucket.sh with the full path in Bitbucket init script [\#158](https://github.com/bflad/chef-stash/pull/158) ([atikhono](https://github.com/atikhono))
+- Bitbucket 4.6 needs set-bitbucket-home.sh and set-bitbucket-user.sh [\#157](https://github.com/bflad/chef-stash/pull/157) ([atikhono](https://github.com/atikhono))
+
+## [4.5.0](https://github.com/bflad/chef-stash/tree/4.5.0) (2016-05-14)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.4.0...4.5.0)
 
 **Closed issues:**
@@ -10,6 +23,7 @@
 
 **Merged pull requests:**
 
+- Prepare for 4.5.0 cookbook release [\#155](https://github.com/bflad/chef-stash/pull/155) ([linc01n](https://github.com/linc01n))
 - Update bitbucket to 4.6.0 and backup client to 3.2.0 [\#154](https://github.com/bflad/chef-stash/pull/154) ([linc01n](https://github.com/linc01n))
 
 ## [4.4.0](https://github.com/bflad/chef-stash/tree/4.4.0) (2016-04-25)
