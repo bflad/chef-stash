@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.6.0'
+default['stash']['version']      = '4.6.2'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -156,6 +157,7 @@ default['stash']['checksum'] =
   when '4.5.1' then 'eb93ede7c4bcaded79540f555062d9f1e79ab0da1615feca1e679cd7094eecd5'
   when '4.5.2' then 'cb3ee49ec20cd2f496dfbf0b8542a24c8db720226e3d80510b9fb4921968f89d'
   when '4.6.0' then '7dd309b5d17be41e3e2406276e14436136f9fd810655ceed6e08a72556e644aa'
+  when '4.6.2' then 'a6260a139d794518ee0b7825f352144243f6da0a89f905cb8203c39516c63067'
   end
 
 # Data bag where credentials and other sensitive data could be stored (optional)
@@ -264,16 +266,16 @@ default['stash']['database']['type']     = 'postgresql'
 # See: https://github.com/hw-cookbooks/postgresql/blob/v3.4.24/attributes/default.rb#L71-L228
 default['stash']['database']['version']  = nil
 
-default['stash']['database']['host']     = '127.0.0.1'
-default['stash']['database']['name']     = node['stash']['product']
+default['stash']['database']['host'] = '127.0.0.1'
+default['stash']['database']['name'] = node['stash']['product']
 default['stash']['database']['password'] = 'changeit'
 default['stash']['database']['testInterval'] = 2
-default['stash']['database']['user']     = node['stash']['product']
+default['stash']['database']['user'] = node['stash']['product']
 
 default['stash']['database']['query_string'] = ''
 
 # See `libraries/stash.rb` for code to set actual default port
-default['stash']['database']['port']     = nil
+default['stash']['database']['port'] = nil
 
 default['stash']['jvm']['minimum_memory']  = '512m'
 default['stash']['jvm']['maximum_memory']  = '768m'

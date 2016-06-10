@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 
 gem 'rake'
@@ -9,7 +10,7 @@ end
 group :test do
   gem 'chefspec', '~> 4.0'
   gem 'foodcritic', '~> 4.0'
-  gem 'rubocop', '~> 0.23'
+  gem 'rubocop', '~> 0.41'
 end
 
 group :integration do

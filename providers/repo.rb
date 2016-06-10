@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 include Stash::Helper
 
 def whyrun_supported?

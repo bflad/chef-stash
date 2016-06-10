@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 handle_old_stash_attributes!
 
 Chef::Log.warn <<-EOH

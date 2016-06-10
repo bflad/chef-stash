@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Stash
   # Stash::Library module
   module Library

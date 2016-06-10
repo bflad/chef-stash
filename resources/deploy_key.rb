@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 actions :create
 
 attribute :alias, :kind_of => String, :name_attribute => true
