@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 template "/etc/init.d/#{node['stash']['product']}" do
   if node['stash']['product'] == 'stash'
     source 'stash.init.erb'

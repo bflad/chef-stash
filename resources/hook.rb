@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 actions :enable, :configure, :disable
 default_action :configure
 

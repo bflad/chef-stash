@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 action :create do
   key_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_key.pem"
   wrapper_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_wrapper.sh"

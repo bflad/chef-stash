@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 action :deploy do
   g = git new_resource.destination do
     repository "ssh://git@#{node['stash']['ssh']['hostname']}:#{node['stash']['ssh']['port']}/#{new_resource.project}/#{new_resource.repository}.git"

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 settings = merge_stash_settings
 
 database_connection = {
