@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 stash_version = Chef::Version.new(node['stash']['version'])
 server_xml_path = "#{node['stash']['install_path']}/stash/conf/server.xml"
 

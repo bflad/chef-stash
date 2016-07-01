@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 platform = 'windows' if node['platform_family'] == 'windows'
 platform ||= 'linux'
 settings = merge_stash_settings

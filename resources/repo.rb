@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 actions :create, :delete
 default_action :create
 

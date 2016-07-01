@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 name 'stash'
 maintainer 'Brian Flad'
 maintainer_email 'bflad417@gmail.com'
