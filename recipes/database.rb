@@ -2,12 +2,18 @@
 settings = merge_stash_settings
 
 database_connection = {
-  :host => settings['database']['host'],
-  :port => settings['database']['port']
+  :host         => settings['database']['host'],
+  :port         => settings['database']['port'],
+  :query_string => settings['database']['query_string']
 }
 
 case settings['database']['type']
 when 'mysql'
+
+  if node['stash']['database']['query_string'].empty?
+    node.set['stash']['database']['query_string'] = '?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB'
+  end
+
   mysql2_chef_gem 'default' do
     client_version settings['database']['version'] if settings['database']['version']
     action :install
