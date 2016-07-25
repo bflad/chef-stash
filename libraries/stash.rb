@@ -2,6 +2,8 @@
 module Stash
   # Stash::Library module
   module Library
+    # rubocop:disable Metrics/AbcSize
+
     # Merges Stash settings from data bag and node attributes.
     # Data dag settings always has a higher priority.
     #
@@ -30,7 +32,6 @@ module Stash
       settings
     end
 
-    # rubocop:disable Metrics/AbcSize
     def handle_old_stash_attributes!
       backup_attrs = %w(backup_path baseurl password user cron)
       show_warn = false
