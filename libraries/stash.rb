@@ -21,6 +21,12 @@ module Stash
         else fatal "Unsupported database type: #{settings['database']['type']}"
         end
 
+      settings['database']['query_string'] ||=
+        case settings['database']['type']
+        when 'mysql' then '?autoReconnect=true&characterEncoding=utf8&useUnicode=true&sessionVariables=storage_engine%3DInnoDB'
+        else ''
+        end
+
       settings
     end
 
