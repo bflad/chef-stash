@@ -77,7 +77,7 @@ describe 'stash::database' do
         port: 3306,
         username: 'root',
         password: 'mysql_root_pass',
-        query_strng: ''
+        query_string: ''
       }
     end
 
