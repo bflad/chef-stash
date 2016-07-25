@@ -30,7 +30,8 @@ describe 'stash::database' do
         host: '127.0.0.1',
         port: 5432,
         username: 'postgres',
-        password: 'postgres_pass'
+        password: 'postgres_pass',
+        query_string: ''
       }
     end
 
