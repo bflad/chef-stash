@@ -157,7 +157,14 @@ default['stash']['checksum'] =
   when '4.5.1' then 'eb93ede7c4bcaded79540f555062d9f1e79ab0da1615feca1e679cd7094eecd5'
   when '4.5.2' then 'cb3ee49ec20cd2f496dfbf0b8542a24c8db720226e3d80510b9fb4921968f89d'
   when '4.6.0' then '7dd309b5d17be41e3e2406276e14436136f9fd810655ceed6e08a72556e644aa'
+  when '4.6.1' then 'c2c9207761152c29a7a3e032737cc51dcf4f8dd84491eb8f5665a8bffa78e938'
   when '4.6.2' then 'a6260a139d794518ee0b7825f352144243f6da0a89f905cb8203c39516c63067'
+  when '4.6.3' then 'ddb4ab0201c0de891070fadef86a0169b1f21be90d61a2bae4e6b3e5a824adda'
+  when '4.7.1' then 'cdbd5e82263638958468917bf9a3376591a8ccc500fd649e0c3e4c048de9ac9c'
+  when '4.8.0' then '6691554ca29efcad98391d33b8b9f7277e3335d45f12517bfd3cb2b9fd7f88e2'
+  when '4.8.1' then 'd77de9aa4f19114f118f2438b05dbd81191847d524b974feecd030937385b275'
+  when '4.8.2' then '14962bdd1713f4f1ccd580158ae206249d5e4c3cf4596275b2c258edc18b20ac'
+  when '4.8.3' then '8f5544e8b9e6cb444df6ce401425ec308c380e317618c40d8895f6ebb2aa6328'
   end
 
 # Data bag where credentials and other sensitive data could be stored (optional)
