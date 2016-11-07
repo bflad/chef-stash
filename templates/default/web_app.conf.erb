@@ -20,6 +20,7 @@
 
 	RewriteEngine On
 	RewriteCond %{HTTPS} off
+	RewriteCond %{REQUEST_URI} !^/server-status
 	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 </VirtualHost>
 
