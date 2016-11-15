@@ -252,6 +252,8 @@ module Stash
         when '4.9.1' then 'cc8833c9f69f9f33f89ca0a7ebd7efe2e604b5e37e1e77f3500c26217dfa6855'
         when '4.10.0' then '65c0c672c6ea92c6fb2090d5f8a170b70a90cbb986af8304fc6bb4dce717451b'
         when '4.10.1' then 'f625977f28d1fbbc7231fcea16bac8521fe3427e05063bfe4c1874be275d75cd'
+        when '4.10.2' then '003cddaa32597552da689731d155d6e1eebadd24b3768d512dfd15c848463ffc'
+        when '4.11.0' then '7b6238d52501e8946fbc536f3aba525d3948a5448b0184bf71e526be6c7d9e3d'
         else raise "Stash version #{node['stash']['version']} is not supported by this cookbook"
       end
     end
