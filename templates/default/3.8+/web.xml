@@ -512,7 +512,7 @@
   <!-- created sessions by modifying the value below.                       -->
 
     <session-config>
-        <session-timeout>30</session-timeout>
+        <session-timeout><%= node['stash']['tomcat']['session-timeout'] %></session-timeout>
     </session-config>
 
 
