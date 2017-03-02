@@ -298,3 +298,4 @@ default['stash']['ssh']['hostname'] = node['fqdn']
 default['stash']['ssh']['port']     = '7999'
 
 default['stash']['tomcat']['port'] = '7990'
+default['stash']['tomcat']['session-timeout'] = '30'
