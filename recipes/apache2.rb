@@ -19,4 +19,7 @@ apache_module 'auth_basic' do
   enable false
 end
 
-web_app node['stash']['apache2']['virtual_host_name']
+web_app node['stash']['apache2']['virtual_host_name'] do
+  template node['stash']['apache2']['webapp_template'] if node['stash']['apache2']['webapp_template']
+  cookbook node['stash']['apache2']['webapp_cookbook'] if node['stash']['apache2']['webapp_cookbook']
+end
