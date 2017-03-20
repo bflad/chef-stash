@@ -174,7 +174,7 @@ default['stash']['data_bag_item'] = 'stash'
 default['stash']['apache2']['access_log']         = ''
 default['stash']['apache2']['error_log']          = ''
 default['stash']['apache2']['port']               = 80
-default['stash']['apache2']['virtual_host_alias'] = node['fqdn']
+default['stash']['apache2']['virtual_host_alias'] = [node['fqdn']]
 default['stash']['apache2']['virtual_host_name']  = node['hostname']
 
 default['stash']['apache2']['ssl']['access_log']       = ''
@@ -295,7 +295,7 @@ default['stash']['plugin'] = {}
 default['stash']['properties'] = {}
 
 default['stash']['ssh']['hostname'] = node['fqdn']
-default['stash']['ssh']['port']     = '7999'
+default['stash']['ssh']['port']     = '7989'
 
-default['stash']['tomcat']['port'] = '7990'
+default['stash']['tomcat']['base-port'] = 7990
 default['stash']['tomcat']['session-timeout'] = '30'

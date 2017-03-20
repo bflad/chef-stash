@@ -1,3 +1,10 @@
+# Create tomcat port to proxy name mapping
+# Creating it in recipe will allow tomcat connection changes when overriding ['stash']['apache2']['virtual_host_alias']
+node['stash']['apache2']['virtual_host_alias'].each_with_index do |cname,index|
+  port = node['stash']['tomcat']['base-port'] + index
+  node.default['stash']['tomcat']['connections'][port] = cname
+end
+
 # frozen_string_literal: true
 stash_version = Chef::Version.new(node['stash']['version'])
 server_xml_path = "#{node['stash']['install_path']}/stash/conf/server.xml"
