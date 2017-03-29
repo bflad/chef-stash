@@ -10,6 +10,7 @@ AllCops:
     - vendor/**/*
     - ruby/**/*
     - Vagrantfile
+  TargetRubyVersion: 2.4
 
 AlignParameters:
   Enabled: false
