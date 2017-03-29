@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 begin
   node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [node['stash']['apache2']['port']] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['port'])
   node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [node['stash']['apache2']['ssl']['port']] unless node['apache']['listen_ports'].include?(node['stash']['apache2']['ssl']['port'])

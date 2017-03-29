@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 set['build-essential']['compile_time'] = true
 
 default['stash']['version']      = '4.6.2'

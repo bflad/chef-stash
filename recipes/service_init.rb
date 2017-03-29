@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 template "/etc/init.d/#{node['stash']['product']}" do
   if node['stash']['product'] == 'stash'
     source 'stash.init.erb'
@@ -13,7 +14,7 @@ end
 if node['stash']['product'] == 'bitbucket'
   service 'stash' do
     supports :status => true, :restart => true
-    action [:stop, :disable]
+    action %i(stop disable)
   end
 
   file '/etc/init.d/stash' do

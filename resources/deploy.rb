@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 actions :deploy
 
 attribute :destination, :kind_of => String, :name_attribute => true
