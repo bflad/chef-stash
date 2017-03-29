@@ -34,3 +34,6 @@ depends 'mysql_connector'
 depends 'perl'
 depends 'postgresql'
 depends 'yum-epel'
+
+source_url 'https://github.com/bflad/chef-stash'
+issues_url 'https://github.com/bflad/chef-stash/issues'
