@@ -6,8 +6,11 @@ AllCops:
     - Rakefile
   Exclude:
     - test/**/*
+    - spec/**/*
     - vendor/**/*
     - ruby/**/*
+    - Vagrantfile
+  TargetRubyVersion: 2.4
 
 AlignParameters:
   Enabled: false

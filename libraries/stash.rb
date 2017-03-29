@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Stash
   # Stash::Library module
   module Library
@@ -42,11 +43,11 @@ module Stash
         Chef::Log.warn "node['stash']['backup_client']['#{attr}'] has been changed to node['stash']['backup']['#{attr}']"
         show_warn = true
       end
-      Chef::Log.warn <<-EOH if show_warn
-This renaming introduces the common approach for both of backup strategies:
-'backup_client' and 'backup_diy'. Attributes mentioned above will be gracefully
-converted for you, but this warning and conversion will be removed in the next
-major release of the 'stash' cookbook.
+      Chef::Log.warn <<~EOH if show_warn
+        This renaming introduces the common approach for both of backup strategies:
+        'backup_client' and 'backup_diy'. Attributes mentioned above will be gracefully
+        converted for you, but this warning and conversion will be removed in the next
+        major release of the 'stash' cookbook.
 EOH
     end
     # rubocop:enable Metrics/AbcSize

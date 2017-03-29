@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 handle_old_stash_attributes!
 
 settings = merge_stash_settings

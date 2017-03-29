@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 name 'stash'
 maintainer 'Brian Flad'
 maintainer_email 'bflad417@gmail.com'
@@ -28,9 +29,12 @@ depends 'cron'
 depends 'database'
 depends 'git'
 depends 'java'
-depends 'mysql', '~> 6.0'
+depends 'mysql'
 depends 'mysql2_chef_gem'
 depends 'mysql_connector'
 depends 'perl'
 depends 'postgresql'
 depends 'yum-epel'
+
+source_url 'https://github.com/bflad/chef-stash'
+issues_url 'https://github.com/bflad/chef-stash/issues'
