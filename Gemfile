@@ -8,9 +8,9 @@ group :test, :integration do
 end
 
 group :test do
-  gem 'chefspec', '~> 4.0'
-  gem 'foodcritic', '~> 4.0'
-  gem 'rubocop', '~> 0.41'
+  gem 'chefspec'
+  gem 'foodcritic'
+  gem 'rubocop'
 end
 
 group :integration do
