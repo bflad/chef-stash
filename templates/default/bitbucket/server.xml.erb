@@ -81,7 +81,7 @@
                    redirectPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    secure="true"
                    scheme="https"
-                   proxyName="<%= node['stash']['apache2']['virtual_host_alias'] %>"
+                   proxyName="<%= node['stash']['apache2']['virtual_host_primary'] %>"
                    proxyPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    <% else -%>
                    redirectPort="<%= node['stash']['tomcat']['ssl_port'] %>"
