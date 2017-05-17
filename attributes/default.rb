@@ -166,6 +166,7 @@ default['stash']['checksum'] =
   when '4.8.1' then 'd77de9aa4f19114f118f2438b05dbd81191847d524b974feecd030937385b275'
   when '4.8.2' then '14962bdd1713f4f1ccd580158ae206249d5e4c3cf4596275b2c258edc18b20ac'
   when '4.8.3' then '8f5544e8b9e6cb444df6ce401425ec308c380e317618c40d8895f6ebb2aa6328'
+  when '4.14.5' then 'f366fc5f4a1b1a41c3daa123d1f18fa166092dc479604694ef3e221b6d4e1f81'
   end
 
 # Data bag where credentials and other sensitive data could be stored (optional)
@@ -252,6 +253,7 @@ default['stash']['backup_client']['checksum'] =
   when '3.0.0' then '1a4dcea8fa5df919b9c92341b1a3b92aed5892022e0f94733540d1ebb88653df'
   when '3.1.0' then '7d586c65f6f0173c064e5d6508c380192c4a9ac3fc2314fbc3fce2e8f6b10daf'
   when '3.2.0' then 'e306e5d0b1f7bc36124ef2877df608b9c1fa2fb7e88d5252fc7dba680962b882'
+  when '3.3.2' then 'ee4439a80c3aa5fb4ab3bc7b44d633c1d063d4b988f9cdbc3b3a8ad886a84c80'
   end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
