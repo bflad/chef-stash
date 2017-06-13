@@ -29,7 +29,5 @@ action :create do
     mode 0500
     variables(:key_path => key_path)
   end
-
-  new_resource.updated_by_last_action(true)
 end
 # rubocop:enable Metrics/BlockLength
