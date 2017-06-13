@@ -28,10 +28,10 @@ directory node['stash']['install_path'] do
 end
 
 ark node['stash']['product'] do
-  url node['stash']['url']
+  url stash_artifact_url
   prefix_root node['stash']['install_path']
   prefix_home node['stash']['install_path']
-  checksum node['stash']['checksum']
+  checksum stash_artifact_checksum
   version node['stash']['version']
   owner node['stash']['user']
   group node['stash']['user']
