@@ -22,5 +22,19 @@ LineLength:
   Enabled: false
 MethodLength:
   Max: 30
+  Exclude:
+    - "libraries/helper.rb"
 Style/NumericLiteralPrefix:
   Enabled: false
+Metrics/ModuleLength:
+  Exclude:
+    - "libraries/helper.rb"
+Metrics/AbcSize:
+  Exclude:
+    - "libraries/helper.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "libraries/helper.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "libraries/helper.rb"

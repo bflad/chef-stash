@@ -21,7 +21,6 @@ action :enable do
     converge_by("Enable #{@new_resource}") do
       enable(server, user, hook_opts)
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -39,7 +38,6 @@ action :configure do
     converge_by("Configure #{@new_resource}") do
       configure(server, user, hook_opts, settings)
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -56,7 +54,6 @@ action :disable do
     converge_by("Disable #{@new_resource}") do
       disable(server, user, hook_opts)
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 

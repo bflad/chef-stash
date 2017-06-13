@@ -34,7 +34,7 @@ module Stash
     end
 
     def handle_old_stash_attributes!
-      backup_attrs = %w(backup_path baseurl password user cron)
+      backup_attrs = %w[backup_path baseurl password user cron]
       show_warn = false
       backup_attrs.each do |attr|
         next if node['stash']['backup_client'][attr].nil?

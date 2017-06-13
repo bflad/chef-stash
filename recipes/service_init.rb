@@ -14,7 +14,7 @@ end
 if node['stash']['product'] == 'bitbucket'
   service 'stash' do
     supports :status => true, :restart => true
-    action %i(stop disable)
+    action %i[stop disable]
   end
 
   file '/etc/init.d/stash' do
