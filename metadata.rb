@@ -7,6 +7,8 @@ license 'Apache 2.0'
 description 'Installs/Configures Atlassian Stash'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '4.5.1'
+chef_version '>= 11' if respond_to?(:chef_version)
+
 recipe 'stash', 'Installs/Configures Atlassian Stash'
 recipe 'stash::apache2', 'Installs/Configures Apache 2 proxy for Stash'
 recipe 'stash::backup_client', 'Installs/Configures Atlassian Stash Backup Client'
