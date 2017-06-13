@@ -66,7 +66,7 @@ end
 def exists?(server, user, repo_opts)
   uri = stash_uri(server, repo_uri(repo_opts))
 
-  response = stash_get(uri, user, %w(200 404))
+  response = stash_get(uri, user, %w[200 404])
   response.code == '200'
 end
 

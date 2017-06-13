@@ -1,4 +1,3 @@
-#!/usr/bin/env rake
 # frozen_string_literal: true
 
 # Style tests. Rubocop and Foodcritic
@@ -59,7 +58,7 @@ end
 task unit: ['unit:rspec']
 
 desc 'Run all tests on Travis'
-task travis: %w(style unit)
+task travis: %w[style unit]
 
 # Default
 task default: ['style', 'unit', 'integration:kitchen:all']

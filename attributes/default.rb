@@ -20,7 +20,6 @@ default['stash']['user']         = node['stash']['product']
 default['stash']['url']      = nil
 default['stash']['checksum'] = nil
 
-
 # Data bag where credentials and other sensitive data could be stored (optional)
 default['stash']['data_bag_name'] = 'stash'
 default['stash']['data_bag_item'] = 'stash'
