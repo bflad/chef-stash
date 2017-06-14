@@ -54,7 +54,7 @@ install_type | Stash install type - "standalone" only for now | String | standal
 url_base | URL base for Stash install | String | http://www.atlassian.com/software/stash/downloads/binary/atlassian-stash
 url | URL for Stash install | String | auto-detected (see attributes/default.rb)
 user | user to run Stash | String | stash
-version | Stash version to install | String | 4.6.2
+version | Stash version to install | String | 4.14.5
 
 ### Stash Backup Attributes (Shared)
 
@@ -316,5 +316,8 @@ Please see license information in: [LICENSE](LICENSE)
 * Claudio Rivabene (@crivabene)
 * Patrick Connolly (@patcon)
 * Benjamin Neff (@SuperTux88)
-* Anna (@atikhono)
+* Anna Tikhonova (@atikhono)
+* Alex Karasik (@akarasik)
+* Andrei Skopenko (@scopenco)
+* Kate Lynn (@katbyte)
 * Lincoln Lee (@linc01n)
