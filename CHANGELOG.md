@@ -1,7 +1,30 @@
 # Change Log
 
-## [4.5.1](https://github.com/bflad/chef-stash/tree/4.5.1) (2016-06-10)
+## [4.5.2](https://github.com/bflad/chef-stash/tree/4.5.2) (2017-06-14)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.5.1...4.5.2)
+
+**Implemented enhancements:**
+
+- Fix rubocop offenses [\#165](https://github.com/bflad/chef-stash/pull/165) ([linc01n](https://github.com/linc01n))
+
+**Closed issues:**
+
+- Allow SSL from the application to the database [\#159](https://github.com/bflad/chef-stash/issues/159)
+- Compatability.md is severely out of date. [\#164](https://github.com/bflad/chef-stash/issues/164)
+
+**Merged pull requests:**
+
+- Fix ruby syntax error [\#184](https://github.com/bflad/chef-stash/pull/184) ([linc01n](https://github.com/linc01n))
+- Added checksums for versions 4.9.0 --\> 4.14.5 [\#183](https://github.com/bflad/chef-stash/pull/183) ([linc01n](https://github.com/linc01n))
+- Fix foodcritic and rubocop [\#182](https://github.com/bflad/chef-stash/pull/182) ([linc01n](https://github.com/linc01n))
+- Fix travis errors [\#177](https://github.com/bflad/chef-stash/pull/177) ([linc01n](https://github.com/linc01n))
+- Enable setting the session timeout [\#172](https://github.com/bflad/chef-stash/pull/172) ([akarasik](https://github.com/akarasik))
+- Don't redirect /server-status for monitoring systems [\#170](https://github.com/bflad/chef-stash/pull/170) ([scopenco](https://github.com/scopenco))
+- Moved checksum's and download url calculation into helper.rb  [\#169](https://github.com/bflad/chef-stash/pull/169) ([katbyte](https://github.com/katbyte))
+- Added versions 4.6.1, 4.6.3, 4.7.1, 4.8.0, 4.8.1, 4.8.2, 4.8.3 [\#166](https://github.com/bflad/chef-stash/pull/166) ([katbyte](https://github.com/katbyte))
+
+## [4.5.1](https://github.com/bflad/chef-stash/tree/4.5.1) (2016-06-10)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.5.0...4.5.1)
 
 **Fixed bugs:**
@@ -10,6 +33,7 @@
 
 **Merged pull requests:**
 
+- Prepare for 4.5.1 cookbook release [\#163](https://github.com/bflad/chef-stash/pull/163) ([linc01n](https://github.com/linc01n))
 - Update bitbucket to 4.6.2 [\#162](https://github.com/bflad/chef-stash/pull/162) ([linc01n](https://github.com/linc01n))
 - Run start-bitbucket.sh with the full path in Bitbucket init script [\#158](https://github.com/bflad/chef-stash/pull/158) ([atikhono](https://github.com/atikhono))
 - Bitbucket 4.6 needs set-bitbucket-home.sh and set-bitbucket-user.sh [\#157](https://github.com/bflad/chef-stash/pull/157) ([atikhono](https://github.com/atikhono))

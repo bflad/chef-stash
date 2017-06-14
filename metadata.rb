@@ -6,7 +6,7 @@ maintainer_email 'bflad417@gmail.com'
 license 'Apache-2.0'
 description 'Installs/Configures Atlassian Stash'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '4.5.1'
+version '4.5.2'
 chef_version '>= 11' if respond_to?(:chef_version)
 
 recipe 'stash', 'Installs/Configures Atlassian Stash'
