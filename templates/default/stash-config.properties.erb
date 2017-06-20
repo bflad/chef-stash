@@ -34,3 +34,15 @@ plugin.<%= key %>=<%= value %>
 <%= key %>=<%= value %>
 <% end -%>
 <% end -%>
+
+<% if Chef::Version.new(node['stash']['version']) >= Chef::Version.new('5.0.0') %>
+  <% if node['stash']['apache2'] %>
+server.secure=true
+server.scheme=https
+server.proxy-name=<%= node['stash']['apache2']['virtual_host_alias'] %>
+server.proxy-port=<%= node['stash']['apache2']['ssl']['port'] %>
+  <% else %>
+server.redirect-port=<%= node['stash']['apache2']['ssl']['port'] %>
+  <% end %>
+<% end %>
+
