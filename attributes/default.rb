@@ -152,3 +152,11 @@ default['stash']['ssh']['port']     = '7999'
 
 default['stash']['tomcat']['port'] = '7990'
 default['stash']['tomcat']['session-timeout'] = '30'
+
+default['stash']['setup']['admin']['username'] = ''
+default['stash']['setup']['admin']['password'] = ''
+default['stash']['setup']['admin']['email'] = ''
+default['stash']['setup']['admin']['displayname'] = ''
+
+default['stash']['setup']['license'] = ''
+default['stash']['setup']['displayname'] = 'Bitbucket'

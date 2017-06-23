@@ -46,3 +46,20 @@ server.redirect-port=<%= node['stash']['apache2']['ssl']['port'] %>
   <% end %>
 <% end %>
 
+<% unless node['stash']['setup']['admin']['username'].empty? && node['stash']['setup']['admin']['password'].empty? && \
+     node['stash']['setup']['admin']['email'].empty? %>
+setup.sysadmin.username=<%= node['stash']['setup']['admin']['username'] %>
+setup.sysadmin.password=<%= node['stash']['setup']['admin']['password'] %>
+setup.sysadmin.emailAddress=<%= node['stash']['setup']['admin']['email'] %>
+<% if node['stash']['setup']['admin']['displayname'].empty? %>
+setup.sysadmin.displayname=<%= node['stash']['setup']['admin']['username'] %>
+<% else %>
+setup.sysadmin.displayname=<%= node['stash']['setup']['admin']['displayname'] %>
+<% end %>
+<% end %>
+
+<% unless node['stash']['setup']['license'].empty? %>
+setup.license=<%= node['stash']['setup']['license'] %>
+<% end %>
+
+setup.displayname=<%= node['stash']['setup']['displayname'] %>
