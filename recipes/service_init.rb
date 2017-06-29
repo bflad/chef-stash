@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
-template "/etc/init.d/#{node['stash']['product']}" do
-  if node['stash']['product'] == 'stash'
-    source 'stash.init.erb'
-  else
-    source 'bitbucket/bitbucket.init.erb'
+if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 15.04
+  template "/etc/systemd/system/#{node['stash']['product']}.service" do
+    source 'bitbucket/bitbucket.service.systemd.erb'
   end
-  mode '0755'
-  notifies :restart, "service[#{node['stash']['product']}]", :delayed
+else
+  template "/etc/init.d/#{node['stash']['product']}" do
+    if node['stash']['product'] == 'stash'
+      source 'stash.init.erb'
+    else
+      source 'bitbucket/bitbucket.init.erb'
+    end
+    mode '0755'
+    notifies :restart, "service[#{node['stash']['product']}]", :delayed
+  end
 end
 
 # disable stash service after upgrade to bitbucket 4.0
