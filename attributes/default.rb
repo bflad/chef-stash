@@ -19,6 +19,9 @@ default['stash']['user']         = node['stash']['product']
 
 default['stash']['url']      = nil
 default['stash']['checksum'] = nil
+# sets the IP version which will be used for internal routing. IPv4 will be used if this attribute
+# is set to 4, in ANY other cases IPv6 will be used instead
+default['stash']['ipversion'] = 4
 
 # Data bag where credentials and other sensitive data could be stored (optional)
 default['stash']['data_bag_name'] = 'stash'
