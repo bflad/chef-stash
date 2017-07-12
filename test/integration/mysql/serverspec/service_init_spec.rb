@@ -31,7 +31,7 @@ end
 
 
 
-if ($node['platform'].downcase) == 'ubuntu' && ($node['platform_version'].to_f) >= 15.04
+if ($node['platform'].downcase == 'ubuntu' && ($node['platform_version'].to_f) >= 15.04) || ($node['platform'].downcase == 'centos' && $node['platform_version'].to_f >= 7)
   describe file("/etc/systemd/system/#{$node['stash']['product']}.service") do
     it { should be_file }
   end

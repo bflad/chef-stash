@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 15.04
+if (node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 15.04) || (node['platform'] == 'centos')
   template "/etc/systemd/system/#{node['stash']['product']}.service" do
     source 'bitbucket/bitbucket.service.systemd.erb'
   end
