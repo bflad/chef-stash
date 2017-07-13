@@ -61,13 +61,3 @@ describe 'stash::default' do
   end
 
 end
-
-# tests for bitbucket >= 5.0.0
-=begin
-it 'renders start-webapp' do
-  expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/_start-webapp.sh')
-end
-it 'renders set-jre-home' do
-  expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/set-jre-home.sh')
-end
-=end
