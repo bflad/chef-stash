@@ -34,6 +34,14 @@ else
   config_path = '/stash-config.properties'
 end
 
+if stash_version >= Chef::Version.new('5.0.0')
+  template "#{node['stash']['install_path']}/bitbucket/bin/set-jre-home.sh" do
+    source 'bitbucket5/set-jre-home.sh.erb'
+    owner node['stash']['user']
+    mode '0755'
+  end
+end
+
 template "#{node['stash']['home_path']}/#{config_path}" do
   source 'stash-config.properties.erb'
   owner node['stash']['user']

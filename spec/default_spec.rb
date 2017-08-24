@@ -20,6 +20,8 @@ describe 'stash::default' do
   end
 
   it 'renders server.xml' do
+    chef_run.node.set['stash']['version'] = '4.14.5'
+    chef_run.converge(described_recipe)
     path = '/var/atlassian/application-data/bitbucket/shared/server.xml'
     resource = chef_run.template(path)
 
@@ -28,6 +30,8 @@ describe 'stash::default' do
   end
 
   it 'renders web.xml' do
+    chef_run.node.set['stash']['version'] = '4.14.5'
+    chef_run.converge(described_recipe)
     path = '/opt/atlassian/bitbucket/conf/web.xml'
     resource = chef_run.template(path)
 
@@ -36,9 +40,24 @@ describe 'stash::default' do
   end
 
   it 'renders setenv.sh' do
+    chef_run.node.set['stash']['version'] = '4.14.5'
+    chef_run.converge(described_recipe)
     expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/setenv.sh')
-      .with_content { |content|
-        expect(content).to include('export BITBUCKET_HOME="/var/atlassian/application-data/bitbucket"')
-      }
+                            .with_content { |content|
+      expect(content).to include('export BITBUCKET_HOME="/var/atlassian/application-data/bitbucket"')
+    }
   end
+
+  it 'renders start-webapp' do
+    chef_run.node.set['stash']['version'] = '5.0.0'
+    chef_run.converge(described_recipe)
+    expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/_start-webapp.sh')
+  end
+
+  it 'renders set-jre-home' do
+    chef_run.node.set['stash']['version'] = '5.0.0'
+    chef_run.converge(described_recipe)
+    expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/set-jre-home.sh')
+  end
+
 end

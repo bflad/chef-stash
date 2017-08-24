@@ -1,0 +1,12 @@
+[Unit]
+Description=Atlassian Bitbucket Server Service
+After=syslog.target network.target postgresql.service
+
+[Service]
+Type=forking
+User=<%= node['stash']['user'] %>
+ExecStart=<%= node['stash']['install_path'] %>/bitbucket/bin/start-bitbucket.sh
+ExecStop=<%= node['stash']['install_path'] %>/bitbucket/bin/stop-bitbucket.sh
+
+[Install]
+WantedBy=multi-user.target

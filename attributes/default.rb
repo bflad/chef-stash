@@ -2,7 +2,7 @@
 
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '4.14.5'
+default['stash']['version']      = '5.1.3'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -19,6 +19,9 @@ default['stash']['user']         = node['stash']['product']
 
 default['stash']['url']      = nil
 default['stash']['checksum'] = nil
+# sets the IP version which will be used for internal routing. IPv4 will be used if this attribute
+# is set to 4, in ANY other cases IPv6 will be used instead
+default['stash']['ipversion'] = 4
 
 # Data bag where credentials and other sensitive data could be stored (optional)
 default['stash']['data_bag_name'] = 'stash'
@@ -152,3 +155,11 @@ default['stash']['ssh']['port']     = '7999'
 
 default['stash']['tomcat']['port'] = '7990'
 default['stash']['tomcat']['session-timeout'] = '30'
+
+default['stash']['setup']['admin']['username'] = ''
+default['stash']['setup']['admin']['password'] = ''
+default['stash']['setup']['admin']['email'] = ''
+default['stash']['setup']['admin']['displayname'] = ''
+
+default['stash']['setup']['license'] = ''
+default['stash']['setup']['displayname'] = 'Bitbucket'
