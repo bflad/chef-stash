@@ -2,7 +2,7 @@
 
 set['build-essential']['compile_time'] = true
 
-default['stash']['version']      = '5.5.1'
+default['stash']['version']      = '5.9.0'
 default['stash']['product']      = Chef::Version.new(node['stash']['version']) >= Chef::Version.new('4.0.0') ? 'bitbucket' : 'stash'
 
 default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/stash')
@@ -62,7 +62,7 @@ default['stash']['backup']['cron']['month'] = '*'
 default['stash']['backup']['cron']['weekday'] = '*'
 
 default['stash']['backup_client']['install_path'] = node['stash']['install_path']
-default['stash']['backup_client']['version']      = '3.3.3'
+default['stash']['backup_client']['version']      = '3.3.4'
 stash_backup_client_version = Chef::Version.new(node['stash']['backup_client']['version'])
 
 default['stash']['backup_client']['url_base'] =
