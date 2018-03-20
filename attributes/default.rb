@@ -108,6 +108,7 @@ default['stash']['backup_client']['checksum'] =
   when '3.1.0' then '7d586c65f6f0173c064e5d6508c380192c4a9ac3fc2314fbc3fce2e8f6b10daf'
   when '3.2.0' then 'e306e5d0b1f7bc36124ef2877df608b9c1fa2fb7e88d5252fc7dba680962b882'
   when '3.3.3' then '550a310f3e8cc1ff6efb1bfa1e7730debfc66710c24f97c9ccbeeefd7b845e6c'
+  when '3.3.4' then '93071fa04c4519271a50aa34c009144396785d3be685bcab0937e8bef5aa6da0'
   end
 
 default['stash']['backup_diy']['install_path'] = "#{node['stash']['install_path']}/stash-diy-backup"
