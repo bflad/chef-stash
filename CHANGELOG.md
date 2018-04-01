@@ -1,7 +1,27 @@
 # Change Log
 
-## [4.5.2](https://github.com/bflad/chef-stash/tree/4.5.2) (2017-06-14)
+## [5.0.0](https://github.com/bflad/chef-stash/tree/5.0.0) (2018-04-01)
 
+[Full Changelog](https://github.com/bflad/chef-stash/compare/4.5.2...5.0.0)
+
+**Fixed bugs:**
+
+- Incompatibility with Bitbucket 5 [\#181](https://github.com/bflad/chef-stash/issues/181)
+- Compatability.md is severely out of date. [\#164](https://github.com/bflad/chef-stash/issues/164)
+
+**Closed issues:**
+
+- is this file /templates/default/web\_app.conf.erb used any longer [\#178](https://github.com/bflad/chef-stash/issues/178)
+- Changes to version attribute not reflected in url or checksum. [\#167](https://github.com/bflad/chef-stash/issues/167)
+
+**Merged pull requests:**
+
+- Remove use\_inline\_resource [\#190](https://github.com/bflad/chef-stash/pull/190) ([linc01n](https://github.com/linc01n))
+- Update bitbucket to 5.9.0 [\#189](https://github.com/bflad/chef-stash/pull/189) ([linc01n](https://github.com/linc01n))
+- Return non 0 rc for status if bitbucket is not running [\#188](https://github.com/bflad/chef-stash/pull/188) ([akarasik](https://github.com/akarasik))
+- Bitbucket 5 support [\#186](https://github.com/bflad/chef-stash/pull/186) ([jtusz](https://github.com/jtusz))
+
+## [4.5.2](https://github.com/bflad/chef-stash/tree/4.5.2) (2017-06-14)
 [Full Changelog](https://github.com/bflad/chef-stash/compare/4.5.1...4.5.2)
 
 **Implemented enhancements:**
@@ -11,10 +31,10 @@
 **Closed issues:**
 
 - Allow SSL from the application to the database [\#159](https://github.com/bflad/chef-stash/issues/159)
-- Compatability.md is severely out of date. [\#164](https://github.com/bflad/chef-stash/issues/164)
 
 **Merged pull requests:**
 
+-  Prepare for 4.5.2 cookbook release [\#185](https://github.com/bflad/chef-stash/pull/185) ([linc01n](https://github.com/linc01n))
 - Fix ruby syntax error [\#184](https://github.com/bflad/chef-stash/pull/184) ([linc01n](https://github.com/linc01n))
 - Added checksums for versions 4.9.0 --\> 4.14.5 [\#183](https://github.com/bflad/chef-stash/pull/183) ([linc01n](https://github.com/linc01n))
 - Fix foodcritic and rubocop [\#182](https://github.com/bflad/chef-stash/pull/182) ([linc01n](https://github.com/linc01n))
