@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-use_inline_resources
-
+# rubocop:disable Style/MixinUsage
 include Stash::Helper
+# rubocop:enable Style/MixinUsage
 
 def whyrun_supported?
   true

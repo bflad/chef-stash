@@ -49,13 +49,13 @@ describe 'stash::default' do
   end
 
   it 'renders start-webapp' do
-    chef_run.node.set['stash']['version'] = '5.0.0'
+    chef_run.node.set['stash']['version'] = '5.9.0'
     chef_run.converge(described_recipe)
     expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/_start-webapp.sh')
   end
 
   it 'renders set-jre-home' do
-    chef_run.node.set['stash']['version'] = '5.0.0'
+    chef_run.node.set['stash']['version'] = '5.9.0'
     chef_run.converge(described_recipe)
     expect(chef_run).to render_file('/opt/atlassian/bitbucket/bin/set-jre-home.sh')
   end

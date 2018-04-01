@@ -2,12 +2,12 @@
 
 handle_old_stash_attributes!
 
-Chef::Log.warn <<~EOH
+Chef::Log.warn <<~WARN
   Recipe 'stash::backup_client_cron' is deprecated. Please, set attrite
   `node['stash']['backup']['crone']['enable'] = true` to configure crond to run
   Stash backup periodically. This recipe will be removed in the next major release
   of the 'stash' cookbook.
-EOH
+WARN
 
 settings = settings = merge_stash_settings
 

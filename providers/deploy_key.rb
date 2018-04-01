@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-use_inline_resources
 action :create do
   key_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_key.pem"
   wrapper_path = "#{node['stash']['install_path']}/#{new_resource.alias}_ssh_wrapper.sh"
@@ -28,4 +27,3 @@ action :create do
     variables(:key_path => key_path)
   end
 end
-# rubocop:enable Metrics/BlockLength
