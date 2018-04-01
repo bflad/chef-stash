@@ -27,4 +27,3 @@ action :create do
     variables(:key_path => key_path)
   end
 end
-# rubocop:enable Metrics/BlockLength

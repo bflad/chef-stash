@@ -43,12 +43,12 @@ module Stash
         Chef::Log.warn "node['stash']['backup_client']['#{attr}'] has been changed to node['stash']['backup']['#{attr}']"
         show_warn = true
       end
-      Chef::Log.warn <<-EOH if show_warn
+      Chef::Log.warn <<-WARN if show_warn
         This renaming introduces the common approach for both of backup strategies:
         'backup_client' and 'backup_diy'. Attributes mentioned above will be gracefully
         converted for you, but this warning and conversion will be removed in the next
         major release of the 'stash' cookbook.
-      EOH
+      WARN
     end
     # rubocop:enable Metrics/AbcSize
 
@@ -62,7 +62,7 @@ module Stash
         item = data_bag_item(node['stash']['data_bag_name'],
                              node['stash']['data_bag_item'])['stash']
         return item if item.is_a?(Hash)
-      rescue
+      rescue StandardError
         Chef::Log.info('No stash data bag found')
       end
       {}
