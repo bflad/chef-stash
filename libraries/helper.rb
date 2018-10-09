@@ -309,6 +309,7 @@ module Stash
       when '5.7.2' then '592d7c6a7346d339e02fe65f86b9b2bd8fb72a2dda65b3cc33da113627906ebe'
       when '5.8.0' then '2d9e9d8bbbdc8986ba5ef8fb248addc79f94adff041efd137eea49a99b93ec9d'
       when '5.9.0' then '69917237813ba1fde116e32d2606d1df22a185e34374623560cf96d10e5ddb5e'
+      when '5.14.1' then '09489cf448343eee0448ee76bf5555a2be4cb4f88f732f0875428142d5a6854e'
       else raise "Stash version #{node['stash']['version']} is not supported by this cookbook"
       end
     end
