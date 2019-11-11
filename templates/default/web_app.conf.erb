@@ -24,16 +24,12 @@
 	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
 </VirtualHost>
 
+<% node['stash']['tomcat']['connections'].each do |port,proxy_name| %>
 <VirtualHost *:<%= node['stash']['apache2']['ssl']['port'] %>>
 	<% unless node['stash']['apache2']['virtual_host_name'].empty? -%>
 	ServerName <%= node['stash']['apache2']['virtual_host_name'] %>
 	<% end -%>
-	<% unless node['stash']['apache2']['virtual_host_alias'].empty? -%>
-	<% virtual_host_aliases = node['stash']['apache2']['virtual_host_alias'].kind_of?(Array) ? node['stash']['apache2']['virtual_host_alias'] : [ node['stash']['apache2']['virtual_host_alias'] ] -%>
-	<% virtual_host_aliases.each do |virtual_host_alias| -%>
-	ServerAlias <%= virtual_host_alias %>
-	<% end -%>
-	<% end -%>
+  ServerAlias <%= proxy_name %>
 	DocumentRoot <%= node['stash']['install_path'] %>
 
 	CustomLog <%= node['stash']['apache2']['ssl']['access_log'].empty? ? node['apache']['log_dir']+"/stash-ssl-access.log" : node['stash']['apache2']['ssl']['access_log'] %> combined
@@ -48,8 +44,8 @@
 		Allow from all
     <% end %>
 	</Proxy>
-	ProxyPass        / http://localhost:<%= node['stash']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
-	ProxyPassReverse / http://localhost:<%= node['stash']['tomcat']['port'] %>/
+	ProxyPass        / http://localhost:<%= port %>/ connectiontimeout=5 timeout=300
+	ProxyPassReverse / http://localhost:<%= port %>/
 
 	SSLEngine on
 	SSLCertificateFile <%= node['stash']['apache2']['ssl']['certificate_file'] %>
@@ -58,3 +54,5 @@
 	SSLCertificateChainFile <%= node['stash']['apache2']['ssl']['chain_file'] %>
 	<% end -%>
 </VirtualHost>
+
+<% end %>

@@ -72,7 +72,8 @@
              If you change this port, you have to update scripts.cfg as well
              to have the same port configuration.
         -->
-        <Connector port="<%= node['stash']['tomcat']['port'] %>" protocol="HTTP/1.1"
+        <% node['stash']['tomcat']['connections'].each do |port,proxy_name| %>
+        <Connector port="<%= port %>" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    useBodyEncodingForURI="true"
                    compression="on"
@@ -81,12 +82,13 @@
                    redirectPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    secure="true"
                    scheme="https"
-                   proxyName="<%= node['stash']['apache2']['virtual_host_alias'] %>"
+                   proxyName="<%= proxy_name %>"
                    proxyPort="<%= node['stash']['apache2']['ssl']['port'] %>"
                    <% else -%>
                    redirectPort="<%= node['stash']['tomcat']['ssl_port'] %>"
                    <% end -%>
                    />
+        <% end %>
 
         <!-- A "Connector" using the shared thread pool-->
         <!--
