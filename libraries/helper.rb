@@ -63,6 +63,19 @@ module Stash
       response
     end
 
+    def stash_get_paged(uri, user, success_codes = ['200'])
+      last_page = false
+      result = []
+      until last_page
+        response = stash_get(uri, user, success_codes)
+        Chef::Log.info("Stash API response: #{response.body}")
+        data = JSON.parse(response.body)
+        last_page = data['isLastPage']
+        result += data['values']
+      end
+      result
+    end
+
     def stash_delete(uri, user, success_codes = ['200'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -83,10 +96,12 @@ module Stash
       Chef::Application.fatal!('error making stash request')
     end
 
-    def install_chef_vault(source = 'http://rubygems.org', version = '1.2.0')
+    def install_chef_vault(source, version = '1.2.0')
       gem_installer = Chef::Resource::ChefGem.new('chef-vault', run_context)
       gem_installer.version version
-      gem_installer.options "--clear-sources --source #{source}"
+
+      # Only override defaults gem source if one is passed
+      gem_installer.options "--clear-sources --source #{source}" if source
       gem_installer.action :install
       gem_installer.after_created
 
