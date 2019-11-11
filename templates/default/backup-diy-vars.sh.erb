@@ -58,8 +58,8 @@ STASH_BACKUP_EXCLUDE_REPOS=(<%= @backup_diy['exclude_repos'].join(" ") %>)
 <% when "postgresql" %>
 # PostgreSQL options
 POSTGRES_HOST=<%= @database['host'] %>
-POSTGRES_USERNAME=postgres
-POSTGRES_PASSWORD=<%= node['postgresql']['password']['postgres'] %>
+POSTGRES_USERNAME=<%= @database['user'] %>
+POSTGRES_PASSWORD=<%= @database['password'] %>
 POSTGRES_PORT=<%= @database['port'] %>
 <% when "mysql" %>
 # MySQL options
