@@ -32,4 +32,5 @@ service node['stash']['product'] do
   supports :status => true, :restart => true
   action [:enable]
   subscribes :restart, 'java_ark[jdk]'
+  only_if { node['stash']['active_service'] }
 end

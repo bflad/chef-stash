@@ -14,6 +14,7 @@ default['stash']['home_path'] = if Dir.exist?('/var/atlassian/application-data/s
 default['stash']['install_path'] = '/opt/atlassian'
 default['stash']['install_type'] = 'standalone'
 default['stash']['service_type'] = 'init'
+default['stash']['active_service'] = true
 default['stash']['url_base']     = "http://www.atlassian.com/software/stash/downloads/binary/atlassian-#{node['stash']['product']}"
 default['stash']['user']         = node['stash']['product']
 
